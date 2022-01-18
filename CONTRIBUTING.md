@@ -1,6 +1,6 @@
-# Contribuing to Atom
+# Contribuing to Lepas Aja
 
-how to contribute in Lepas Aja project
+How to contribute in Lepas Aja project
 
 #### Table Of Contents
 
