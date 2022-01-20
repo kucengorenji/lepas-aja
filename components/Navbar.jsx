@@ -1,7 +1,7 @@
 const Navbar = () => {
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap p-8">
+      <nav className="flex items-center justify-between flex-wrap p-8 border-b-4 border-ruddy-pink">
         <div className="flex items-center flex-shrink-0  mr-6">
           <span className="font-semibold text-3xl tracking-tight text-ruddy-pink">
             LepasAja
