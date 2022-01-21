@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import Navbar from '../components/Navbar';
+import CardProduct from '../components/CardProduct';
+import NewGiveaway from '../components/NewGiveaway';
 
 export default function Home() {
   return (
@@ -12,10 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <NewGiveaway />
       </main>
     </div>
   );
