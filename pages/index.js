@@ -1,10 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import Navbar from '../components/Navbar';
-import CardProduct from '../components/CardProduct';
 import NewGiveaway from '../components/NewGiveaway';
 import ProductGiveaway from '../components/ProductGiveaway';
+import ProductCategory from '../components/ProductCategory';
 
 export default function Home() {
   return (
@@ -16,6 +14,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <NewGiveaway />
+        <ProductCategory />
         <ProductGiveaway />
       </main>
     </div>
