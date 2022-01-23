@@ -7,10 +7,25 @@ export default function NewGiveaway() {
       <h1 className="font-bold text-[#DF8D9F] text-center text-4xl">
         NEW GIVEAWAY
       </h1>
-      <div className="flex gap-8 mt-8 flex-wrap justify-center">
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
+      <div className="flex flex-wrap justify-center gap-8 mt-8">
+        <CardProduct
+          name="Sepatu Gunung"
+          owner="moehzi"
+          src="/images/sepatu.jpg"
+          location="Makassar"
+        />
+        <CardProduct
+          name="Sepatu Gunung"
+          owner="moehzi"
+          src="/images/sepatu.jpg"
+          location="Makassar"
+        />
+        <CardProduct
+          name="Sepatu Gunung"
+          owner="moehzi"
+          src="/images/sepatu.jpg"
+          location="Makassar"
+        />
       </div>
     </section>
   );
