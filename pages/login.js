@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from '../components/Modal';
 
 function login() {
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = (e) => {
+    e.preventDefault();
+    setModal(!modal);
+  };
+
   return (
     <section className="w-full min-h-[80vh] flex flex-col justify-center items-center py-8">
       <h1 className="text-5xl mb-14">LOGIN</h1>
@@ -44,12 +52,12 @@ function login() {
           <button className="rounded-[4px] bg-[#DF8D9F] mx-auto max-w-[196px] w-full py-4 mt-8 text-xl text-white font-medium">
             Login
           </button>
-          <a
-            class="font-bold text-lg text-black opacity-50"
-            href="#password-request"
+          <button
+            className="text-lg font-bold text-black opacity-50"
+            onClick={toggleModal}
           >
             Forgot Password?
-          </a>
+          </button>
         </div>
         <div className="flex flex-col items-center mt-8 gap-y-4">
           <p className="font-bold opacity-70">Or With</p>
@@ -63,6 +71,7 @@ function login() {
           </div>
         </div>
       </form>
+      {modal && <Modal toggleModal={toggleModal} />}
     </section>
   );
 }
