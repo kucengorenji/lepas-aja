@@ -5,6 +5,8 @@ import Navbar from '../components/Navbar';
 import CardProduct from '../components/CardProduct';
 import NewGiveaway from '../components/NewGiveaway';
 import ProductGiveaway from '../components/ProductGiveaway';
+import Register from '../components/Register/Register';
+import SuccessRegister from '../components/SuccessRegister/SuccessRegister';
 
 export default function Home() {
   return (
@@ -15,8 +17,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <NewGiveaway />
-        <ProductGiveaway />
+        {/* <NewGiveaway />
+        <ProductGiveaway /> */}
+        <Register />
+        {/* <SuccessRegister /> */}
       </main>
     </div>
   );

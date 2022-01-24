@@ -1,7 +1,7 @@
 import { useState } from 'react';
-// import css from './style.module.css';
+import css from './style.module.css';
 
-const register = () => {
+const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,65 +26,64 @@ const register = () => {
     }
 
     return (
-        <div className="flex flex-col mx-96 px-32 my-20">
+        <div className="flex flex-col">
             <div className='flex justify-center mb-8'>
-                <h1 className={`rhythm text-5xl`}>SIGN UP</h1>
+                <h1 className={`${css.textPurple} text-5xl`}>SIGN UP</h1>
             </div>
             <div className="flex flex-col">
                 <form action="/" method="POST" onSubmit={formSubmit}>
-                    <div className={`flex flex-col bg-[#E4E4E4] border-2 border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-sm`}>
+                    <div className={`flex flex-col ${css.bgGray} ${css.borderPink} my-8 pl-4 pr-4 py-2 rounded-sm`}>
                         <label 
-                            className={`rhythm border-2 border-b-[#DF8D9F] w-20`} 
+                            className={`${css.textPurple} ${css.borderBottomPink} w-20`} 
                             htmlFor="username">
                                 Username
                         </label>
                         <input 
-                            className={`bg-[#E4E4E4] ruddy-pink w-96`} 
+                            className={`${css.bgGray} ${css.textPink} w-96`} 
                             type="text" 
                             id="username" 
                             name="username" 
-                            placeholder="Enter your username"
+                            placeholder="lepasaja"
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
-                    <div className={`flex flex-col bg-[#E4E4E4] border-2 border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-sm`}>
+                    <div className={`flex flex-col ${css.bgGray} ${css.borderPink} my-8 pl-4 pr-4 py-2 rounded-sm`}>
                         <label 
-                            className={`rhythm border-2 border-b-[#DF8D9F] w-12`} 
+                            className={`${css.textPurple} ${css.borderBottomPink} w-12`} 
                             htmlFor="email">
                                 Email
                         </label>
                         <input 
-                            className={`bg-[#E4E4E4] ruddy-pink w-96`} 
+                            className={`${css.bgGray} ${css.textPink} w-96`} 
                             type="text" 
                             id="email" 
                             name="email" 
-                            placeholder="Enter your email"
+                            placeholder="lepasaja"
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-                    <div className={`flex flex-col bg-[#E4E4E4] border-2 border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-sm`}>
+                    <div className={`flex flex-col ${css.bgGray} ${css.borderPink} my-8 pl-4 pr-4 py-2 rounded-sm`}>
                         <label 
-                            className={`rhythm border-2 border-b-[#DF8D9F] w-20`} 
+                            className={`${css.textPurple} ${css.borderBottomPink} w-20`} 
                             htmlFor="password">
                                 Password
                         </label>
                         <input 
-                            className={`bg-[#E4E4E4] ruddy-pink w-96`} 
+                            className={`${css.bgGray} ${css.textPink} w-96`} 
                             type="password" 
                             id="password" 
                             name="password"
-                            placeholder='Enter your password'
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     <div className={`mx-20 flex justify-center my-4 `}>
-                        <input className={`bg-[#DF8D9F] px-10 py-4 text-white rounded-sm`} type="submit" value="Create Account"/>
+                        <input className={`${css.bgPink} px-10 py-4 text-white rounded-sm`} type="submit" value="Create Account"/>
                     </div>
                 </form>
             </div>
             <div className={`flex flex-col justify-center items-center`}>
                 <div className={`my-2`}>
-                    <h1 className='font-bold'>Already A Member? <span className={`ruddy-pink`}><a href="">Log In</a></span> </h1>
+                    <h1 className='font-bold'>Already A Member? <span className={css.textPink}><a href="">Log In</a></span> </h1>
                 </div>
                 <div className={`my-5`}>
                     <h1 className='font-bold'>Or With</h1>
@@ -106,4 +105,4 @@ const register = () => {
     );
 }
  
-export default register;
+export default Register;
