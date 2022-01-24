@@ -11,7 +11,7 @@ export default function Modal(props) {
         <h2 className="text-lg text-white">EMAIL</h2>
         <input
           className="max-w-[500px] w-full mt-3 mb-5 bg-white rounded-md focus:outline-none focus:shadow-outline text-[#DF8D9F] text-base p-2"
-          placeholder="Enter your email/username here"
+          placeholder="Enter your email here"
         />
         <button className="px-6 py-2 font-medium bg-white text-ruddy-pink rounded-[4px]">
           SEND
