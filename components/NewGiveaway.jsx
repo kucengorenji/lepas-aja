@@ -3,7 +3,7 @@ import CardProduct from './CardProduct';
 
 export default function NewGiveaway() {
   return (
-    <section>
+    <section className="mt-5">
       <h1 className="font-bold text-[#DF8D9F] text-center text-4xl">
         NEW GIVEAWAY
       </h1>

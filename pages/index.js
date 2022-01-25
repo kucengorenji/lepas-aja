@@ -1,20 +1,18 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import Navbar from '../components/Navbar';
-import CardProduct from '../components/CardProduct';
 import NewGiveaway from '../components/NewGiveaway';
 import ProductGiveaway from '../components/ProductGiveaway';
+import ProductCategory from '../components/ProductCategory';
 import Carousel from '../components/Carousel/Carousel';
 import ImageCarousel from '../components/ImageCarousel';
 
 export default function Home() {
   const imgArray = [
-   <ImageCarousel src="/images/image1.jpg" />,
-   <ImageCarousel src="/images/image2.jpg" />,
-   <ImageCarousel src="/images/image3.jpg" />,
-   <ImageCarousel src="/images/image4.jpg" />,
-  ]
+    <ImageCarousel src="/images/image1.jpg" />,
+    <ImageCarousel src="/images/image2.jpg" />,
+    <ImageCarousel src="/images/image3.jpg" />,
+    <ImageCarousel src="/images/image4.jpg" />,
+  ];
   return (
     <div className={styles.container}>
       <Head>
@@ -24,6 +22,9 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Carousel imgArray={imgArray} />
+        <NewGiveaway />
+        <ProductCategory />
+        <ProductGiveaway />
       </main>
     </div>
   );
