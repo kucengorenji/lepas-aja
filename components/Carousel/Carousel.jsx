@@ -28,7 +28,7 @@ const Carousel = ({ imgArray }) => {
     };
   }, [index]);
   return (
-    <div className={`${css.slideshow} rounded-3xl`}>
+    <div className={`${css.slideshow} rounded-3xl h-[30vh]`}>
       <div
         className={`${css.slider}`}
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
