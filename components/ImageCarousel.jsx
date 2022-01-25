@@ -1,7 +1,7 @@
-const ImageCarousel = ({src}) => {
-    return (
-        <img className="w-full h-auto" src={src} alt="slide-image" />
-    );
-}
- 
+const ImageCarousel = ({ src }) => {
+  return (
+    <img className="object-cover w-full h-full" src={src} alt="slide-image" />
+  );
+};
+
 export default ImageCarousel;
