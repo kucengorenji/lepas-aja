@@ -1,0 +1,23 @@
+.bgGray{
+    background-color: #E4E4E4;
+}
+
+.bgPink{
+    background-color: #DF8D9F;
+}
+
+.textPink{
+    color: #DF8D9F;
+}
+
+.textPurple{
+    color: #706C88
+}
+
+.borderPink{
+    border: 1px solid #DF8D9F;
+}
+
+.borderBottomPink{
+    border-bottom: 2.5px solid #DF8D9F;
+}
