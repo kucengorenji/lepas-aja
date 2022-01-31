@@ -33,16 +33,16 @@ const register = () => {
       <div className="flex flex-col">
         <form action="/" method="POST" onSubmit={formSubmit}>
           <div
-            className={`flex flex-col bg-[#E4E4E4] border-2 border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-lg`}
+            className={`flex flex-col bg-[#E4E4E4] border border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-lg`}
           >
             <label
-              className={`rhythm border-2 border-b-[#DF8D9F] w-20`}
+              className={`rhythm border border-b-[#DF8D9F] w-20`}
               htmlFor="username"
             >
               Username
             </label>
             <input
-              className={`bg-[#E4E4E4] ruddy-pink w-96`}
+              className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-[#DF8D9F] text-xl"
               type="text"
               id="username"
               name="username"
@@ -51,16 +51,16 @@ const register = () => {
             />
           </div>
           <div
-            className={`flex flex-col bg-[#E4E4E4] border-2 border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-lg`}
+            className={`flex flex-col bg-[#E4E4E4] border border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-lg`}
           >
             <label
-              className={`rhythm border-2 border-b-[#DF8D9F] w-12`}
+              className={`rhythm border border-b-[#DF8D9F] w-12`}
               htmlFor="email"
             >
               Email
             </label>
             <input
-              className={`bg-[#E4E4E4] ruddy-pink w-96`}
+              className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-[#DF8D9F] text-xl"
               type="text"
               id="email"
               name="email"
@@ -69,16 +69,16 @@ const register = () => {
             />
           </div>
           <div
-            className={`flex flex-col bg-[#E4E4E4] border-2 border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-lg`}
+            className={`flex flex-col bg-[#E4E4E4] border border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-lg`}
           >
             <label
-              className={`rhythm border-2 border-b-[#DF8D9F] w-20`}
+              className={`rhythm border border-b-[#DF8D9F] w-20`}
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className={`bg-[#E4E4E4] ruddy-pink w-96`}
+              className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-[#DF8D9F] text-xl"
               type="password"
               id="password"
               name="password"
