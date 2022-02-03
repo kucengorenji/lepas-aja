@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CardProduct from './CardProduct';
-import { data } from '../data/data';
+import { giveaway } from '../data/giveaway';
 
 const ProductGiveaway = () => {
   const [visible, setVisible] = useState(8);
@@ -19,9 +19,10 @@ const ProductGiveaway = () => {
       </div>
 
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {data.slice(0, visible).map((item, index) => {
+        {giveaway.slice(0, visible).map((item, index) => {
           return (
             <CardProduct
+              id={item.id}
               key={index}
               name={item.name}
               owner={item.owner}

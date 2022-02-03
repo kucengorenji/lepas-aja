@@ -1,10 +1,20 @@
-const data = [
+export const giveaway = [
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9591',
     name: 'sepatu gunung',
     owner: 'moehzi',
     image: '/images/sepatu.jpg',
     lokasi: 'makasar',
+  },
+  {
+    id: '5b591617-9989-4d4b-8b5d-282533bf9591',
+    name: 'Giveaway akhir tahun Google',
+    owner: 'moehzi',
+    location: 'Yogyakarta',
+    photoUrl: null,
+    isOpen: true,
+    totalParticipants: 2,
+    totalProducts: 1,
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9592',
@@ -105,4 +115,3 @@ const data = [
     lokasi: 'Bali',
   },
 ];
-export { data };

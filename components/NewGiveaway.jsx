@@ -9,18 +9,21 @@ export default function NewGiveaway() {
       </h1>
       <div className="flex flex-wrap justify-center gap-8 mt-8">
         <CardProduct
+          id="1"
           name="Sepatu Gunung"
           owner="moehzi"
           src="/images/sepatu.jpg"
           location="Makassar"
         />
         <CardProduct
+          id="2"
           name="Sepatu Gunung"
           owner="moehzi"
           src="/images/sepatu.jpg"
           location="Makassar"
         />
         <CardProduct
+          id="3"
           name="Sepatu Gunung"
           owner="moehzi"
           src="/images/sepatu.jpg"
