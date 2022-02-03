@@ -1,7 +1,7 @@
 import React from 'react';
 import CardProduct from './CardProduct';
 import Carousel from 'react-elastic-carousel';
-import { data } from '../data/data';
+import { giveaway } from '../data/giveaway';
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -16,7 +16,7 @@ export default function NewGiveaway() {
         NEW GIVEAWAY
       </h1>
       <Carousel breakPoints={breakPoints}>
-        {data.map((item, index) => {
+        {giveaway.map((item, index) => {
           return (
             <CardProduct
               key={index}
