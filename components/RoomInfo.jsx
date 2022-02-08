@@ -18,7 +18,7 @@ export default function RoomInfo() {
           <p className="font-bold text-xl">03</p> <p>Second</p>
         </div>
       </div>
-      <div className="w-full bg-slate-200 rounded-lg">
+      <div className="w-full bg-slate-200 rounded-lg p-3">
         <h3 className="text-left font-bold px-8 py-1 text-xl">
           Total Peserta:
         </h3>

@@ -1,19 +1,23 @@
-import giveaway from '../data/giveaway';
+import giveawayRoom from '../data/giveaway-room';
 
 export default function ProductDetail() {
   return (
     <section className="p-5">
       <div className="bg-slate-200 w-full min-h-[400px] rounded h-full flex p-8">
         <div className="text-center align-middle flex-1">
-          <img src="" alt="" />
+          <img src={giveawayRoom.image} alt="" />
         </div>
         <div className=" flex-1 flex-column p-3 relative">
           <div className="align-middle">
-            <h3 className=" text-xl font-bold text-[#DF8D9F]">Sepatu</h3>
-            <p className="text-[#DF8D9F] opacity-70 text-sm">moehzi</p>
+            <h3 className=" text-xl font-bold text-[#DF8D9F]">
+              {giveawayRoom.name}
+            </h3>
+            <p className="text-[#DF8D9F] opacity-70 text-sm">
+              {giveawayRoom.owner}
+            </p>
             <div className="items-center gap-2 mt-2">
               <img src="/icons/map-pin.svg" />
-              <p className="text-[#DF8D9F] text-sm">makassar</p>
+              <p className="text-[#DF8D9F] text-sm">{giveawayRoom.lokasi}</p>
             </div>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae,
@@ -26,7 +30,7 @@ export default function ProductDetail() {
             <button>
               <a
                 href="#"
-                className="inline-block text-sm px-4 py-2 leading-none border rounded bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0"
+                className="inline-block text-lg px-12 py-4 rounded-xl leading-none border rounded bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0"
               >
                 Ikuti giveaway
               </a>
