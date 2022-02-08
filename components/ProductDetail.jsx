@@ -1,12 +1,14 @@
+import giveaway from '../data/giveaway';
+
 export default function ProductDetail() {
   return (
-    <section className="w-full min-h-[400px] ">
-      <div className="bg-slate-200 rounded h-full flex p-8">
+    <section className="p-5">
+      <div className="bg-slate-200 w-full min-h-[400px] rounded h-full flex p-8">
         <div className="text-center align-middle flex-1">
           <img src="" alt="" />
         </div>
-        <div className="align-middle flex-1 p-3 ">
-          <div>
+        <div className=" flex-1 flex-column p-3 relative">
+          <div className="align-middle">
             <h3 className=" text-xl font-bold text-[#DF8D9F]">Sepatu</h3>
             <p className="text-[#DF8D9F] opacity-70 text-sm">moehzi</p>
             <div className="items-center gap-2 mt-2">
@@ -20,7 +22,7 @@ export default function ProductDetail() {
               perferendis nam quae?
             </p>
           </div>
-          <div className="mt-6 text-center justify-center bottom-0">
+          <div className="mt-6 absolute bottom-0 mx-auto px-auto left-0 right-0 text-center">
             <button>
               <a
                 href="#"
