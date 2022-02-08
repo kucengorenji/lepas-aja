@@ -5,7 +5,11 @@ export default function ProductDetail() {
     <section className="p-5">
       <div className="bg-slate-200 w-full min-h-[400px] rounded h-full flex p-8">
         <div className="text-center align-middle flex-1">
-          <img src={giveawayRoom.image} alt="" />
+          <img
+            src={giveawayRoom.image}
+            alt=""
+            className="border-ruddy-pink border-2"
+          />
         </div>
         <div className=" flex-1 flex-column p-3 relative">
           <div className="align-middle">
