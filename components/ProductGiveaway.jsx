@@ -1,9 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardProduct from './CardProduct';
-import { data } from '../data/data';
+import axios from 'axios';
 
 const ProductGiveaway = () => {
   const [visible, setVisible] = useState(8);
+
+  const [data, setData] = useState([]);
+
+  async function fetchData() {
+    let response = await axios(
+      `https://virtserver.swaggerhub.com/ahmadnzr/LepasAja/1.0.0/products`
+    );
+    let user = await response.data;
+    setData(user.data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);
