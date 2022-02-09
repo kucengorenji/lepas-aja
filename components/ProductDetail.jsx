@@ -3,12 +3,12 @@ import giveawayRoom from '../data/giveaway-room';
 export default function ProductDetail() {
   return (
     <section className="p-5">
-      <div className="bg-slate-200 w-full min-h-[400px] rounded h-full flex p-8">
-        <div className="text-center align-middle flex-1">
+      <div className="bg-slate-200 w-full min-h-[400px] rounded-lg h-full flex p-8">
+        <div className="text-center  items-center align-middle flex-1">
           <img
             src={giveawayRoom.image}
             alt=""
-            className="border-ruddy-pink border-2"
+            className="border-ruddy-pink border-2 mx-auto"
           />
         </div>
         <div className=" flex-1 flex-column p-3 relative">
