@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import CardProduct from './CardProduct';
 import Carousel from 'react-elastic-carousel';
 import axios from 'axios';
-import { data } from '../data/data';
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -15,7 +14,7 @@ export default function NewGiveaway() {
 
   async function fetchData() {
     let response = await axios(
-      `https://virtserver.swaggerhub.com/ahmadnzr/LepasAja/1.0.0/rooms`
+      `https://virtserver.swaggerhub.com/moehzi/LepasAja/1.0.0/rooms`
     );
     let user = await response.data;
     setData(user.data);
@@ -37,8 +36,8 @@ export default function NewGiveaway() {
               key={index}
               name={item.name}
               owner={item.owner}
-              src={item.image}
-              location={item.lokasi}
+              src={item.products.photoUrl}
+              location={item.location}
             />
           );
         })}

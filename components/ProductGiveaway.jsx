@@ -9,7 +9,7 @@ const ProductGiveaway = () => {
 
   async function fetchData() {
     let response = await axios(
-      `https://virtserver.swaggerhub.com/ahmadnzr/LepasAja/1.0.0/products`
+      `https://virtserver.swaggerhub.com/moehzi/LepasAja/1.0.0/products`
     );
     let user = await response.data;
     setData(user.data);
@@ -39,8 +39,8 @@ const ProductGiveaway = () => {
               key={index}
               name={item.name}
               owner={item.owner}
-              src={item.image}
-              location={item.lokasi}
+              src={item.photoUrl}
+              location={item.location}
             />
           );
         })}
