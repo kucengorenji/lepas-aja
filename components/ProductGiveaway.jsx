@@ -22,7 +22,7 @@ const ProductGiveaway = ({ categoryIdFilter }) => {
       </div>
 
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {data.slice(0, visible).map((item, index) => {
+        {giveaway.slice(0, visible).map((item, index) => {
           if (item.id_cat === categoryIdFilter) {
             return (
               <CardProduct
