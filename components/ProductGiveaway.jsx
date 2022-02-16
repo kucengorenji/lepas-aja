@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardProduct from './CardProduct';
 import { giveaway } from '../data/giveaway';
 
-const ProductGiveaway = () => {
+const ProductGiveaway = ({ categoryIdFilter }) => {
   const [visible, setVisible] = useState(8);
 
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);
   };
+
+  // Nanti disini tinggal di map aja propsnya jadi tinggal gantiin variable data di line 26
+  // nanti if statement di line 28 bisa dihapus
 
   return (
     <section className="flex flex-col mt-14 gap-y-12 max-w-[1100px]">
@@ -19,17 +22,18 @@ const ProductGiveaway = () => {
       </div>
 
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {giveaway.slice(0, visible).map((item, index) => {
-          return (
-            <CardProduct
-              id={item.id}
-              key={index}
-              name={item.name}
-              owner={item.owner}
-              src={item.image}
-              location={item.lokasi}
-            />
-          );
+        {data.slice(0, visible).map((item, index) => {
+          if (item.id_cat === categoryIdFilter) {
+            return (
+              <CardProduct
+                key={index}
+                name={item.name}
+                owner={item.owner}
+                src={item.image}
+                location={item.lokasi}
+              />
+            );
+          }
         })}
       </div>
       <button
