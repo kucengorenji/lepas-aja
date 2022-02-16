@@ -1,6 +1,7 @@
 export const giveaway = [
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9591',
+    id_cat: 1,
     name: 'sepatu gunung',
     owner: 'moehzi',
     image: '/images/sepatu.jpg',
@@ -18,6 +19,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9592',
+    id_cat: 3,
     name: 'Sendal jepit',
     owner: 'randymawar',
     image: '/images/sepatu.jpg',
@@ -25,6 +27,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9593',
+    id_cat: 2,
     name: 'Toa mesjid',
     owner: 'alditaher',
     image: '/images/sepatu.jpg',
@@ -32,6 +35,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9594',
+    id_cat: 6,
     name: 'Laptop GTX 3090',
     owner: 'riska',
     image: '/images/sepatu.jpg',
@@ -39,6 +43,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9595',
+    id_cat: 4,
     name: 'Taro Madura',
     owner: 'tretan',
     image: '/images/sepatu.jpg',
@@ -46,6 +51,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 5,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -53,6 +59,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 1,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -60,6 +67,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 2,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -67,6 +75,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 3,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -74,6 +83,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 4,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -81,6 +91,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 5,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -88,6 +99,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 6,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -95,6 +107,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 1,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -102,6 +115,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 2,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',
@@ -109,6 +123,7 @@ export const giveaway = [
   },
   {
     id: '5b591617-9989-4d4b-8b5d-282533bf9596',
+    id_cat: 3,
     name: 'Sinte Kingkong',
     owner: 'coki',
     image: '/images/sepatu.jpg',

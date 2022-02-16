@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import NewGiveaway from '../components/NewGiveaway';
@@ -13,6 +15,19 @@ export default function Home() {
     <ImageCarousel src="/images/image3.jpg" />,
     <ImageCarousel src="/images/image4.jpg" />,
   ];
+
+  const [category, setCategory] = useState(1);
+
+  const getCategoryData = (childCategoryData) => {
+    setCategory(childCategoryData);
+    // nanti disini olah data backendnya terus simpen ke salah satu state (contoh category)
+    // Nah state category di pass sebagai props ke ProductGiveaway
+  }
+
+  useEffect(() => {
+    console.log(category);
+  }, [category]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -23,8 +38,8 @@ export default function Home() {
       <main className={styles.main}>
         <Carousel imgArray={imgArray} />
         <NewGiveaway />
-        <ProductCategory />
-        <ProductGiveaway />
+        <ProductCategory categoryDataFunc={getCategoryData} />
+        <ProductGiveaway categoryIdFilter={category} />
       </main>
     </div>
   );
