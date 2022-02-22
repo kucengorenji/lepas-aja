@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         'ruddy-pink': '#DF8D9F',
-        'rhythm' : '#706C88'
+        rhythm: '#706C88',
       },
     },
   },
