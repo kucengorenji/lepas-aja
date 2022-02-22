@@ -87,7 +87,7 @@ const login = () => {
             className="text-[#706C88] mb-1 border-b-[3px] border-[#DF8D9F] max-w-max"
             htmlFor="username-email"
           >
-            Email/Username
+            Email
           </label>
           <input
             ref={emailRef}
@@ -134,7 +134,7 @@ const login = () => {
           </button>
         </div>
         <div className="flex flex-col items-center mt-8 gap-y-4">
-          <p className="font-bold opacity-70">Or With</p>
+          <p className="font-bold opacity-70">Or Log in With</p>
           <div className="flex gap-x-8">
             <button onClick={handleFacebookAuth}>
               <img src="/icons/facebook.svg" />

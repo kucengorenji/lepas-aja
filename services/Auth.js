@@ -15,7 +15,7 @@ export const Authentication = () => {
   return FirebaseAuth;
 };
 
-export const signUp = async (email, password) => {
+export const SignUp = async (email, password) => {
   await createUserWithEmailAndPassword(FirebaseAuth, email, password);
 };
 
