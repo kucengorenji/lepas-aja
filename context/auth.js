@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { InitialUserState, useUser } from './user';
-import { Authentication } from '../services/auth';
+import { Authentication } from '../services/Auth';
 
 const AuthStateChangeProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);

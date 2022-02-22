@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import { signUp } from '../services/Auth';
+
 // import css from './style.module.css';
 
 const register = () => {
@@ -8,22 +11,16 @@ const register = () => {
 
   // console.log(email);
 
-  function formSubmit(e) {
-    // e.preventDeafult();
-
-    if (!/^[a-z0-9_\.]+$/.exec(username)) {
-      console.log('salah username format');
-    }
-
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      console.log('salah email format');
-    }
-
-    // console.log(username);
-    // console.log(email);
-    // console.log(password);
-    console.log('Sign Up Success!');
-  }
+  const handleRegister = () => {
+    signUp(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <div className="flex flex-col mx-96 px-32 my-20">
@@ -31,7 +28,7 @@ const register = () => {
         <h1 className={`rhythm text-5xl`}>SIGN UP</h1>
       </div>
       <div className="flex flex-col">
-        <form action="/" method="POST" onSubmit={formSubmit}>
+        <form action="/" method="POST" onSubmit={handleRegister}>
           <div
             className={`flex flex-col bg-[#E4E4E4] border border-[#DF8D9F] my-8 pl-4 pr-4 py-2 rounded-lg`}
           >
