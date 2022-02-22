@@ -8,8 +8,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^0.25.0",
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.5",
+    "axios": "^0.26.0",
     "firebase": "^9.6.3",
+    "module-alias": "^2.2.2",
     "next": "12.0.8",
     "react": "17.0.2",
     "react-datepicker": "^4.6.0",
