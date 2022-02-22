@@ -4,8 +4,9 @@ import {
   signOut,
   getAuth,
 } from 'firebase/auth';
+import { app } from '../config/firebase.config';
 
-export const FirebaseAuth = getAuth();
+export const FirebaseAuth = getAuth(app);
 
 export const Authentication = () => {
   return FirebaseAuth;
