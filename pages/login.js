@@ -1,10 +1,15 @@
 import React, { useState, useRef } from 'react';
 import Modal from '../components/Modal';
-import { SignIn, GetSignInErrorMessage } from '../services/Auth';
+import {
+  SignIn,
+  GetSignInErrorMessage,
+  GoogleAuth,
+  FacebookAuth,
+} from '../services/Auth';
 import { useRouter } from 'next/dist/client/router';
 import withUnProtected from '../hoc/withUnprotected';
 
-function login() {
+const login = () => {
   const [modal, setModal] = useState(false);
   const router = useRouter();
   const emailRef = useRef();
@@ -16,7 +21,7 @@ function login() {
     setModal(!modal);
   };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -27,7 +32,27 @@ function login() {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
     }
-  }
+  };
+
+  const handleGoogleAuth = async () => {
+    try {
+      await GoogleAuth();
+      router.replace('/');
+    } catch (err) {
+      const message = GetSignInErrorMessage(err.code);
+      setError(message);
+    }
+  };
+
+  const handleFacebookAuth = async () => {
+    try {
+      await FacebookAuth();
+      router.replace('/');
+    } catch (err) {
+      const message = GetSignInErrorMessage(err.code);
+      setError(message);
+    }
+  };
 
   return (
     <section className="w-full min-h-[80vh] flex flex-col justify-center items-center py-8">
@@ -111,18 +136,18 @@ function login() {
         <div className="flex flex-col items-center mt-8 gap-y-4">
           <p className="font-bold opacity-70">Or With</p>
           <div className="flex gap-x-8">
-            <a href="http://www.google.com">
+            <button onClick={handleFacebookAuth}>
               <img src="/icons/facebook.svg" />
-            </a>
-            <a href="http://www.google.com">
+            </button>
+            <button onClick={handleGoogleAuth}>
               <img src="/icons/google.svg" />
-            </a>
+            </button>
           </div>
         </div>
       </form>
       {modal && <Modal toggleModal={toggleModal} />}
     </section>
   );
-}
+};
 
 export default withUnProtected(login);

@@ -1,6 +1,9 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup,
   signOut,
   getAuth,
 } from 'firebase/auth';
@@ -22,6 +25,16 @@ export const SignIn = async (email, password) => {
 
 export const logout = async () => {
   await signOut(FirebaseAuth);
+};
+
+export const GoogleAuth = async () => {
+  const provider = new GoogleAuthProvider();
+  await signInWithPopup(FirebaseAuth, provider);
+};
+
+export const FacebookAuth = async () => {
+  const provider = new FacebookAuthProvider();
+  await signInWithPopup(FirebaseAuth, provider);
 };
 
 export const GetSignInErrorMessage = (code) => {
