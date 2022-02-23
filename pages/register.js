@@ -2,34 +2,29 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import { SignUp, GoogleAuth, FacebookAuth } from '../services/Auth';
-import { useUser } from '../context/user';
-import { postRegister } from '../services/Auth';
 import withUnProtected from '../hoc/withUnprotected';
+import { GetSignInErrorMessage } from '../services/Auth';
 
 const register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-  const user = useUser();
-  const { token, uid } = user;
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     try {
       await SignUp(email, password);
-      postRegister({ email, token, uid })
-        .then((body) => console.log(body))
-        .catch((err) => console.log(err));
     } catch (err) {
-      console.log(err.message);
+      const message = GetSignInErrorMessage(err.code);
+      setError(message);
     }
   };
 
   const handleGoogleAuth = async () => {
     try {
       await GoogleAuth();
-      router.replace('/');
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
@@ -39,7 +34,6 @@ const register = () => {
   const handleFacebookAuth = async () => {
     try {
       await FacebookAuth();
-      router.replace('/');
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
