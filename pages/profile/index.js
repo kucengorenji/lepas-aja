@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUser } from '../../context/user';
+import ListBio from '../../components/ListBio';
+import withProtected from '../../hoc/withProtected';
+import { getProfileById } from '../../services/api';
 
 const Profile = () => {
+  const user = useUser();
+  const [biodata, setBiodata] = useState([]);
+
+  useEffect(() => {
+    getProfileById(user.uid, setBiodata);
+  }, []);
+
   return (
     <div className="container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded rounded-[10px] border border-[#C4C4C4] my-4 p-4">
       <div className="flex justify-end gap-4">
@@ -12,7 +23,7 @@ const Profile = () => {
         <div className="max-w-[320px] shrink-0 rounded rounded-[10px] border border-[#C4C4C4] flex flex-col items-center p-4">
           <img
             className="w-full h-[300px] rounded rounded-[15px] object-cover"
-            src="/images/image2.jpg"
+            src={biodata.photoUrl}
           />
           <button
             type="submit"
@@ -24,45 +35,15 @@ const Profile = () => {
         <div className="flex-1">
           <div className="flex flex-col gap-y-4">
             <h4 className="text-2xl font-medium">Biodata Diri</h4>
-            <div className="w-full">
-              <div className="flex max-w-[500px] text-lg text-start">
-                <p className="flex-1">Nama</p>
-                <p className="flex-1">Tretan Muslim</p>
-              </div>
-            </div>
-            <div className="w-full">
-              <div className="flex max-w-[500px] text-lg text-start">
-                <p className="flex-1">Tanggal Lahir</p>
-                <p className="flex-1">6 November 1999</p>
-              </div>
-            </div>
-            <div className="w-full">
-              <div className="flex max-w-[500px] text-lg text-start">
-                <p className="flex-1">Jenis Kelamin</p>
-                <p className="flex-1">Laki Laki</p>
-              </div>
-            </div>
+            <ListBio title="Nama" content={biodata.displayName} />
+            <ListBio title="Tanggal Lahir" content={biodata.birthday} />
+            <ListBio title="Jenis Kelamin" content={biodata.gender} />
           </div>
           <div className="flex flex-col mt-8 gap-y-4">
-            <h4 className="text-2xl font-medium">Biodata Diri</h4>
-            <div className="w-full">
-              <div className="flex max-w-[500px] text-lg text-start">
-                <p className="flex-1">Nama</p>
-                <p className="flex-1">Tretan Muslim</p>
-              </div>
-            </div>
-            <div className="w-full">
-              <div className="flex max-w-[500px] text-lg text-start">
-                <p className="flex-1">Tanggal Lahir</p>
-                <p className="flex-1">6 November 1999</p>
-              </div>
-            </div>
-            <div className="w-full">
-              <div className="flex max-w-[500px] text-lg text-start">
-                <p className="flex-1">Jenis Kelamin</p>
-                <p className="flex-1">Laki Laki</p>
-              </div>
-            </div>
+            <h4 className="text-2xl font-medium">Kontak</h4>
+            <ListBio title="Email" content={biodata.email} />
+            <ListBio title="Nomor HP" content={biodata.phoneNumber} />
+            {/* <ListBio title="Alamat" content={biodata.address.address} /> */}
             <div className="flex gap-x-4">
               <button
                 type="submit"
@@ -84,4 +65,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withProtected(Profile);

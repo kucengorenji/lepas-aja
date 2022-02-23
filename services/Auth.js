@@ -39,12 +39,6 @@ const postRegister = async (token) => {
   );
 };
 
-// export const getProfileById = async (id) => {
-//   let response = await axios.get(
-//     `https://lepasaja-backend.herokuapp.com/api/v1/users/${id}`
-//   );
-// };
-
 export const SignIn = async (email, password) => {
   await signInWithEmailAndPassword(FirebaseAuth, email, password);
 };
