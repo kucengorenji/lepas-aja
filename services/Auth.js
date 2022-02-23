@@ -8,6 +8,7 @@ import {
   getAuth,
 } from 'firebase/auth';
 import { app } from '../config/firebase.config';
+import axios from 'axios';
 
 export const FirebaseAuth = getAuth(app);
 
@@ -18,6 +19,21 @@ export const Authentication = () => {
 export const SignUp = async (email, password) => {
   await createUserWithEmailAndPassword(FirebaseAuth, email, password);
 };
+
+export async function postRegister({ email, token, uid }) {
+  let response = await axios.post(
+    `https://lepasaja-backend.herokuapp.com/api/v1/register`,
+    {
+      email: email,
+      id: uid,
+      headers: {
+        Authorization: `${token}`,
+      },
+    }
+  );
+  let body = await response;
+  return body;
+}
 
 export const SignIn = async (email, password) => {
   await signInWithEmailAndPassword(FirebaseAuth, email, password);
