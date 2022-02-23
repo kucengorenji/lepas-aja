@@ -4,6 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 import { logout } from '../../services/Auth';
 import { useUser } from '../../context/user';
+import { useRouter } from 'next/dist/client/router';
 
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
@@ -20,6 +21,7 @@ const LinkDropdown = (props) => {
 
 const Dropdown = () => {
   const user = useUser();
+  const router = useRouter();
   async function handleLogout() {
     await logout();
   }
@@ -51,7 +53,7 @@ const Dropdown = () => {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <LinkDropdown href="/">
+                <LinkDropdown href="/profile">
                   <a
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
