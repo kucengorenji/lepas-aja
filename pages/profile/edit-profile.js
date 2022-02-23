@@ -88,7 +88,6 @@ const EditProfile = () => {
                   const idKota = dataProvinsi.find(
                     (item) => item.nama === selectedProvinsi
                   );
-                  console.log(idKota.id);
                   setIdKota(idKota.id);
                 }}
               >

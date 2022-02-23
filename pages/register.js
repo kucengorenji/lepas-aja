@@ -1,19 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import { SignUp, GoogleAuth, FacebookAuth } from '../services/Auth';
+import { useUser } from '../context/user';
+import { postRegister } from '../services/Auth';
+import withUnProtected from '../hoc/withUnprotected';
 
 const register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+  const user = useUser();
+  const { token, uid } = user;
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    await SignUp(email, password);
-    router.replace('/login');
+    try {
+      await SignUp(email, password);
+      postRegister({ email, token, uid })
+        .then((body) => console.log(body))
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const handleGoogleAuth = async () => {
@@ -120,4 +130,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default withUnProtected(register);
