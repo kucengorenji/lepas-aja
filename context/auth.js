@@ -6,15 +6,14 @@ const AuthStateChangeProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const user = useUser();
   const { SetUser } = user;
-  const [token, setToken] = useState('');
 
   const InitiateAuthStateChange = () => {
     Authentication().onAuthStateChanged((user) => {
       if (user) {
         user.getIdToken().then((token) => {
-          setToken(token);
+          SetUser({ email: user.email, uid: user.uid, token: token });
+          console.log(token);
         });
-        SetUser({ email: user.email, uid: user.uid, token: token });
       } else {
         SetUser(InitialUserState);
       }
