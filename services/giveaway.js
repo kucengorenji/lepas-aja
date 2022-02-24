@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const createRoomPayload = {
-  name: '',
-  description: '',
-  type: '',
-};
+const baseUrl = 'https://lepasaja-backend.herokuapp.com/api/v1';
 
-axios.post('/api/giveaway/create', {});
+export const postRoom = async (payload) => {
+  await axios.post(`${baseUrl}/rooms`, payload);
+};
