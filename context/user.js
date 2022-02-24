@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from 'react';
 export const InitialUserState = {
   email: null,
   uid: null,
+  token: null,
 };
 
 const UserContext = createContext();

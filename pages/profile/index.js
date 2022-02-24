@@ -3,8 +3,11 @@ import { useUser } from '../../context/user';
 import ListBio from '../../components/ListBio';
 import withProtected from '../../hoc/withProtected';
 import { getProfileById } from '../../services/api';
+import { useRouter } from 'next/dist/client/router';
+import moment from 'moment';
 
 const Profile = () => {
+  const router = useRouter();
   const user = useUser();
   const [biodata, setBiodata] = useState([]);
 
@@ -36,14 +39,17 @@ const Profile = () => {
           <div className="flex flex-col gap-y-4">
             <h4 className="text-2xl font-medium">Biodata Diri</h4>
             <ListBio title="Nama" content={biodata.displayName} />
-            <ListBio title="Tanggal Lahir" content={biodata.birthday} />
+            <ListBio
+              title="Tanggal Lahir"
+              content={moment(biodata.birthday).format('L')}
+            />
             <ListBio title="Jenis Kelamin" content={biodata.gender} />
           </div>
           <div className="flex flex-col mt-8 gap-y-4">
             <h4 className="text-2xl font-medium">Kontak</h4>
             <ListBio title="Email" content={biodata.email} />
             <ListBio title="Nomor HP" content={biodata.phoneNumber} />
-            {/* <ListBio title="Alamat" content={biodata.address.address} /> */}
+            <ListBio title="Alamat" content={biodata.address?.address} />
             <div className="flex gap-x-4">
               <button
                 type="submit"
@@ -54,6 +60,7 @@ const Profile = () => {
               <button
                 type="submit"
                 className="rounded-[4px] bg-[#DF8D9F] px-8 py-2 mt-8 text-lg text-white font-medium"
+                onClick={() => router.replace('/profile/edit-profile')}
               >
                 Edit Profil
               </button>
