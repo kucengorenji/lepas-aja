@@ -43,7 +43,7 @@ const createRoom = () => {
               <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                 <Controller
                   control={control}
-                  name="start"
+                  name="startAt"
                   render={({ field: { onChange, onBlur, value, ref } }) => (
                     <DatePicker
                       className=" bg-none"
@@ -64,7 +64,7 @@ const createRoom = () => {
               <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                 <Controller
                   control={control}
-                  name="end"
+                  name="finishAt"
                   render={({ field: { onChange, onBlur, value, ref } }) => (
                     <DatePicker
                       className=" bg-none"
@@ -87,7 +87,7 @@ const createRoom = () => {
                 cols="33"
                 className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
                 maxLength="200"
-                {...register('deskripsi', { required: true })}
+                {...register('description', { required: true })}
               />
               <p className="text-black opacity-30">Maksimal 200 Karakter</p>
             </div>
@@ -101,7 +101,7 @@ const createRoom = () => {
               cols="33"
               className="flex flex-col px-4 py-3 my-2 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
               maxLength="200"
-              {...register('termandcondition', { required: true })}
+              {...register('condition', { required: true })}
             />
             <p className="text-black opacity-30">Maksimal 200 Karakter</p>
             <button
