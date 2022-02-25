@@ -1,16 +1,24 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm, Controller } from 'react-hook-form';
 import { postRoom } from '../services/giveaway';
+import { useUser } from '../context/user';
 
 const createRoom = () => {
   const { register, handleSubmit, control } = useForm();
 
+  const user = useUser();
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  };
+
   const onSubmit = async (data) => {
     console.log(data);
-    await postRoom(data);
+    await postRoom(data, headers);
   };
 
   return (
