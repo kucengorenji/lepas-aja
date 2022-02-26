@@ -1,7 +1,7 @@
 export default function CardCategory(props) {
   return (
     <div className="hover:scale-125">
-      <div className="min-w-[120px] rounded-lg shadow-lg  bg-[#F0F0F0]">
+      <div className="min-w-[100px] rounded-lg shadow-lg  bg-[#F0F0F0]">
         <img
           src={props.src}
           alt={props.name}

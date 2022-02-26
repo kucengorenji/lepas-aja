@@ -9,6 +9,7 @@ module.exports = {
         'ruddy-pink': '#DF8D9F',
         rhythm: '#706C88',
       },
+      display: ['group-hover'],
     },
   },
   plugins: [],
