@@ -4,12 +4,14 @@ import Head from 'next/head';
 import ParticipantList from '../../components/ParticipantList';
 import RoomInfo from '../../components/RoomInfo';
 import axios from 'axios';
+import { useRouter } from 'next/dist/client/router';
 
 const Event = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
   axios
-    .get(
-      'https://virtserver.swaggerhub.com/ahmadnzr/LepasAja/1.0.0/rooms/5911a1cc-8780-4d1f-a509-45007d1ac8b0'
-    )
+    .get(`https://lepasaja-backend.herokuapp.com/api/v1/rooms/${id}`)
     .then((res) => {
       console.log(res.data.data);
     });
