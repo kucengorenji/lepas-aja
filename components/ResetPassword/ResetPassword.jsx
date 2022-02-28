@@ -1,4 +1,4 @@
-import { getAuth, confirmPasswordReset } from 'firebase/auth';
+import { confirmPasswordReset } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
 const ResetPassword = () => {
