@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import CardProduct from './CardProduct';
-import axios from 'axios';
 import { getAllRooms } from '../services/giveaway';
 
 const ProductGiveaway = () => {
   const [visible, setVisible] = useState(8);
-
   const [data, setData] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://lepasaja-backend.herokuapp.com/api/v1/rooms`
-      );
-      const user = await response.data;
-      setData(user.data);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
-    fetchData();
+    getAllRooms(setData);
   }, []);
 
   const showMoreItem = () => {

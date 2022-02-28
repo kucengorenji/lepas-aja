@@ -1,15 +1,15 @@
-import axios from 'axios';
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm, Controller } from 'react-hook-form';
 import { postRoom } from '../services/giveaway';
 import { useUser } from '../context/user';
+import { useRouter } from 'next/dist/client/router';
 
 const createRoom = () => {
   const { register, handleSubmit, control } = useForm();
-
   const user = useUser();
+  const router = useRouter();
   const headers = {
     headers: {
       Authorization: `Bearer ${user.token}`,
@@ -17,8 +17,13 @@ const createRoom = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
-    await postRoom(data, headers);
+    try {
+      await postRoom(data, headers);
+      console.log(data);
+      // router.replace(`/giveaway/${data.id}`);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (

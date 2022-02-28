@@ -6,7 +6,13 @@ export const postRoom = async (payload, headers) => {
   await axios.post(`${baseUrl}/rooms`, payload, headers);
 };
 
-// gagal untuk dipisah dari file service giveaway. langsung fetch di file
-// export const getAllRooms = async () => {
-//   await axios.get(`${baseUrl}/rooms`);
-// };
+export const getRoomById = async (id, headers) => {
+  const response = axios.get(`${baseUrl}/rooms/${id}`, headers);
+  return response.data;
+};
+
+export const getAllRooms = async (setState) => {
+  const response = await axios.get(`${baseUrl}/rooms`);
+  const rooms = await response.data;
+  setState(rooms.data);
+};
