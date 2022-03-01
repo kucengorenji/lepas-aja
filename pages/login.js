@@ -1,13 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Modal from '../components/Modal';
 import {
+  Authentication,
   SignIn,
   GetSignInErrorMessage,
   GoogleAuth,
   FacebookAuth,
+  sendEmailResetPassword
 } from '../services/Auth';
 import { useRouter } from 'next/dist/client/router';
 import withUnProtected from '../hoc/withUnprotected';
+import app from '../config/firebase.config.js';
+
+// console.log(app);
+
+// const auth = Authentication;
+// console.log(auth);
 
 const login = () => {
   const [modal, setModal] = useState(false);
@@ -15,6 +23,7 @@ const login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState('');
+  const [isAlert, setIsAlert] = useState(false);
 
   const toggleModal = (e) => {
     e.preventDefault();
@@ -53,9 +62,52 @@ const login = () => {
       setError(message);
     }
   };
+  const onSendEmail = async({ email }) =>{
+    // console.log(app);
+    // console.log(Authentication, email);
+    try {
+      await sendEmailResetPassword(email);
+      setModal(!modal);
+      setIsAlert(true);
+      console.log('Please check your email!');
+    } catch (error) {
+      console.log('error');
+      console.log(error);
+    }
+
+    // sendPasswordResetEmail(Authentication, email)
+    //   .then(() => {
+    //     setModal(!modal);
+    //     setIsAlert(true);
+    //     // alert('Email has been send. Please check your email!');
+    //     console.log('Please check your email!');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     console.log(Authentication);
+    //     console.log('Error');
+    //   })
+
+  }
+
+  useEffect(() => {
+    if(isAlert){
+      let timer = setTimeout(() => setIsAlert(false), 5000);
+      return () => {
+        clearTimeout(timer);
+      }
+    }
+  }, [isAlert])
 
   return (
     <section className="w-full min-h-[80vh] flex flex-col justify-center items-center py-8">
+      {isAlert && 
+        <div className='relative '>
+          <div className='absolute w-96 -top-36 -left-44 bg-gray-500 text-center px-4 py-10'>
+            <h1 className='text-white'>Email has been send. Please check your email!</h1>
+          </div>
+        </div>
+      }
       <h1 className="text-5xl mb-14">LOGIN</h1>
       <form
         className="mb-4 flex flex-col max-w-[450px] w-full"
@@ -145,7 +197,7 @@ const login = () => {
           </div>
         </div>
       </form>
-      {modal && <Modal toggleModal={toggleModal} />}
+      {modal && <Modal onSendEmail={onSendEmail} toggleModal={toggleModal} />}
     </section>
   );
 };

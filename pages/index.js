@@ -7,6 +7,7 @@ import ProductGiveaway from '../components/ProductGiveaway';
 import ProductCategory from '../components/ProductCategory';
 import Carousel from '../components/Carousel/Carousel';
 import ImageCarousel from '../components/ImageCarousel';
+import ResetPassword from '../components/ResetPassword/ResetPassword';
 
 export default function Home() {
   const imgArray = [
@@ -36,10 +37,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Carousel imgArray={imgArray} />
+        {/* <Carousel imgArray={imgArray} />
         <NewGiveaway />
         <ProductCategory categoryDataFunc={getCategoryData} />
         <ProductGiveaway categoryIdFilter={category} />
+        <ProductCategory />
+        <ProductGiveaway /> */}
+        {/* <ResetPassword /> */}
       </main>
     </div>
   );

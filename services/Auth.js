@@ -6,6 +6,8 @@ import {
   signInWithPopup,
   signOut,
   getAuth,
+  sendPasswordResetEmail,
+  confirmPasswordReset,
 } from 'firebase/auth';
 import { app } from '../config/firebase.config';
 
@@ -46,3 +48,11 @@ export const GetSignInErrorMessage = (code) => {
       return 'Email atau password salah';
   }
 };
+
+export const sendEmailResetPassword = async(email) => {
+  await sendPasswordResetEmail(FirebaseAuth, email);
+}
+
+export const sendResetPassword = async(oobCode, newPassword) => {
+  await confirmPasswordReset(FirebaseAuth, oobCode, newPassword);
+}
