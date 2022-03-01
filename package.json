@@ -17,6 +17,7 @@
     "@mui/lab": "^5.0.0-alpha.70",
     "@mui/material": "^5.4.3",
     "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
     "firebase": "^9.6.3",
     "module-alias": "^2.2.2",
     "moment": "^2.29.1",
