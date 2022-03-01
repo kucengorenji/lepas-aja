@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import { SignUp, GoogleAuth, FacebookAuth } from '../services/Auth';
+import withUnProtected from '../hoc/withUnprotected';
+import { GetSignInErrorMessage } from '../services/Auth';
 
 const register = () => {
   const [email, setEmail] = useState('');
@@ -12,14 +14,17 @@ const register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    await SignUp(email, password);
-    router.replace('/login');
+    try {
+      await SignUp(email, password);
+    } catch (err) {
+      const message = GetSignInErrorMessage(err.code);
+      setError(message);
+    }
   };
 
   const handleGoogleAuth = async () => {
     try {
       await GoogleAuth();
-      router.replace('/');
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
@@ -29,7 +34,6 @@ const register = () => {
   const handleFacebookAuth = async () => {
     try {
       await FacebookAuth();
-      router.replace('/');
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
@@ -120,4 +124,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default withUnProtected(register);

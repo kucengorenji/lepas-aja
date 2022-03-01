@@ -10,6 +10,7 @@ import {
   confirmPasswordReset,
 } from 'firebase/auth';
 import { app } from '../config/firebase.config';
+import axios from 'axios';
 
 export const FirebaseAuth = getAuth(app);
 
@@ -19,6 +20,25 @@ export const Authentication = () => {
 
 export const SignUp = async (email, password) => {
   await createUserWithEmailAndPassword(FirebaseAuth, email, password);
+  Authentication().onAuthStateChanged((user) => {
+    if (user) {
+      user.getIdToken().then(async (token) => {
+        await postRegister(token);
+      });
+    }
+  });
+};
+
+const postRegister = async (token) => {
+  let response = await axios.post(
+    `https://lepasaja-backend.herokuapp.com/api/v1/register`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 
 export const SignIn = async (email, password) => {
@@ -32,6 +52,13 @@ export const logout = async () => {
 export const GoogleAuth = async () => {
   const provider = new GoogleAuthProvider();
   await signInWithPopup(FirebaseAuth, provider);
+  Authentication().onAuthStateChanged((user) => {
+    if (user) {
+      user.getIdToken().then(async (token) => {
+        await postRegister(token);
+      });
+    }
+  });
 };
 
 export const FacebookAuth = async () => {
