@@ -60,7 +60,7 @@ const EditProfile = () => {
       });
       fetchProvinsi().then((prov) => {
         const kota = prov.find((item) => item.nama === data.address?.province);
-        setIdKota(kota.id);
+        setIdKota(kota?.id);
         setLoading(false);
       });
     });
