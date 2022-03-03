@@ -4,23 +4,29 @@ import Head from 'next/head';
 import ParticipantList from '../../components/ParticipantList';
 import RoomInfo from '../../components/RoomInfo';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/dist/client/router';
+import { getRoomById } from '../../services/giveaway';
+import { useUser } from '../../context/user';
 
 const Event = () => {
+  const user = useUser();
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    const response = await axios
-      .get(`https://lepasaja-backend.herokuapp.com/api/v1/rooms/${id}`)
-      .then((res) => {
-        console.log(res.data.data);
-      });
-    const user = await response.data;
-    setData(user);
+    try {
+      await getRoomById(id).then((data) => setData(data));
+    } catch (e) {
+      console.error(e);
+    }
   };
+
+  useEffect(() => {
+    fetchData();
+    console.log(data);
+  });
   return (
     <>
       <div className={styles.container + 'container'}>
@@ -41,17 +47,17 @@ const Event = () => {
   );
 };
 
-export async function getServerSideProps() {
-  const response = await axios.get(
-    `https://lepasaja-backend.herokuapp.com/api/v1/rooms/${id}`
-  );
-  console.log(response);
-  const data = await response.data;
-  return {
-    props: {
-      data: data,
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const response = await axios.get(
+//     `https://lepasaja-backend.herokuapp.com/api/v1/rooms/${id}`
+//   );
+//   console.log(response);
+//   const data = await response.data;
+//   return {
+//     props: {
+//       data: data,
+//     },
+//   };
+// }
 
 export default Event;

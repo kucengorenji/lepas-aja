@@ -2,13 +2,19 @@ import axios from 'axios';
 
 const baseUrl = 'https://lepasaja-backend.herokuapp.com/api/v1';
 
-export const postRoom = async (payload, headers) => {
-  await axios.post(`${baseUrl}/rooms`, payload, headers);
+export const postRoom = async (payload, token) => {
+  await axios.post(`${baseUrl}/rooms`, payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
-export const getRoomById = async (id, headers) => {
-  const response = axios.get(`${baseUrl}/rooms/${id}`, headers);
-  return response.data;
+export const getRoomById = async (id) => {
+  const response = await axios.get(`${baseUrl}/rooms/${id}`);
+  const data = response.data;
+  return data;
 };
 
 export const getAllRooms = async (setState) => {

@@ -20,6 +20,7 @@ const ProductGiveaway = () => {
         {data.slice(0, visible).map((item, index) => {
           return (
             <CardProduct
+              id={item.id}
               key={index}
               name={item.name}
               owner={item.owner}
