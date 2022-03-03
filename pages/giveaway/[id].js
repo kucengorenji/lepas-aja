@@ -4,10 +4,23 @@ import Head from 'next/head';
 import ParticipantList from '../../components/ParticipantList';
 import RoomInfo from '../../components/RoomInfo';
 import axios from 'axios';
+import { useState } from 'react';
+import { useRouter } from 'next/dist/client/router';
 
-const Event = (props) => {
-  const { data } = props;
-  console.log(data);
+const Event = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [data, setData] = useState([]);
+
+  const fetchData = async () => {
+    const response = await axios
+      .get(`https://lepasaja-backend.herokuapp.com/api/v1/rooms/${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+      });
+    const user = await response.data;
+    setData(user);
+  };
   return (
     <>
       <div className={styles.container + 'container'}>
