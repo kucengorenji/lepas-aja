@@ -1,9 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { fetchProvinsi, fetchKota } from '../../services/api';
+import React, { useState, useEffect } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import {
+  fetchProvinsi,
+  fetchKota,
+  getProfileById,
+  editImage,
+  editBio,
+} from '../../services/api';
 import { useUser } from '../../context/user';
 import withProtected from '../../hoc/withProtected';
-// import { getProfileById } from '../../services/api';
-import axios from 'axios';
 import { useRouter } from 'next/dist/client/router';
 import TextField from '@mui/material/TextField';
 import DateAdapter from '@mui/lab/AdapterMoment';
@@ -16,47 +22,61 @@ const EditProfile = () => {
   const user = useUser();
   const [dataProvinsi, setDataProvinsi] = useState([]);
   const [dataKota, setDataKota] = useState([]);
-  const [idKota, setIdKota] = useState(getIdkota?.id);
-  const [dataBio, setDataBio] = useState({});
+  const [idKota, setIdKota] = useState();
   const [loading, setLoading] = useState(true);
-
-  const getProfileById = async () => {
-    let response = await axios.get(
-      `https://lepasaja-backend.herokuapp.com/api/v1/users/${user.uid}`
-    );
-    let biodata = await response.data;
-    setDataBio(biodata.data);
-    setLoading(false);
-  };
-
-  const fetchKota = async () => {
-    let response = await axios(
-      `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${idKota}`
-    );
-    let dataKota = await response.data;
-    setDataKota(dataKota.kota_kabupaten);
-  };
-
-  const fetchProvinsi = async () => {
-    let response = await axios(
-      `https://dev.farizdotid.com/api/daerahindonesia/provinsi`
-    );
-    let dataProvinsi = await response.data;
-    setDataProvinsi(dataProvinsi.provinsi);
-  };
-
+  const [dataBio, setDataBio] = useState({
+    firstname: '',
+    lastname: '',
+    gender: '',
+    address: '',
+    province: '',
+    city: '',
+    birthday: '',
+    phoneNumber: '',
+    zipCode: '',
+  });
+  const [image, setImage] = useState();
+  const [preview, setPreview] = useState();
   useEffect(() => {
-    fetchProvinsi();
-    fetchKota();
+    fetchKota(idKota).then((data) => {
+      setDataKota(data);
+      setDataBio({ ...dataBio, city: data[0]?.nama });
+    });
   }, [idKota]);
 
   useEffect(() => {
-    getProfileById();
+    fetchProvinsi().then((data) => setDataProvinsi(data));
+    getProfileById(user.uid).then((data) => {
+      setDataBio({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        gender: data.gender,
+        address: data.address?.address,
+        province: data.address?.province,
+        birthday: moment.unix(data.birthday),
+        city: data.address?.city,
+        phoneNumber: data.phoneNumber,
+        zipCode: data.address?.zipCode,
+      });
+      fetchProvinsi().then((prov) => {
+        const kota = prov.find((item) => item.nama === data.address?.province);
+        setIdKota(kota?.id);
+        setLoading(false);
+      });
+    });
   }, []);
 
-  const getIdkota = dataProvinsi.find(
-    (item) => item.nama === dataBio.address?.province
-  );
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setPreview(null);
+    }
+  }, [image]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,22 +84,28 @@ const EditProfile = () => {
       firstname: dataBio.firstname,
       lastname: dataBio.lastname,
       gender: dataBio.gender,
-      address: dataBio.address?.address,
-      province: dataBio.address?.province,
-      city: dataBio.address?.city,
-      birthday: dataBio.birthday,
+      address: dataBio.address,
+      province: dataBio.province,
+      city: dataBio.city,
+      birthday: moment(dataBio.birthday).format('YYYY-MM-DD'),
       phoneNumber: dataBio.phoneNumber,
+      zipCode: dataBio.zipCode,
     };
-    axios
-      .put(
-        `https://lepasaja-backend.herokuapp.com/api/v1/users/${user.uid}`,
-        userData,
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      )
+
+    const form = new FormData();
+    form.append('avatar', image);
+
+    editImage(user.uid, form, user.token)
+      .then((response) => {
+        console.log(response.data);
+        console.log(response.status);
+        router.replace('/profile');
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+
+    editBio(user.uid, userData, user.token)
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
@@ -89,12 +115,44 @@ const EditProfile = () => {
         console.log(error.message);
       });
   };
-  //   console.log(user.token);
-  //   console.log('kota', dataBio.address?.city);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setDataBio({
+      ...dataBio,
+      [name]: value,
+    });
+  };
+
+  const handleChangeIdKota = async (e) => {
+    handleChange(e);
+    const kota = dataProvinsi.find((item) => item.nama === e.target.value);
+    console.log(kota);
+    console.log('city ', dataBio.city);
+    setIdKota(kota.id);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.substring(0, 5) === 'image') {
+      setImage(file);
+    } else {
+      setImage(null);
+    }
+  };
+
   return (
     <section className="flex flex-col px-8 py-12">
       {loading ? (
-        <i>Loading...</i>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <CircularProgress />
+        </Box>
       ) : (
         <div className="flex flex-col items-center justify-center w-full">
           <h1 className="mb-8 text-4xl text-left text-ruddy-pink">
@@ -111,7 +169,8 @@ const EditProfile = () => {
                     Nama Depan
                   </label>
                   <input
-                    onChange={(e) => setDataBio({ firstname: e.target.value })}
+                    onChange={handleChange}
+                    name="firstname"
                     className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
                     value={dataBio.firstname}
                   />
@@ -121,8 +180,9 @@ const EditProfile = () => {
                     Nama Belakang
                   </label>
                   <input
+                    name="lastname"
                     className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
-                    onChange={(e) => setDataBio({ lastname: e.target.value })}
+                    onChange={handleChange}
                     value={dataBio.lastname}
                   />
                 </div>
@@ -132,8 +192,9 @@ const EditProfile = () => {
                   Jenis Kelamin
                 </label>
                 <select
+                  name="gender"
                   className="flex flex-col px-4 py-3 leading-tight border rounded border-ruddy-pink focus:outline-none focus:shadow-outline "
-                  onChange={(e) => setDataBio({ gender: e.target.value })}
+                  onChange={handleChange}
                   value={dataBio.gender}
                 >
                   <option value="LAKI_LAKI">Laki - laki</option>
@@ -145,11 +206,21 @@ const EditProfile = () => {
                   Alamat
                 </label>
                 <input
+                  name="address"
                   className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
-                  value={dataBio.address?.address}
-                  onChange={(e) =>
-                    setDataBio({ address: { address: e.target.value } })
-                  }
+                  value={dataBio.address}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col flex-1 gap-y-2">
+                <label className="text-2xl font-medium opacity-70">
+                  Kode Pos
+                </label>
+                <input
+                  onChange={handleChange}
+                  name="zipCode"
+                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                  value={dataBio.zipCode}
                 />
               </div>
               <div className="flex flex-col gap-y-2">
@@ -157,17 +228,10 @@ const EditProfile = () => {
                   Provinsi
                 </label>
                 <select
+                  name="province"
                   className="flex flex-col px-4 py-3 leading-tight border rounded shadow border-ruddy-pink focus:outline-none focus:shadow-outline"
-                  value={dataBio.address?.province}
-                  onChange={(e) => {
-                    setDataBio({ address: { province: e.target.value } });
-
-                    const kota = dataProvinsi.find(
-                      (item) => item.nama === e.target.value
-                    );
-                    console.log(kota);
-                    setIdKota(kota.id);
-                  }}
+                  value={dataBio.province}
+                  onChange={handleChangeIdKota}
                 >
                   {dataProvinsi.map((item, index) => {
                     return (
@@ -183,12 +247,10 @@ const EditProfile = () => {
                   Kota/Kabupaten
                 </label>
                 <select
+                  name="city"
                   className="flex flex-col px-4 py-3 leading-tight border rounded shadow border-ruddy-pink focus:outline-none focus:shadow-outline"
-                  value={dataBio.address?.city}
-                  onChange={(e) => {
-                    const selectedKota = e.target.value;
-                    setDataBio({ address: { city: selectedKota } });
-                  }}
+                  value={dataBio.city}
+                  onChange={handleChange}
                 >
                   {dataKota.map((item, index) => {
                     return (
@@ -208,9 +270,9 @@ const EditProfile = () => {
                 <div className="mb-4 shadow border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                   <LocalizationProvider dateAdapter={DateAdapter}>
                     <DatePicker
-                      value={moment(dataBio.birthday).format('L')}
+                      value={dataBio.birthday}
                       onChange={(newValue) => {
-                        setDataBio({ birthday: newValue });
+                        setDataBio({ ...dataBio, birthday: newValue });
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
@@ -222,11 +284,10 @@ const EditProfile = () => {
                   No. HP
                 </label>
                 <input
+                  name="phoneNumber"
                   className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
                   value={dataBio.phoneNumber}
-                  onChange={(e) => {
-                    setDataBio({ phoneNumber: e.target.value });
-                  }}
+                  onChange={handleChange}
                 />
               </div>
               <div className="flex flex-col mt-4 gap-y-2">
@@ -234,40 +295,68 @@ const EditProfile = () => {
                   Foto Profile
                 </label>
                 <div className="flex justify-center px-6 pt-5 pb-6 mt-1 border-2 border-gray-300 border-dashed rounded-md">
-                  <div className="space-y-1 text-center">
-                    <svg
-                      className="w-12 h-12 mx-auto text-gray-400"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 48 48"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <div className="flex text-sm text-gray-600">
-                      <label
-                        htmlFor="file-upload"
-                        className="relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                      >
-                        <span>Upload a file</span>
-                        <input
-                          id="file-upload"
-                          name="file-upload"
-                          type="file"
-                          className="sr-only"
+                  {preview ? (
+                    <>
+                      <div className="flex text-sm text-gray-600">
+                        <img
+                          src={preview}
+                          className="w-[485px] h-[300px] object-cover"
                         />
-                      </label>
-                      <p className="pl-1">or drag and drop</p>
+                        <label
+                          htmlFor="file-upload"
+                          className="relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                        >
+                          <span>Upload a file</span>
+                          <input
+                            onChange={handleImageChange}
+                            accept="image/*"
+                            id="file-upload"
+                            name="file-upload"
+                            type="file"
+                            className="sr-only"
+                          />
+                        </label>
+                        <p className="pl-1">or drag and drop</p>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="space-y-1 text-center">
+                      <svg
+                        className="w-12 h-12 mx-auto text-gray-400"
+                        stroke="currentColor"
+                        fill="none"
+                        viewBox="0 0 48 48"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <div className="flex text-sm text-gray-600">
+                        <label
+                          htmlFor="file-upload"
+                          className="relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                        >
+                          <span>Upload a file</span>
+                          <input
+                            onChange={handleImageChange}
+                            accept="image/*"
+                            id="file-upload"
+                            name="file-upload"
+                            type="file"
+                            className="sr-only"
+                          />
+                        </label>
+                        <p className="pl-1">or drag and drop</p>
+                      </div>
+                      <p className="text-xs text-gray-500">
+                        PNG, JPG, GIF up to 10MB
+                      </p>
                     </div>
-                    <p className="text-xs text-gray-500">
-                      PNG, JPG, GIF up to 10MB
-                    </p>
-                  </div>
+                  )}
                 </div>
               </div>
 
