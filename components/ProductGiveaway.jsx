@@ -48,7 +48,7 @@ const ProductGiveaway = ({ categoryIdFilter, data }) => {
         {filteredData.slice(0, visible).map((item, index) => {
           return (
             <CardProduct
-              id={data.id}
+              id={item.id}
               key={index}
               name={data.name}
               owner={data.owner}
