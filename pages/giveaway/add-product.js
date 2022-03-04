@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { category } from '../data/category';
+import { category } from '../../data/category';
 
 const addProduct = () => {
   const [categoryState, setCategoryState] = useState(category[0].name);

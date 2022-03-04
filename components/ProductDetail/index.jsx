@@ -1,9 +1,9 @@
-import giveawayRoom from '../data/giveaway-room';
+import giveawayRoom from '../../data/giveaway-room';
 
 export default function ProductDetail() {
   return (
-    <section className="p-5">
-      <div className="bg-slate-200 w-full min-h-[400px] rounded-lg h-full flex p-8">
+    <section className="container p-5 mx-auto">
+      <div className="border border-ruddy-pink w-full min-h-[400px] rounded-lg h-full flex p-8">
         <div className="text-center  items-center align-middle flex-1">
           <img
             src={giveawayRoom.image}

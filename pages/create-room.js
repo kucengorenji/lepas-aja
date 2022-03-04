@@ -1,26 +1,24 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm, Controller } from 'react-hook-form';
 import { postRoom } from '../services/giveaway';
 import { useUser } from '../context/user';
 import { useRouter } from 'next/dist/client/router';
+import DateAdapter from '@mui/lab/AdapterMoment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 const createRoom = () => {
   const { register, handleSubmit, control } = useForm();
   const user = useUser();
   const router = useRouter();
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-    },
-  };
 
   const onSubmit = async (data) => {
     try {
-      await postRoom(data, headers);
+      await postRoom(data, user.token);
       console.log(data);
-      // router.replace(`/giveaway/${data.id}`);
+      router.replace(`/giveaway/${data.id}`);
     } catch (e) {
       console.error(e);
     }
@@ -74,19 +72,21 @@ const createRoom = () => {
               <label className="text-2xl font-medium opacity-70">
                 Akhir Giveaway
               </label>
-              <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
+              <div className="mb-4 shadow border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                 <Controller
                   control={control}
                   name="finishAt"
                   render={({ field: { onChange, onBlur, value, ref } }) => (
-                    <DatePicker
-                      className=" bg-none"
-                      selected={value}
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      showTimeSelect
-                      dateFormat="Pp"
-                    />
+                    <LocalizationProvider dateAdapter={DateAdapter}>
+                      <DatePicker
+                        className=" bg-none"
+                        selected={value}
+                        onBlur={onBlur}
+                        onChange={onChange}
+                        showTimeSelect
+                        dateFormat="Pp"
+                      />
+                    </LocalizationProvider>
                   )}
                 />
               </div>
