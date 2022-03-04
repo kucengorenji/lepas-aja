@@ -1,15 +1,12 @@
 import giveawayRoom from '../../data/giveaway-room';
+import PhotoShowcase from './PhotoShowcase';
 
 export default function ProductDetail() {
   return (
     <section className="container p-5 mx-auto">
       <div className="border border-ruddy-pink w-full min-h-[400px] rounded-lg h-full flex p-8">
         <div className="text-center  items-center align-middle flex-1">
-          <img
-            src={giveawayRoom.image}
-            alt=""
-            className="border-ruddy-pink border-2 mx-auto"
-          />
+          <PhotoShowcase image={giveawayRoom.image} />
         </div>
         <div className=" flex-1 flex-column p-3 relative">
           <div className="align-middle">
