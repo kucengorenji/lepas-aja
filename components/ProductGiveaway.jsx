@@ -27,7 +27,8 @@ const ProductGiveaway = ({ categoryIdFilter }) => {
   }
 
   useEffect(() => {
-    getAllRooms(setData);
+    fetchData();
+    // getAllRooms(setData);
   }, []);
 
   useEffect(() => {
