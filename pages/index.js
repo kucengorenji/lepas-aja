@@ -17,7 +17,7 @@ export default function Home({ data }) {
     <ImageCarousel src="/images/image4.jpg" />,
   ];
 
-  const [category, setCategory] = useState(1);
+  const [category, setCategory] = useState('');
 
   const getCategoryData = (childCategoryData) => {
     setCategory(childCategoryData);
