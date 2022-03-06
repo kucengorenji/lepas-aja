@@ -7,7 +7,6 @@ import { useRouter } from 'next/dist/client/router';
 import DateAdapter from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 
 const createRoom = () => {
   const { register, handleSubmit, control } = useForm();

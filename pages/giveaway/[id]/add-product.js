@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
-import { category } from '../../../data/category';
+import { getCategory, postProductData } from '../../../services/giveaway';
+import { useUser } from '../../../context/user';
 
-const addProduct = () => {
+const addProduct = ({ id, category }) => {
+  const user = useUser();
+  console.log(category);
   const [categoryState, setCategoryState] = useState(category[0].name);
+  console.log(categoryState);
+  const handleSubmit = async (data) => {
+    try {
+      await postProductData(data, user.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <section className="flex flex-col items-center py-12">
@@ -34,7 +45,7 @@ const addProduct = () => {
               {category.map((item, index) => {
                 return (
                   <option value={item.name} key={index}>
-                    {item.title}
+                    {item.name}
                   </option>
                 );
               })}
@@ -68,5 +79,18 @@ const addProduct = () => {
     </section>
   );
 };
+
+export async function getServerSideProps({ query }) {
+  const body = await getCategory();
+  const category = body.data;
+  const id = query.id;
+
+  return {
+    props: {
+      category,
+      id,
+    },
+  };
+}
 
 export default addProduct;

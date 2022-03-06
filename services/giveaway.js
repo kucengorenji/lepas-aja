@@ -52,6 +52,15 @@ export const getProductsData = async (id) => {
   return data;
 };
 
+export const postProductData = async (payload, token) => {
+  return axios.post(`${baseUrl}/products`, payload, {
+    headers: {
+      method: 'POST',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 // crud product photos
 export const getProduct = async (id) => {
   const response = await axios.get(`${baseUrl}/product/${id}`);
@@ -87,4 +96,11 @@ export const deleteProductPhoto = async (id, token) => {
       Authorization: `Bearer ${token}`,
     },
   });
+};
+
+// get category list
+export const getCategory = async () => {
+  const response = await axios.get(`${baseUrl}/categories`);
+  const body = await response.data;
+  return body;
 };
