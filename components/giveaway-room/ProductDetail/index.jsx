@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import PhotoShowcase from './PhotoShowcase';
 import ProductInfo from './ProductInfo';
-import ProductInfoHadless from './ProductInfoHeadless';
 import { useUser } from '../../../context/user';
 import Link from 'next/link';
+import { joinGiveaway } from '../../../services/giveaway';
 
 const ProductDetail = ({ id, data, products }) => {
   const user = useUser();
-  const isOwner = true;
+  const isOwner = false;
   // const isOwner = data.owner === user.uid;
-  const [selectedProduct, setSelectedProduct] = useState([]);
-  const tes = products.map((product) => {
-    return product;
-  });
 
-  const handleSelectProduct = () => {
-    setSelectedProduct(tes);
+  const handleJoinRoom = async () => {
+    try {
+      console.log(id);
+      await joinGiveaway(id, user.token);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -26,7 +27,7 @@ const ProductDetail = ({ id, data, products }) => {
         </div>
         <div className=" flex-1 flex-column px-3 pb-3 relative ">
           <div className="flex">
-            <div className="basis-3/4 align-middle bg-ruddy-pink rounded-lg p-3">
+            <div className="w-full align-middle bg-ruddy-pink rounded-lg p-3">
               <h3 className=" text-xl font-bold text-white">{data.name}</h3>
               <p className="text-white opacity-70 text-sm">{data.owner}</p>
               <div className="items-center flex gap-2 mt-2">
@@ -66,13 +67,11 @@ const ProductDetail = ({ id, data, products }) => {
             </div>
           ) : (
             <div className="mt-6 bottom-0 mx-auto px-auto left-0 right-0 text-center">
-              <button>
-                <a
-                  href="#"
-                  className="inline-block text-lg px-12 py-4 rounded-xl leading-none border bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0"
-                >
-                  Ikuti giveaway
-                </a>
+              <button
+                className="inline-block text-lg px-12 py-4 rounded-xl leading-none border bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0"
+                onClick={handleJoinRoom}
+              >
+                Ikuti giveaway
               </button>
             </div>
           )}

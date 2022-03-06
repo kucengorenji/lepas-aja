@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { getCategory, postProductData } from '../../../services/giveaway';
 import { useUser } from '../../../context/user';
 import { useForm, Controller } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 const addProduct = ({ id, category }) => {
+  const router = useRouter();
   const { register, handleSubmit, control } = useForm();
   const user = useUser();
   const [categoryState, setCategoryState] = useState(category[0].name);
   const onSubmit = async (data) => {
     try {
       await postProductData(data, user.token);
+      console.log(data);
+      router.replace(`/giveaway/${id}`);
     } catch (e) {
       console.error(e);
     }
@@ -30,6 +34,7 @@ const addProduct = ({ id, category }) => {
             <input
               className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
               maxLength="30"
+              {...register('name', { required: true })}
             />
             <p className="opacity-30 text-black">Maksimal 30 Karakter</p>
           </div>
@@ -59,6 +64,7 @@ const addProduct = ({ id, category }) => {
             <input
               className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
               type="number"
+              {...register('qty', { required: true })}
             />
           </div>
           <div className="flex flex-col gap-y-2">
@@ -68,6 +74,7 @@ const addProduct = ({ id, category }) => {
               cols="33"
               className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
               maxLength="200"
+              {...register('description', { required: true })}
             />
             <p className="opacity-30 text-black">Maksimal 200 Karakter</p>
             <button

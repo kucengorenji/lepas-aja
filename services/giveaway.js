@@ -104,3 +104,13 @@ export const getCategory = async () => {
   const body = await response.data;
   return body;
 };
+
+// join giveaway
+export const joinGiveaway = async (id, token) => {
+  return axios.post(`${baseUrl}/rooms/${id}/join`, {
+    headers: {
+      method: 'POST',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
