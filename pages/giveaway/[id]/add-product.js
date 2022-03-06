@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { getCategory, postProductData } from '../../../services/giveaway';
 import { useUser } from '../../../context/user';
+import { useForm, Controller } from 'react-hook-form';
 
 const addProduct = ({ id, category }) => {
+  const { register, handleSubmit, control } = useForm();
   const user = useUser();
-  console.log(category);
   const [categoryState, setCategoryState] = useState(category[0].name);
-  console.log(categoryState);
-  const handleSubmit = async (data) => {
+  const onSubmit = async (data) => {
     try {
       await postProductData(data, user.token);
     } catch (e) {
@@ -19,7 +19,10 @@ const addProduct = ({ id, category }) => {
     <section className="flex flex-col items-center py-12">
       <h1 className="text-4xl text-ruddy-pink">Buat Giveaway</h1>
       <div className="flex flex-col mt-6 gap-y-4 w-full mx-auto items-center">
-        <form className="flex flex-col max-w-[485px] gap-y-4 w-full flex-1">
+        <form
+          onClick={handleSubmit(onSubmit)}
+          className="flex flex-col max-w-[485px] gap-y-4 w-full flex-1"
+        >
           <div className="flex flex-col gap-y-2">
             <label className="text-2xl font-medium opacity-70">
               Nama Barang
