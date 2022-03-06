@@ -1,19 +1,19 @@
-const ProductInfo = (props) => {
-  const data = props.data;
+const ProductInfo = ({ data }) => {
+  console.log(data);
   return (
     <div>
       <div>
         <ul>
-          {data.map((product) => {
+          {/* {data.map((product) => {
             return (
               <li>
                 <button>{product.name}</button>
               </li>
             );
-          })}
+          })} */}
         </ul>
       </div>
-      <p>{props.descrption}</p>
+      <p></p>
     </div>
   );
 };

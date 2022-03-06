@@ -1,4 +1,5 @@
 const PhotoShowcase = (props) => {
+  console.log(props);
   return (
     <div>
       <img

@@ -4,8 +4,6 @@ import CardProduct from './CardProduct';
 const ProductGiveaway = ({ data }) => {
   const [visible, setVisible] = useState(8);
 
-  console.log(data);
-
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);
   };
@@ -13,15 +11,15 @@ const ProductGiveaway = ({ data }) => {
   return (
     <section className="flex flex-col mt-14 gap-y-12 max-w-[1100px]">
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {data.slice(0, visible).map((item, index) => {
+        {data.slice(0, visible).map((data, index) => {
           return (
             <CardProduct
-              id={item.id}
+              id={data.id}
               key={index}
-              name={item.name}
-              owner={item.owner}
-              src={item.photoUrl}
-              location={item.location}
+              name={data.name}
+              owner={data.owner}
+              src={data.photoUrl}
+              location={data.location}
             />
           );
         })}
