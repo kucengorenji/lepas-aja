@@ -19,6 +19,6 @@ export const getRoomById = async (id) => {
 
 export const getAllRooms = async (setState) => {
   const response = await axios.get(`${baseUrl}/rooms`);
-  const rooms = await response.data;
-  setState(rooms.data);
+  const data = await response.data;
+  return data;
 };

@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CardProduct from './CardProduct';
-import { getAllRooms } from '../services/giveaway';
 
-const ProductGiveaway = () => {
+const ProductGiveaway = ({ data }) => {
   const [visible, setVisible] = useState(8);
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    getAllRooms(setData);
-  }, []);
+  console.log(data);
 
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);

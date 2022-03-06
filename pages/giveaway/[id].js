@@ -47,17 +47,18 @@ const Event = () => {
   );
 };
 
-// export async function getServerSideProps() {
-//   const response = await axios.get(
-//     `https://lepasaja-backend.herokuapp.com/api/v1/rooms/${id}`
-//   );
-//   console.log(response);
-//   const data = await response.data;
-//   return {
-//     props: {
-//       data: data,
-//     },
-//   };
-// }
+export async function getServerSideProps({ req, query }) {
+  const user = await getUser(req);
+  const response = await axios.get(
+    `https://lepasaja-backend.herokuapp.com/api/v1/rooms/${id}`
+  );
+  console.log(response);
+  const data = await response.data;
+  return {
+    props: {
+      data: data,
+    },
+  };
+}
 
 export default Event;
