@@ -1,14 +1,17 @@
 const PhotoShowcase = ({ products }) => {
-  const productList = products.map((product) => {
-    return product.photoUrl;
-  });
+  // const productList = products.photoUrl.map((product) => {
+  //   return product;
+  // });
 
-  productList.map((image) => {
-    console.log(image);
-  });
+  console.log(products);
+
   return (
     <div>
       <img src="" alt="" className="border-ruddy-pink border-2 mx-auto" />
+      test
+      {/* {productList.map((image) => {
+        return <div>{image.url}</div>;
+      })} */}
     </div>
   );
 };

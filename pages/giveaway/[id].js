@@ -23,10 +23,10 @@ const Event = ({ data, productsData }) => {
 };
 
 export async function getServerSideProps({ query }) {
-  const { slug } = query;
+  const { id } = query;
   const [data, productsData] = await Promise.all([
-    getRoomById(slug),
-    getProductsData(slug),
+    getRoomById(id),
+    getProductsData(id),
   ]);
 
   return {
