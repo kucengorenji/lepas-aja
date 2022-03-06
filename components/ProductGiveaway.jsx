@@ -44,10 +44,10 @@ const ProductGiveaway = ({ categoryIdFilter, data }) => {
   return (
     <section className="flex flex-col mt-14 gap-y-12 max-w-[1100px]">
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {filteredData.slice(0, visible).map((item, index) => {
+        {data.slice(0, visible).map((data, index) => {
           return (
             <CardProduct
-              id={item.id}
+              id={data.id}
               key={index}
               name={data.name}
               owner={data.owner}
