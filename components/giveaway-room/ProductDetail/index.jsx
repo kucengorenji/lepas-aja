@@ -2,20 +2,27 @@ import { useState } from 'react';
 import PhotoShowcase from './PhotoShowcase';
 import ProductInfo from './ProductInfo';
 import { useUser } from '../../../context/user';
+import Link from 'next/link';
 
-const ProductDetail = ({ data, products }) => {
+const ProductDetail = ({ id, data, products }) => {
   const user = useUser();
   const isOwner = true;
   // const isOwner = data.owner === user.uid;
-  const [selectedProduct, setSelectedProduct] = useState({});
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
-  const handleSelectProduct = (e) => {};
+  const tes = products.map((product) => {
+    return product;
+  });
+
+  const handleSelectProduct = () => {
+    setSelectedProduct(tes);
+  };
 
   return (
     <section className="container p-5 mx-auto">
       <div className="border border-ruddy-pink w-full min-h-[400px] rounded-lg h-full flex p-8">
         <div className="text-center  items-center align-middle flex-1">
-          <PhotoShowcase products={products} />
+          <PhotoShowcase products={selectedProduct} />
         </div>
         <div className=" flex-1 flex-column px-3 pb-3 relative ">
           <div className="flex">
@@ -40,13 +47,12 @@ const ProductDetail = ({ data, products }) => {
           </div>
           <div className="flex my-2 max-w-3xl">
             <div>
-              <ul className="flex-column bg-ruddy-pink rounded-lg">
+              <ul className="flex-column border-ruddy-pink border rounded-lg">
                 {products.map((product) => (
                   <li>
                     <button
                       onClick={handleSelectProduct}
                       className="bg-white p-1 m-2 rounded text-ruddy-pink w-20"
-                      value={product.name}
                     >
                       {product.name}
                     </button>
@@ -54,18 +60,17 @@ const ProductDetail = ({ data, products }) => {
                 ))}
                 <li>
                   <button className="bg-ruddy-pink p-1 m-2 rounded text-white w-20">
-                    add product
+                    <Link href={`/giveaway/${id}/add-product`}>
+                      <a>add product</a>
+                    </Link>
                   </button>
                 </li>
               </ul>
             </div>
-            {products.map((product) => {
-              return (
-                <div className=" ml-3 p-3 bg-ruddy-pink text-white w-full h-auto rounded-lg">
-                  <p>{product.description}</p>
-                </div>
-              );
-            })}
+
+            <div className=" ml-3 p-3 bg-ruddy-pink text-white w-full h-auto rounded-lg">
+              <p>{selectedProduct.description}</p>
+            </div>
           </div>
           {isOwner ? (
             <div className="mt-6 bottom-0 mx-auto px-auto left-0 right-0 text-center">
