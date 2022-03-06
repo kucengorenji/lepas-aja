@@ -10,7 +10,6 @@ import {
 
 const ProductGiveaway = ({ categoryIdFilter, data }) => {
   const [visible, setVisible] = useState(8);
-  const [data, setData] = useState([]);
 
   const [filteredData, setFilteredData] = useState([]);
 
