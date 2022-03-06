@@ -5,11 +5,13 @@ import RoomInfo from '../../components/giveaway-room/RoomInfo';
 import { getRoomById, getProductsData } from '../../services/giveaway';
 
 const Event = ({ data, productsData }) => {
+  const room = data.data;
+  const products = productsData.data;
   return (
     <>
       <div className={styles.container + 'container'}>
         <main className={styles.main + `top-0 p-6`}>
-          <ProductDetail data={productsData} />
+          <ProductDetail data={room} products={products} />
           <div className="flex flex-row w-full">
             <ParticipantList data={data} />
             <RoomInfo data={data} />
@@ -21,11 +23,11 @@ const Event = ({ data, productsData }) => {
 };
 
 export async function getServerSideProps({ query }) {
-  const { id } = query;
-  const { data } = await getRoomById(id);
-  const { productsData } = await getProductsData(id);
-  console.log(data);
-  console.log(productsData);
+  const { slug } = query;
+  const [data, productsData] = await Promise.all([
+    getRoomById(slug),
+    getProductsData(slug),
+  ]);
 
   return {
     props: {

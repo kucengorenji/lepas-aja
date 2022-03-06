@@ -1,5 +1,4 @@
 const ProductInfo = ({ data }) => {
-  console.log(data);
   return (
     <div>
       <div>

@@ -3,7 +3,6 @@ import CardProduct from './CardProduct';
 
 const ProductGiveaway = ({ data }) => {
   const [visible, setVisible] = useState(8);
-
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);
   };
