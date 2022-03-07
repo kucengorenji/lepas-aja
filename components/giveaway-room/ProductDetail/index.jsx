@@ -7,9 +7,7 @@ import { joinGiveaway } from '../../../services/giveaway';
 
 const ProductDetail = ({ id, data, products }) => {
   const user = useUser();
-  const isOwner = false;
-  // const isOwner = data.owner === user.uid;
-
+  const isOwner = data.ownerId === user.uid;
   const handleJoinRoom = async () => {
     try {
       console.log(id);
