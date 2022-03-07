@@ -46,6 +46,12 @@ export const getAllRooms = async () => {
 };
 
 // crud products
+export const getAllProducts = async () => {
+  const response = await axios.get(`${baseUrl}/products`);
+  const data = await response.data;
+  return data;
+};
+
 export const getProductsData = async (id) => {
   const response = await axios.get(`${baseUrl}/rooms/${id}/products`);
   const data = await response.data;

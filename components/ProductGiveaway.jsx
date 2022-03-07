@@ -1,36 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import CardProduct from './CardProduct';
-import { getAllRooms } from '../services/giveaway';
-import axios from 'axios';
-import {
-  fetchCategory,
-  fetchProducts,
-  filteringProducts,
-} from '../services/filter';
+import { filteringProducts } from '../services/filter';
 
-const ProductGiveaway = ({ categoryIdFilter, roomData, productData }) => {
+const ProductGiveaway = ({ categoryIdFilter, data }) => {
   const [visible, setVisible] = useState(8);
-  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-
-  async function fetchData() {
-    let response = await fetchProducts();
-    console.log(response.data);
-    setData(response.data);
-    setFilteredData(response.data);
-  }
+  console.log(data);
 
   async function filteredProducts() {
-    let response = await filteringProducts(data, categoryIdFilter);
+    const response = await filteringProducts(data, categoryIdFilter);
 
     setFilteredData(response);
-    console.log(response);
+    console.log(data);
   }
-
-  useEffect(() => {
-    fetchData();
-    // getAllRooms(setData);
-  }, []);
 
   useEffect(() => {
     filteredProducts();
@@ -47,7 +29,7 @@ const ProductGiveaway = ({ categoryIdFilter, roomData, productData }) => {
         {filteredData.slice(0, visible).map((data, index) => {
           return (
             <CardProduct
-              id={data.id}
+              id={data.roomId}
               key={index}
               name={data.name}
               owner={data.owner}

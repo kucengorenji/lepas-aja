@@ -28,7 +28,7 @@ export default function ProductCategory({ categoryDataFunc }) {
   return (
     <section className="flex flex-col mt-14 gap-y-12 max-w-[1200px]">
       <h1 className="font-bold text-ruddy-pink text-center text-4xl">
-        GIVEAWAY LIST
+        Product Giveaway
       </h1>
       <div className="flex flex-wrap gap-4 mx-auto mt-1">
         {console.log(dataCategories)}
