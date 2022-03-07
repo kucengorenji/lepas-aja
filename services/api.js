@@ -46,6 +46,12 @@ export const editRoom = async (id, payload, token) => {
   return response;
 };
 
+export const getUser = async () => {
+  const response = await axios.get(`${LEPASAJA_ENDPOINT}/users`);
+  const user = await response.data;
+  return user.data;
+};
+
 export const editImage = async (id, payload, token) => {
   const response = await axios.put(
     `${LEPASAJA_ENDPOINT}/users/${id}`,
