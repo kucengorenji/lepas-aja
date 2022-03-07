@@ -14,10 +14,32 @@ const ProductGiveaway = ({ categoryIdFilter, data }) => {
     console.log(data);
   }
 
+  const [filteredData, setFilteredData] = useState([]);
+
+  async function fetchData() {
+    let response = await fetchProducts();
+    console.log(response.data);
+    setData(response.data);
+    setFilteredData(response.data);
+  }
+
+  async function filteredProducts(){
+    let response = await filteringProducts(data, categoryIdFilter);
+
+    setFilteredData(response);
+    console.log(response);
+  }
+
   useEffect(() => {
     filteredProducts();
     console.log(categoryIdFilter);
   }, [categoryIdFilter]);
+
+  useEffect(() => {
+    filteredProducts();
+    console.log(categoryIdFilter);
+  }, [categoryIdFilter]);
+
 
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);
