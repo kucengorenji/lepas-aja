@@ -1,57 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import CardProduct from './CardProduct';
-import { getAllRooms } from '../services/giveaway';
-import axios from 'axios';
-import { fetchCategory, fetchProducts, filteringProducts  } from "../services/filter";
+import { filteringProducts } from '../services/filter';
 
-
-
-const ProductGiveaway = ({ categoryIdFilter }) => {
+const ProductGiveaway = ({ categoryIdFilter, data }) => {
   const [visible, setVisible] = useState(8);
-  const [data, setData] = useState([]);
-
   const [filteredData, setFilteredData] = useState([]);
 
-  async function fetchData() {
-    let response = await fetchProducts();
-    console.log(response.data);
-    setData(response.data);
-    setFilteredData(response.data);
-  }
-
-  async function filteredProducts(){
-    let response = await filteringProducts(data, categoryIdFilter);
-
+  async function filteredProducts() {
+    const response = await filteringProducts(data, categoryIdFilter);
     setFilteredData(response);
-    console.log(response);
   }
-
-  useEffect(() => {
-    fetchData();
-    // getAllRooms(setData);
-  }, []);
 
   useEffect(() => {
     filteredProducts();
     console.log(categoryIdFilter);
   }, [categoryIdFilter]);
 
-
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);
   };
 
   return (
-    <section className="flex flex-col mt-14 gap-y-12 max-w-[1100px]">
+    <section className="flex flex-col mt-1 gap-y-12 max-w-[1100px]">
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {filteredData.slice(0, visible).map((item, index) => {
+        {filteredData.slice(0, visible).map((data, index) => {
           return (
             <CardProduct
+              id={data.roomId}
               key={index}
-              name={item.name}
-              owner={item.owner}
-              src={item.photoUrl}
-              location={item.location}
+              name={data.name}
+              owner={data.owner}
+              src={data.photoUrl}
+              location={data.location}
             />
           );
         })}

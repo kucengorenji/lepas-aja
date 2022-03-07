@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import CardProduct from './CardProduct';
+import CardRoom from './CardRoom';
 import Carousel from 'react-elastic-carousel';
-import axios from 'axios';
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -9,21 +7,7 @@ const breakPoints = [
   { width: 768, itemsToShow: 3, itemsToScroll: 3 },
 ];
 
-export default function NewGiveaway() {
-  const [data, setData] = useState([]);
-
-  async function fetchData() {
-    let response = await axios(
-      `https://lepasaja-backend.herokuapp.com/api/v1/rooms`
-    );
-    let user = await response.data;
-    setData(user.data);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+export default function NewGiveaway({ data }) {
   return (
     <section className="mt-5 w-full max-w-[950px]">
       <h1 className="font-bold mb-5 text-[#DF8D9F] text-center text-4xl">
@@ -32,8 +16,9 @@ export default function NewGiveaway() {
       <Carousel breakPoints={breakPoints}>
         {data.map((item, index) => {
           return (
-            <CardProduct
+            <CardRoom
               key={index}
+              id={item.id}
               name={item.name}
               owner={item.owner}
               src={item.photoUrl}
