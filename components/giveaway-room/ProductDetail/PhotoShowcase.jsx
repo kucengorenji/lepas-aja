@@ -1,6 +1,15 @@
 const PhotoShowcase = ({ products }) => {
   const shit = products[0].photoUrl[0].url;
-  const product = products.map((product) => product);
+  const newArray = [];
+
+  products.map((product) => {
+    newArray = product.photoUrl;
+  });
+
+  console.log(newArray);
+  newArray.map((item) => {
+    console.log(item.url);
+  });
 
   return (
     <div>
