@@ -6,8 +6,7 @@ import { getProfileById } from '../../services/api';
 import { useRouter } from 'next/dist/client/router';
 import moment from 'moment';
 import 'moment/locale/id';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import { CircularProgress, Box } from '@mui/material';
 import Link from 'next/link';
 
 const Profile = () => {
@@ -25,9 +24,13 @@ const Profile = () => {
   return (
     <div className="container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
       <div className="flex justify-end gap-4">
-        <a className="underline underline-offset-8">Biodata</a>
-        <a>Room Saya</a>
-        <Link href="/profile/giveaway-history">
+        <Link href="/profile">
+          <a className="underline underline-offset-8">Biodata</a>
+        </Link>
+        <Link href="/profile/my-room">
+          <a>Room Saya</a>
+        </Link>
+        <Link href="/profile/history-room">
           <a>Riwayat</a>
         </Link>
       </div>
