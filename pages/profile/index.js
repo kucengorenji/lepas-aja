@@ -8,6 +8,7 @@ import moment from 'moment';
 import 'moment/locale/id';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 
 const Profile = () => {
   const router = useRouter();
@@ -26,7 +27,9 @@ const Profile = () => {
       <div className="flex justify-end gap-4">
         <a className="underline underline-offset-8">Biodata</a>
         <a>Room Saya</a>
-        <a>Riwayat</a>
+        <Link href="/profile/giveaway-history">
+          <a>Riwayat</a>
+        </Link>
       </div>
       {loading ? (
         <Box

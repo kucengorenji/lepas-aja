@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/solid';
 const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -45,7 +45,7 @@ const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
                 disabled={currentPage == 1}
                 onClick={handlePrevious}
               >
-                <GrFormPreviousLink className="w-5 h-5" />
+                <ArrowLeftIcon className="w-5 h-5" />
               </button>
             </a>
             {pageNumber.map((number) => (
@@ -76,7 +76,7 @@ const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
                 disabled={currentPage == int}
                 onClick={handleNext}
               >
-                <GrFormNextLink className="w-5 h-5" />
+                <ArrowRightIcon className="w-5 h-5" />
               </button>
             </a>
           </nav>
