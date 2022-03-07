@@ -11,6 +11,8 @@ import {
 } from 'firebase/auth';
 import { app } from '../config/firebase.config';
 import axios from 'axios';
+import { data } from 'autoprefixer';
+import { getUser } from './api';
 
 export const FirebaseAuth = getAuth(app);
 
@@ -54,8 +56,13 @@ export const GoogleAuth = async () => {
   await signInWithPopup(FirebaseAuth, provider);
   Authentication().onAuthStateChanged((user) => {
     if (user) {
-      user.getIdToken().then(async (token) => {
-        await postRegister(token);
+      getUser().then((data) => {
+        if (data.some((e) => e['email'] === user?.email)) {
+          return;
+        }
+        user.getIdToken().then(async (token) => {
+          return await postRegister(token);
+        });
       });
     }
   });
@@ -76,10 +83,10 @@ export const GetSignInErrorMessage = (code) => {
   }
 };
 
-export const sendEmailResetPassword = async(email) => {
+export const sendEmailResetPassword = async (email) => {
   await sendPasswordResetEmail(FirebaseAuth, email);
-}
+};
 
-export const sendResetPassword = async(oobCode, newPassword) => {
+export const sendResetPassword = async (oobCode, newPassword) => {
   await confirmPasswordReset(FirebaseAuth, oobCode, newPassword);
-}
+};
