@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { joinGiveaway, leaveGiveaway } from '../../../services/giveaway';
+import { useRouter } from 'next/router';
 
 const StatusButton = ({ id, user, isOwner, data }) => {
+  const router = useRouter();
   const [isParticipant, setIsParticipant] = useState(false);
   const getParticipantStatus = Boolean(
     data.participants.find((participant) => participant.email === user.email)
@@ -10,6 +12,7 @@ const StatusButton = ({ id, user, isOwner, data }) => {
   const handleJoinRoom = async () => {
     try {
       await joinGiveaway(id, user, user.token);
+      router.reload();
     } catch (e) {
       console.error(e);
     }
@@ -18,6 +21,7 @@ const StatusButton = ({ id, user, isOwner, data }) => {
   const handleEjectRoom = async () => {
     try {
       await leaveGiveaway(id, user, user.token);
+      router.reload();
     } catch (e) {
       console.error(e);
     }
