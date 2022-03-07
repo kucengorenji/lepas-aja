@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-<<<<<<<< HEAD:pages/giveaway/[id]/add-product.js
 import { getCategory, postProductData } from '../../../services/giveaway';
 import { useUser } from '../../../context/user';
 import { useForm, Controller } from 'react-hook-form';
 import { useRouter } from 'next/router';
-========
-import { category } from '../../data/category';
->>>>>>>> e2bf74c (fix: edit file structur and component layout):pages/giveaway/add-product.js
 
 const addProduct = ({ id, category }) => {
   const router = useRouter();
