@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardProduct from './CardProduct';
 import { getAllRooms } from '../services/giveaway';
 import axios from 'axios';
@@ -8,9 +8,9 @@ import {
   filteringProducts,
 } from '../services/filter';
 
-const ProductGiveaway = ({ categoryIdFilter, data }) => {
+const ProductGiveaway = ({ categoryIdFilter, roomData, productData }) => {
   const [visible, setVisible] = useState(8);
-
+  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
   async function fetchData() {
@@ -42,9 +42,9 @@ const ProductGiveaway = ({ categoryIdFilter, data }) => {
   };
 
   return (
-    <section className="flex flex-col mt-14 gap-y-12 max-w-[1100px]">
+    <section className="flex flex-col mt-1 gap-y-12 max-w-[1100px]">
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {data.slice(0, visible).map((data, index) => {
+        {filteredData.slice(0, visible).map((data, index) => {
           return (
             <CardProduct
               id={data.id}
