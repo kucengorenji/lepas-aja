@@ -22,10 +22,10 @@ const ProductDetail = ({ id, data, products }) => {
   return (
     <section className="container p-5 mx-auto">
       <div className="border border-ruddy-pink w-full min-h-[400px] rounded-lg h-full flex p-8">
-        <div className="text-center  items-center align-middle flex-1">
+        <div className="text-center  items-center align-middle w-full">
           <PhotoShowcase products={products} />
         </div>
-        <div className=" flex-1 flex-column px-3 pb-3 relative ">
+        <div className=" w-full flex-column px-3 pb-3 relative ">
           <div className="flex">
             <div className="w-full align-middle bg-ruddy-pink rounded-lg p-3">
               <h3 className=" text-xl font-bold text-white">{data.name}</h3>
