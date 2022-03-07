@@ -35,19 +35,18 @@ const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
             className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
             aria-label="Pagination"
           >
-            <a
-              href="#"
+            <button
+              disabled={currentPage == 1}
+              onClick={handlePrevious}
               className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50"
             >
-              <span className="sr-only">Previous</span>
-              <button
-                className={currentPage === 1 ? 'opacity-20' : 'opacity-100'}
-                disabled={currentPage == 1}
-                onClick={handlePrevious}
-              >
-                <ArrowLeftIcon className="w-5 h-5" />
-              </button>
-            </a>
+              <ArrowLeftIcon
+                className={`h-6 w-6 ${
+                  currentPage == 1 ? 'opacity-20' : 'opacity-100'
+                }`}
+              />
+            </button>
+
             {pageNumber.map((number) => (
               <a
                 onClick={(e) => {
@@ -66,19 +65,17 @@ const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
                 {number}
               </a>
             ))}
-            <a
-              href="#"
-              className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50"
+            <button
+              disabled={currentPage === int}
+              onClick={handleNext}
+              className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50"
             >
-              <span className="sr-only">Next</span>
-              <button
-                className={currentPage === int ? 'opacity-20' : 'opacity-100'}
-                disabled={currentPage == int}
-                onClick={handleNext}
-              >
-                <ArrowRightIcon className="w-5 h-5" />
-              </button>
-            </a>
+              <ArrowRightIcon
+                className={`h-6 w-6 ${
+                  currentPage == int ? 'opacity-20' : 'opacity-100'
+                }`}
+              />
+            </button>
           </nav>
         </div>
       </div>
