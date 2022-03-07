@@ -112,8 +112,17 @@ export const getCategory = async () => {
 };
 
 // join giveaway
-export const joinGiveaway = async (id, token) => {
-  return axios.post(`${baseUrl}/rooms/${id}/join`, {
+export const joinGiveaway = async (id, user, token) => {
+  return axios.post(`${baseUrl}/rooms/${id}/join`, user, {
+    headers: {
+      method: 'POST',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const leaveGiveaway = async (id, user, token) => {
+  return axios.post(`${baseUrl}/rooms/${id}/leave`, user, {
     headers: {
       method: 'POST',
       Authorization: `Bearer ${token}`,
