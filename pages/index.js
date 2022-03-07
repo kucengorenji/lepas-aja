@@ -16,15 +16,15 @@ export default function Home() {
     <ImageCarousel src="/images/image4.jpg" />,
   ];
 
-  const [category, setCategory] = useState(1);
+  const [category, setCategory] = useState('');
 
   const getCategoryData = (childCategoryData) => {
     setCategory(childCategoryData);
   };
 
-  useEffect(() => {
-    console.log(category);
-  }, [category]);
+  // useEffect(() => {
+  //   console.log(category);
+  // }, [category]);
 
   return (
     <div className={styles.container}>
@@ -38,6 +38,9 @@ export default function Home() {
         <NewGiveaway />
         <ProductCategory categoryDataFunc={getCategoryData} />
         <ProductGiveaway categoryIdFilter={category} />
+        {/* <ProductCategory />
+        <ProductGiveaway /> */}
+        {/* <ResetPassword /> */}
       </main>
     </div>
   );

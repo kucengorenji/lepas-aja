@@ -1,14 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import CardProduct from './CardProduct';
 import { getAllRooms } from '../services/giveaway';
+import axios from 'axios';
+import { fetchCategory, fetchProducts, filteringProducts  } from "../services/filter";
 
-const ProductGiveaway = () => {
+
+
+const ProductGiveaway = ({ categoryIdFilter }) => {
   const [visible, setVisible] = useState(8);
   const [data, setData] = useState([]);
 
+  const [filteredData, setFilteredData] = useState([]);
+
+  async function fetchData() {
+    let response = await fetchProducts();
+    console.log(response.data);
+    setData(response.data);
+    setFilteredData(response.data);
+  }
+
+  async function filteredProducts(){
+    let response = await filteringProducts(data, categoryIdFilter);
+
+    setFilteredData(response);
+    console.log(response);
+  }
+
   useEffect(() => {
-    getAllRooms(setData);
+    fetchData();
+    // getAllRooms(setData);
   }, []);
+
+  useEffect(() => {
+    filteredProducts();
+    console.log(categoryIdFilter);
+  }, [categoryIdFilter]);
+
 
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 4);
@@ -17,7 +44,7 @@ const ProductGiveaway = () => {
   return (
     <section className="flex flex-col mt-14 gap-y-12 max-w-[1100px]">
       <div className="flex flex-wrap gap-8 mx-auto mt-8">
-        {data.slice(0, visible).map((item, index) => {
+        {filteredData.slice(0, visible).map((item, index) => {
           return (
             <CardProduct
               key={index}
