@@ -7,8 +7,9 @@ import ProductGiveaway from '../components/ProductGiveaway';
 import ProductCategory from '../components/ProductCategory';
 import Carousel from '../components/Carousel/Carousel';
 import ImageCarousel from '../components/ImageCarousel';
+import { getAllRooms, getAllProducts } from '../services/giveaway';
 
-export default function Home() {
+export default function Home({ roomData, productData }) {
   const imgArray = [
     <ImageCarousel src="/images/image1.jpg" />,
     <ImageCarousel src="/images/image2.jpg" />,
@@ -21,11 +22,7 @@ export default function Home() {
   const getCategoryData = (childCategoryData) => {
     setCategory(childCategoryData);
   };
-
-  // useEffect(() => {
-  //   console.log(category);
-  // }, [category]);
-
+  console.log(productData.data);
   return (
     <div className={styles.container}>
       <Head>
@@ -35,13 +32,24 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Carousel imgArray={imgArray} />
-        <NewGiveaway />
+        <NewGiveaway data={roomData.data} />
         <ProductCategory categoryDataFunc={getCategoryData} />
-        <ProductGiveaway categoryIdFilter={category} />
-        {/* <ProductCategory />
-        <ProductGiveaway /> */}
-        {/* <ResetPassword /> */}
+        <ProductGiveaway categoryIdFilter={category} data={productData.data} />
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const [roomData, productData] = await Promise.all([
+    getAllRooms(),
+    getAllProducts(),
+  ]);
+
+  return {
+    props: {
+      roomData,
+      productData,
+    },
+  };
 }

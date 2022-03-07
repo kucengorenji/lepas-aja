@@ -1,59 +1,26 @@
 import React from 'react';
-import Button from '@mui/material/Button';
-import { TrashIcon, PencilAltIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 
-export const CardRoom = (props) => {
+export default function CardProduct(data) {
   return (
-    <div className="mt-4 text-lg text-ruddy-pink p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
-      <div className="text-black">
-        <div className="flex items-center justify-between text-lg">
-          <p className="font-semibold">
-            Giveaway |
-            <span className="ml-3 text-sm opacity-70">{props.date}</span>
-          </p>
-        </div>
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex gap-x-4">
-            <img
-              className="w-[80px] h-[80px] object-cover rounded"
-              src={props.src}
-            />
-            <div>
-              <div className="flex items-center">
-                <h5 className="text-lg font-semibold">{props.owner}</h5>
-                <p className="px-2 ml-2 text-xs text-white opacity-100 bg-ruddy-pink">
-                  {props.userStatus}
-                </p>
-              </div>
-              <p>{props.title}</p>
+    <div className="max-w-[250px] rounded-lg shadow-lg  bg-[#F0F0F0] group relative overflow-hidden">
+      <Link href={`/giveaway/${data.id}`}>
+        <a>
+          <img
+            src={data.src}
+            alt={data.name}
+            className="object-cover w-full rounded-t-lg h-60"
+          />
+          <div className="invisible group-hover:visible absolute bottom-0 left-0 w-full px-6 py-4 group-hover:bg-ruddy-pink transition ease-in duration-150">
+            <h5 className=" text-xl font-bold text-white">{data.name}</h5>
+            <p className="text-white opacity-70 text-sm">{data.owner}</p>
+            <div className="flex items-center gap-2 mt-2">
+              <img src="/icons/map-pin.svg" />
+              <p className="text-white text-sm">{data.location}</p>
             </div>
           </div>
-          <div className="flex items-center gap-x-4">
-            <Button
-              id={props.id}
-              onClick={props.handleModalEdit}
-              color="success"
-              size="medium"
-              variant="outlined"
-              startIcon={<PencilAltIcon className="w-5 h-5" />}
-            >
-              Edit
-            </Button>
-            <Button
-              id={props.id}
-              onClick={props.handleModalDelete}
-              color="error"
-              size="medium"
-              variant="outlined"
-              startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
-            >
-              Delete
-            </Button>
-          </div>
-
-          {/* <h5 className="px-6 py-2 text-white bg-ruddy-pink">Owner</h5> */}
-        </div>
-      </div>
+        </a>
+      </Link>
     </div>
   );
-};
+}

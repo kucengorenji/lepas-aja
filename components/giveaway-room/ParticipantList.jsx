@@ -1,6 +1,3 @@
-import axios from 'axios';
-import { useState } from 'react';
-
 export default function ParticipantList() {
   return (
     <div className="grow text-center">
