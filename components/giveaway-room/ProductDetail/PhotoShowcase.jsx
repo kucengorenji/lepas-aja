@@ -1,33 +1,32 @@
+import { Carousel } from 'react-responsive-carousel';
+import { useState } from 'react';
+
 const PhotoShowcase = ({ products }) => {
   const shit = products[0].photoUrl[0].url;
-  const newArray = [];
+  let photoUrl = [];
+  const [photoProduct, setPhotoProduct] = useState({});
 
   products.map((product) => {
-    newArray = product.photoUrl;
+    photoUrl = product.photoUrl;
+    // console.log(product.photoUrl);
   });
-
-  console.log(newArray);
-  newArray.map((item) => {
-    console.log(item.url);
-  });
+  console.log(photoUrl);
 
   return (
     <div>
-      <img
-        src={shit}
-        alt=""
-        className="border-ruddy-pink border-2 mx-auto max-w-sm max-h-sm shadow-lg"
-      />
-      {/* {test.map((item, index) => {
-        return (
-          <img
-            key={index}
-            src={item.url}
-            alt=""
-            className="border-ruddy-pink border-2 mx-auto max-w-sm max-h-sm"
-          />
-        );
-      })} */}
+      <Carousel
+        showArrows={true}
+        // onChange={onChange}
+        // onClickItem={onClickItem}
+        // onClickThumb={onClickThumb}
+      >
+        {photoUrl.map((item) => {
+          <div>
+            <img src={item.url} />
+            <p className="legend">Legend 1</p>
+          </div>;
+        })}
+      </Carousel>
     </div>
   );
 };
