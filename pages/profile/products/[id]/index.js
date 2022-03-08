@@ -36,6 +36,7 @@ const MyProduct = ({ productsData, id, category }) => {
   const indexOfFirstRoom = indexOfLastRoom - myRoomPage;
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [productId, setProductId] = useState('');
   const [productById, setProductById] = useState({
     name: '',
@@ -128,7 +129,7 @@ const MyProduct = ({ productsData, id, category }) => {
     e.preventDefault();
     setProductById('');
     setIsRoomUpdate(true);
-    setIsOpenEdit(true);
+    setIsOpenAdd(true);
   };
 
   const handleModalEdit = (e) => {
@@ -232,7 +233,7 @@ const MyProduct = ({ productsData, id, category }) => {
         />
       )}
 
-      {isOpenEdit && (
+      {isOpenAdd && (
         <ModalAddProduct
           category={category}
           categoryState={categoryState}
@@ -245,7 +246,7 @@ const MyProduct = ({ productsData, id, category }) => {
           description={productById.description}
           name={productById.name}
           handleClose={closeModalEdit}
-          open={isOpenEdit}
+          open={isOpenAdd}
         />
       )}
     </div>
