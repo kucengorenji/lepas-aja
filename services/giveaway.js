@@ -75,7 +75,7 @@ export const getProduct = async (id) => {
 };
 
 export const postProductPhoto = async (id, payload, token) => {
-  return axios.post(`${baseUrl}/rooms/${id}/photos`, payload, {
+  return axios.post(`${baseUrl}/products/${id}/photos`, payload, {
     headers: {
       method: 'POST',
       Authorization: `Bearer ${token}`,
@@ -85,14 +85,17 @@ export const postProductPhoto = async (id, payload, token) => {
 };
 
 export const updateProductPhoto = async (id, payload, token) => {
-  return axios.post(`${baseUrl}/rooms/${id}/photos`, {
-    headers: {
-      method: 'PUT',
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
-      body: JSON.stringify(payload),
-    },
-  });
+  const response = await axios.put(
+    `${LEPASAJA_ENDPOINT}/rooms/${id}`,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
+  return response;
 };
 
 export const deleteProductPhoto = async (id, token) => {
@@ -128,4 +131,29 @@ export const leaveGiveaway = async (id, user, token) => {
       Authorization: `Bearer ${token}`,
     },
   });
+};
+
+export const getProductById = async (id) => {
+  const response = await axios.get(`${baseUrl}/products/${id}`);
+  const product = await response.data;
+  return product;
+};
+
+export const editProduct = async (id, payload, token) => {
+  const response = await axios.put(`${baseUrl}/products/${id}`, payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
+
+export const deleteProduct = async (token, id) => {
+  const response = await axios.delete(`${baseUrl}/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const product = await response.data;
+  return product.data;
 };

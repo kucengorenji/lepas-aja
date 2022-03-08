@@ -13,8 +13,8 @@ import { CircularProgress, Box } from '@mui/material';
 import Link from 'next/link';
 import withProtected from '../../hoc/withProtected';
 import { ModalDelete } from '../../components/ModalDelete';
-import { ModalEdit } from '../../components/ModalEdit';
 import { CardMyRoom } from '../../components/CardMyRoom';
+import { ModalEditRoom } from '../../components/ModalEditRoom';
 
 const MyRoom = () => {
   const user = useUser();
@@ -177,7 +177,7 @@ const MyRoom = () => {
       )}
 
       {isOpenEdit && (
-        <ModalEdit
+        <ModalEditRoom
           handleSubmit={handleSubmit}
           handleChange={handleChange}
           condition={roomById.condition}
