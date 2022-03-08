@@ -17,10 +17,12 @@ import {
   getCategory,
   updateProductPhoto,
   postProductData,
+  postProductPhoto,
 } from '../../../../services/giveaway';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
 import { ModalAddProduct } from '../../../../components/ModalAddProduct';
+import { ModalPhotoProduct } from '../../../../components/ModalPhotoProduct';
 
 const MyProduct = ({ productsData, id, category }) => {
   const router = useRouter();
@@ -37,12 +39,19 @@ const MyProduct = ({ productsData, id, category }) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const [isOpenUpload, setIsOpenUpload] = useState(false);
   const [productId, setProductId] = useState('');
   const [productById, setProductById] = useState({
     name: '',
     description: '',
     category: '',
   });
+  const [photo, setPhoto] = useState({
+    title: '',
+    alt: '',
+  });
+  const [image, setImage] = useState();
+  const [preview, setPreview] = useState();
 
   function closeModalDelete() {
     setIsOpenDelete(false);
@@ -54,12 +63,24 @@ const MyProduct = ({ productsData, id, category }) => {
   function closeModalAdd() {
     setIsOpenAdd(false);
   }
+  function closeModalUpload() {
+    setIsOpenUpload(false);
+  }
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setProductById({
       ...productById,
+      [name]: value,
+    });
+  };
+
+  const handlePhotoChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setPhoto({
+      ...photo,
       [name]: value,
     });
   };
@@ -85,6 +106,18 @@ const MyProduct = ({ productsData, id, category }) => {
     });
   }, [isRoomUpdate]);
 
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setPreview(null);
+    }
+  }, [image]);
+
   const currentRoom = products.slice(indexOfFirstRoom, indexOfLastRoom);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -94,6 +127,14 @@ const MyProduct = ({ productsData, id, category }) => {
     const getProductId = e.target.id;
     setProductId(getProductId);
     setIsOpenDelete(true);
+  };
+
+  const handleModalUpload = (e) => {
+    setImage('');
+    e.preventDefault();
+    const getProductId = e.target.id;
+    setProductId(getProductId);
+    setIsOpenUpload(true);
   };
 
   const handleSubmit = (e) => {
@@ -110,6 +151,28 @@ const MyProduct = ({ productsData, id, category }) => {
     });
   };
 
+  const handleUploadPhoto = (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append('productPhoto', image);
+    form.append('title', photo.title);
+    form.append('alt', photo.alt);
+
+    postProductPhoto(productId, form, user.token).then(() => {
+      setIsOpenUpload(false);
+      setIsRoomUpdate(true);
+    });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.substring(0, 5) === 'image') {
+      setImage(file);
+    } else {
+      setImage(null);
+    }
+  };
+
   const handleSubmitNew = (e) => {
     e.preventDefault();
     const payload = {
@@ -120,7 +183,6 @@ const MyProduct = ({ productsData, id, category }) => {
       qty: 1,
     };
     postProductData(payload, user.token).then((res) => {
-      console.log(res);
       setIsOpenAdd(false);
       setIsRoomUpdate(true);
     });
@@ -187,6 +249,7 @@ const MyProduct = ({ productsData, id, category }) => {
               return (
                 <CardMyProduct
                   id={item.id}
+                  handleModalUpload={handleModalUpload}
                   handleModalEdit={handleModalEdit}
                   handleModalDelete={handleModalDelete}
                   key={index}
@@ -195,7 +258,7 @@ const MyProduct = ({ productsData, id, category }) => {
                     .locale('id')
                     .format('DD MMMM YYYY')}
                   category={item.category}
-                  src={item.src}
+                  src={item.photoUrl[0].url}
                   description={item.description}
                   name={item.name}
                 />
@@ -248,6 +311,19 @@ const MyProduct = ({ productsData, id, category }) => {
           name={productById.name}
           handleClose={closeModalAdd}
           open={isOpenAdd}
+        />
+      )}
+
+      {isOpenUpload && (
+        <ModalPhotoProduct
+          handleClose={closeModalUpload}
+          open={isOpenUpload}
+          preview={preview}
+          title={photo.title}
+          alt={photo.alt}
+          handleChange={handlePhotoChange}
+          handleImageChange={handleImageChange}
+          handleUploadPhoto={handleUploadPhoto}
         />
       )}
     </div>
