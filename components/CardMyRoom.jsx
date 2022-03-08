@@ -26,9 +26,13 @@ export const CardMyRoom = (props) => {
                   {props.userStatus}
                 </p>
               </div>
-              <Link href={`/profile/products/${props.id}`}>
+              {props.userStatus === 'Owner' ? (
+                <Link href={`/profile/products/${props.id}`}>
+                  <a>{props.title}</a>
+                </Link>
+              ) : (
                 <a>{props.title}</a>
-              </Link>
+              )}
             </div>
           </div>
           {props.userStatus === 'Owner' ? (
