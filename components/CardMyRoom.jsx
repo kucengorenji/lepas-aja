@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { TrashIcon, PencilAltIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 
 export const CardMyRoom = (props) => {
   return (
@@ -25,31 +26,45 @@ export const CardMyRoom = (props) => {
                   {props.userStatus}
                 </p>
               </div>
-              <p>{props.title}</p>
+              <Link href={`/profile/products/${props.id}`}>
+                <a>{props.title}</a>
+              </Link>
             </div>
           </div>
-          <div className="flex items-center gap-x-4">
-            <Button
-              id={props.id}
-              onClick={props.handleModalEdit}
-              color="success"
-              size="medium"
-              variant="outlined"
-              startIcon={<PencilAltIcon className="w-5 h-5" />}
-            >
-              Edit
-            </Button>
-            <Button
-              id={props.id}
-              onClick={props.handleModalDelete}
-              color="error"
-              size="medium"
-              variant="outlined"
-              startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
-            >
-              Delete
-            </Button>
-          </div>
+          {props.userStatus === 'Owner' ? (
+            <div className="flex items-center gap-x-4">
+              <Button
+                id={props.id}
+                onClick={props.handleModalEdit}
+                color="success"
+                size="medium"
+                variant="outlined"
+                startIcon={<PencilAltIcon className="w-5 h-5" />}
+              >
+                Edit
+              </Button>
+              <Button
+                id={props.id}
+                onClick={props.handleModalDelete}
+                color="error"
+                size="medium"
+                variant="outlined"
+                startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
+              >
+                Delete
+              </Button>
+            </div>
+          ) : (
+            <>
+              <button
+                id={props.id}
+                className={`inline-block text-lg px-2 py-4 rounded-xl leading-none border m-4 lg:mt-0 bg-red-600 text-white`}
+                onClick={props.handleEjectRoom}
+              >
+                batal join
+              </button>
+            </>
+          )}
 
           {/* <h5 className="px-6 py-2 text-white bg-ruddy-pink">Owner</h5> */}
         </div>

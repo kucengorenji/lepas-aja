@@ -13,8 +13,9 @@ import { CircularProgress, Box } from '@mui/material';
 import Link from 'next/link';
 import withProtected from '../../hoc/withProtected';
 import { ModalDelete } from '../../components/ModalDelete';
-import { ModalEdit } from '../../components/ModalEdit';
 import { CardMyRoom } from '../../components/CardMyRoom';
+import { ModalEditRoom } from '../../components/ModalEditRoom';
+import { leaveGiveaway } from '../../services/giveaway';
 
 const MyRoom = () => {
   const user = useUser();
@@ -112,10 +113,12 @@ const MyRoom = () => {
       setIsOpenEdit(true);
     }
   };
+
   const handleDelete = () => {
     deleteRoom(token, roomId);
     setIsOpenDelete(false);
   };
+
   return (
     <div className="min-h-[80vh] container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
       <div className="flex justify-end gap-4">
@@ -145,6 +148,10 @@ const MyRoom = () => {
             {currentRoom.map((item, index) => {
               return (
                 <CardMyRoom
+                  handleEjectRoom={async () => {
+                    await leaveGiveaway(item.id, user, user.token);
+                    setIsRoomUpdate(true);
+                  }}
                   id={item.id}
                   handleModalEdit={handleModalEdit}
                   handleModalDelete={handleModalDelete}
@@ -177,7 +184,7 @@ const MyRoom = () => {
       )}
 
       {isOpenEdit && (
-        <ModalEdit
+        <ModalEditRoom
           handleSubmit={handleSubmit}
           handleChange={handleChange}
           condition={roomById.condition}
