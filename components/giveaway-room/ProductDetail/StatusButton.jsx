@@ -36,7 +36,7 @@ const StatusButton = ({ id, user, isOwner, data }) => {
       {isOwner ? (
         <>
           <button className="p-1">
-            <Link href={`/giveaway/${id}/add-product`}>
+            <Link href={`/profile/products/${id}`}>
               <a className="inline-block text-lg px-12 py-4 rounded-xl leading-none border bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0">
                 add product
               </a>
