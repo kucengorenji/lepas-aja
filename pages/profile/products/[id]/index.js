@@ -75,7 +75,6 @@ const MyProduct = ({ productsData, id, category }) => {
         setIsLoading(false);
       });
     }
-    setIsLoading(false);
   }, [productId]);
 
   useEffect(() => {
@@ -85,8 +84,6 @@ const MyProduct = ({ productsData, id, category }) => {
       setIsLoading(false);
     });
   }, [isRoomUpdate]);
-
-  console.log(user.token);
 
   const currentRoom = products.slice(indexOfFirstRoom, indexOfLastRoom);
 
