@@ -27,11 +27,6 @@ export default function ProductInfo({ id, products }) {
               {product.name}
             </Tab>
           ))}
-          <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-ruddy-pink rounded-lg my-2 border border-white hover:border-ruddy-pink">
-            <Link href={`/giveaway/${id}/add-product`}>
-              <a>add product</a>
-            </Link>
-          </Tab>
         </Tab.List>
         <Tab.Panels className="w-full m-2 border border-ruddy-pink rounded-lg">
           {Object.values(products).map((product, idx) => (
