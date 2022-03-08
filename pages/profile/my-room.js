@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Pagination from '../../components/Pagination';
-import { CardRoom } from '../../components/CardRoom';
 import moment from 'moment';
 import 'moment/locale/id';
 import {
@@ -15,12 +14,14 @@ import Link from 'next/link';
 import withProtected from '../../hoc/withProtected';
 import { ModalDelete } from '../../components/ModalDelete';
 import { ModalEdit } from '../../components/ModalEdit';
+import { CardMyRoom } from '../../components/CardMyRoom';
 
 const MyRoom = () => {
   const user = useUser();
   const [currentPage, setCurrentPage] = useState(1);
   const [myRoomPage] = useState(5);
   const [room, setRoom] = useState([]);
+  const [isRoomUpdate, setIsRoomUpdate] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState();
   const indexOfLastRoom = currentPage * myRoomPage;
@@ -68,13 +69,14 @@ const MyRoom = () => {
 
   useEffect(() => {
     setToken(user.token);
+    setIsRoomUpdate(false);
     if (token) {
       getMyRoom(token).then((data) => {
         setRoom(data);
         setIsLoading(false);
       });
     }
-  }, [token, room]);
+  }, [token, isRoomUpdate]);
 
   const currentRoom = room.slice(indexOfFirstRoom, indexOfLastRoom);
 
@@ -96,7 +98,10 @@ const MyRoom = () => {
       description: roomById.description,
       condition: roomById.condition,
     };
-    editRoom(roomId, payload, token).then(() => setIsOpenEdit(false));
+    editRoom(roomId, payload, token).then(() => {
+      setIsOpenEdit(false);
+      setIsRoomUpdate(true);
+    });
   };
 
   const handleModalEdit = (e) => {
@@ -120,7 +125,7 @@ const MyRoom = () => {
         <Link href="/profile/my-room">
           <a className="underline underline-offset-8">Room Saya</a>
         </Link>
-        <Link href="/profile/history-room">
+        <Link href="/profile/giveaway-history">
           <a>Riwayat</a>
         </Link>
       </div>
@@ -139,7 +144,7 @@ const MyRoom = () => {
           <div className="max-w-[950px] mt-8 mx-auto">
             {currentRoom.map((item, index) => {
               return (
-                <CardRoom
+                <CardMyRoom
                   id={item.id}
                   handleModalEdit={handleModalEdit}
                   handleModalDelete={handleModalDelete}

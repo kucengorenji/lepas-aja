@@ -19,7 +19,7 @@ const Profile = () => {
       setBiodata(data);
       setLoading(false);
     });
-  }, [biodata]);
+  }, [biodata.photoUrl]);
 
   return (
     <div className="container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
@@ -30,7 +30,7 @@ const Profile = () => {
         <Link href="/profile/my-room">
           <a>Room Saya</a>
         </Link>
-        <Link href="/profile/history-room">
+        <Link href="/profile/giveaway-history">
           <a>Riwayat</a>
         </Link>
       </div>

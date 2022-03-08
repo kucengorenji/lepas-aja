@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useCallback } from 'react';
 const LEPASAJA_ENDPOINT = 'https://lepasaja-backend.herokuapp.com/api/v1';
 
 export async function fetchProvinsi() {
@@ -97,4 +98,17 @@ export const deleteRoom = async (token, id) => {
   });
   const room = await response.data;
   return room.data;
+};
+
+export const getGiveawayHistory = async (token) => {
+  const response = await axios.get(
+    `${LEPASAJA_ENDPOINT}/rooms/giveaway-history`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const history = await response.data;
+  return history.data;
 };
