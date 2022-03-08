@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 export default function CardProduct(data) {
-  console.log(data);
   return (
     <div className="max-w-[250px] rounded-lg shadow-lg  bg-[#F0F0F0] group relative overflow-hidden">
       <Link href={`/giveaway/${data.id}`}>

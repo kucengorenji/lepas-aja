@@ -13,7 +13,7 @@ const AuthStateChangeProvider = ({ children }) => {
       if (user) {
         user.getIdToken().then((token) => {
           SetUser({ email: user.email, uid: user.uid, token: token });
-          console.log(token);
+          // console.log(token);
         });
       } else {
         SetUser(InitialUserState);

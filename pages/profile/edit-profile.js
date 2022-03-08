@@ -34,36 +34,45 @@ const EditProfile = () => {
     birthday: '',
     phoneNumber: '',
     zipCode: '',
+    street: '',
   });
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   useEffect(() => {
-    fetchKota(idKota).then((data) => {
-      setDataKota(data);
-      setDataBio({ ...dataBio, city: data[0]?.nama });
-    });
+    if (idKota) {
+      fetchKota(idKota).then((data) => {
+        setDataKota(data);
+        setDataBio({ ...dataBio, city: data[0]?.nama });
+      });
+    }
   }, [idKota]);
 
   useEffect(() => {
     fetchProvinsi().then((data) => setDataProvinsi(data));
-    getProfileById(user.uid).then((data) => {
-      setDataBio({
-        firstname: data.firstname,
-        lastname: data.lastname,
-        gender: data.gender,
-        address: data.address?.address,
-        province: data.address?.province,
-        birthday: moment.unix(data.birthday),
-        city: data.address?.city,
-        phoneNumber: data.phoneNumber,
-        zipCode: data.address?.zipCode,
+    if (user.uid) {
+      getProfileById(user.uid).then((data) => {
+        setDataBio({
+          firstname: data.firstname,
+          lastname: data.lastname,
+          gender: data.gender,
+          address: data.address?.address,
+          province: data.address?.province,
+          birthday: moment.unix(data.birthday),
+          city: data.address?.city,
+          phoneNumber: data.phoneNumber,
+          zipCode: data.address?.zipCode,
+          street: data.address?.street,
+        });
+        setPreview(data.photoUrl);
+        fetchProvinsi().then((prov) => {
+          const kota = prov.find(
+            (item) => item.nama === data.address?.province
+          );
+          setIdKota(kota?.id);
+          setLoading(false);
+        });
       });
-      fetchProvinsi().then((prov) => {
-        const kota = prov.find((item) => item.nama === data.address?.province);
-        setIdKota(kota?.id);
-        setLoading(false);
-      });
-    });
+    }
   }, []);
 
   useEffect(() => {
@@ -90,6 +99,7 @@ const EditProfile = () => {
       birthday: moment(dataBio.birthday).format('YYYY-MM-DD'),
       phoneNumber: dataBio.phoneNumber,
       zipCode: dataBio.zipCode,
+      street: dataBio.street,
     };
 
     const form = new FormData();
@@ -223,6 +233,15 @@ const EditProfile = () => {
                   value={dataBio.zipCode}
                 />
               </div>
+              <div className="flex flex-col flex-1 gap-y-2">
+                <label className="text-2xl font-medium opacity-70">Jalan</label>
+                <input
+                  onChange={handleChange}
+                  name="street"
+                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                  value={dataBio.street}
+                />
+              </div>
               <div className="flex flex-col gap-y-2">
                 <label className="text-2xl font-medium opacity-70">
                   Provinsi
@@ -305,18 +324,7 @@ const EditProfile = () => {
                         <label
                           htmlFor="file-upload"
                           className="relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                        >
-                          <span>Upload a file</span>
-                          <input
-                            onChange={handleImageChange}
-                            accept="image/*"
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                            className="sr-only"
-                          />
-                        </label>
-                        <p className="pl-1">or drag and drop</p>
+                        ></label>
                       </div>
                     </>
                   ) : (
@@ -358,6 +366,20 @@ const EditProfile = () => {
                     </div>
                   )}
                 </div>
+                <label
+                  htmlFor="file-upload"
+                  className="relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                >
+                  <span>Upload a file</span>
+                  <input
+                    onChange={handleImageChange}
+                    accept="image/*"
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    className="sr-only"
+                  />
+                </label>
               </div>
 
               <button

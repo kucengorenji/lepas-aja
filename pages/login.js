@@ -6,7 +6,7 @@ import {
   GetSignInErrorMessage,
   GoogleAuth,
   FacebookAuth,
-  sendEmailResetPassword
+  sendEmailResetPassword,
 } from '../services/Auth';
 import { useRouter } from 'next/dist/client/router';
 import withUnProtected from '../hoc/withUnprotected';
@@ -62,7 +62,7 @@ const login = () => {
       setError(message);
     }
   };
-  const onSendEmail = async({ email }) =>{
+  const onSendEmail = async ({ email }) => {
     // console.log(app);
     // console.log(Authentication, email);
     try {
@@ -87,27 +87,28 @@ const login = () => {
     //     console.log(Authentication);
     //     console.log('Error');
     //   })
-
-  }
+  };
 
   useEffect(() => {
-    if(isAlert){
+    if (isAlert) {
       let timer = setTimeout(() => setIsAlert(false), 5000);
       return () => {
         clearTimeout(timer);
-      }
+      };
     }
-  }, [isAlert])
+  }, [isAlert]);
 
   return (
     <section className="w-full min-h-[80vh] flex flex-col justify-center items-center py-8">
-      {isAlert && 
-        <div className='relative '>
-          <div className='absolute w-96 -top-36 -left-44 bg-gray-500 text-center px-4 py-10'>
-            <h1 className='text-white'>Email has been send. Please check your email!</h1>
+      {isAlert && (
+        <div className="relative ">
+          <div className="absolute w-96 -top-36 -left-44 bg-gray-500 text-center px-4 py-10">
+            <h1 className="text-white">
+              Email has been send. Please check your email!
+            </h1>
           </div>
         </div>
-      }
+      )}
       <h1 className="text-5xl mb-14">LOGIN</h1>
       <form
         className="mb-4 flex flex-col max-w-[450px] w-full"
@@ -185,18 +186,18 @@ const login = () => {
             Forgot Password?
           </button>
         </div>
-        <div className="flex flex-col items-center mt-8 gap-y-4">
-          <p className="font-bold opacity-70">Or Log in With</p>
-          <div className="flex gap-x-8">
-            <button onClick={handleFacebookAuth}>
-              <img src="/icons/facebook.svg" />
-            </button>
-            <button onClick={handleGoogleAuth}>
-              <img src="/icons/google.svg" />
-            </button>
-          </div>
-        </div>
       </form>
+      <div className="flex flex-col items-center mt-8 gap-y-4">
+        <p className="font-bold opacity-70">Or Log in With</p>
+        <div className="flex gap-x-8">
+          <button onClick={handleFacebookAuth}>
+            <img src="/icons/facebook.svg" />
+          </button>
+          <button onClick={handleGoogleAuth}>
+            <img src="/icons/google.svg" />
+          </button>
+        </div>
+      </div>
       {modal && <Modal onSendEmail={onSendEmail} toggleModal={toggleModal} />}
     </section>
   );
