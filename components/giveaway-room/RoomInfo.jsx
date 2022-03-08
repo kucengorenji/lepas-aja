@@ -2,6 +2,7 @@ import CountDown from "./CountDown";
 
 export default function RoomInfo({data}) {
 
+  const conditions = data.condition;
   const finishAt = data.finishAt*1000;
   const totalParticipants = data.participants.length;
 
@@ -20,10 +21,7 @@ export default function RoomInfo({data}) {
           Syarat & Ketentutan:
         </h3>
         <ol className="text-left font-bold px-8 py-1">
-          <li>1. Dharma Gans</li>
-          <li>2. Dharma Gans</li>
-          <li>3. Dharma Gans</li>
-          <li>4. Dharma Gans</li>
+          {conditions}
         </ol>
       </div>
     </div>
