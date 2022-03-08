@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export const ModalEdit = (props) => {
+export const ModalEditRoom = (props) => {
   return (
     <div>
       <Modal

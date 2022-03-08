@@ -1,9 +1,8 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { TrashIcon, PencilAltIcon } from '@heroicons/react/solid';
-import Link from 'next/link';
 
-export const CardMyRoom = (props) => {
+export const CardMyProduct = (props) => {
   return (
     <div className="mt-4 text-lg text-ruddy-pink p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
       <div className="text-black">
@@ -21,14 +20,12 @@ export const CardMyRoom = (props) => {
             />
             <div>
               <div className="flex items-center">
-                <h5 className="text-lg font-semibold">{props.owner}</h5>
+                <h5 className="text-xl font-semibold">{props.name}</h5>
                 <p className="px-2 ml-2 text-xs text-white opacity-100 bg-ruddy-pink">
-                  {props.userStatus}
+                  {props.category}
                 </p>
               </div>
-              <Link href={`/profile/products/${props.id}`}>
-                <a>{props.title}</a>
-              </Link>
+              <p>{props.description}</p>
             </div>
           </div>
           <div className="flex items-center gap-x-4">
