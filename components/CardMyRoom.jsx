@@ -19,50 +19,69 @@ export const CardMyRoom = (props) => {
               className="w-[80px] h-[80px] object-cover rounded"
               src={props.src}
             />
-            <div>
+            <div className="flex flex-col">
               <div className="flex items-center">
-                <h5 className="text-lg font-semibold">{props.owner}</h5>
+                <h5 className="text-sm font-bold">{props.owner}</h5>
                 <p className="px-2 ml-2 text-xs text-white opacity-100 bg-ruddy-pink">
                   {props.userStatus}
                 </p>
               </div>
-              <Link href={`/profile/products/${props.id}`}>
-                <a>{props.title}</a>
+              <p className="text-xl text-black font-semibold opacity-100 py-1">
+                {props.title}
+              </p>
+              <Link href={`/giveaway/${props.id}`}>
+                <a className="mr-4 underline hover:no-underline md:mr-6 text-ruddy-pink text-sm">
+                  Menuju room giveaway
+                </a>
               </Link>
             </div>
           </div>
           {props.userStatus === 'Owner' ? (
-            <div className="flex items-center gap-x-4">
-              <Button
-                id={props.id}
-                onClick={props.handleModalEdit}
-                color="success"
-                size="medium"
-                variant="outlined"
-                startIcon={<PencilAltIcon className="w-5 h-5" />}
-              >
-                Edit
-              </Button>
-              <Button
-                id={props.id}
-                onClick={props.handleModalDelete}
-                color="error"
-                size="medium"
-                variant="outlined"
-                startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
-              >
-                Delete
-              </Button>
+            <div className="flex flex-col gap-y-4">
+              <Link href={`/profile/products/${props.id}`}>
+                <Button
+                  id={props.id}
+                  color="primary"
+                  size="large"
+                  variant="outlined"
+                >
+                  Lihat Produk
+                </Button>
+              </Link>
+
+              <div className="flex items-center gap-x-4">
+                <Button
+                  id={props.id}
+                  onClick={props.handleModalEdit}
+                  color="success"
+                  size="medium"
+                  variant="outlined"
+                  startIcon={<PencilAltIcon className="w-5 h-5" />}
+                >
+                  Edit
+                </Button>
+                <Button
+                  id={props.id}
+                  onClick={props.handleModalDelete}
+                  color="error"
+                  size="medium"
+                  variant="outlined"
+                  startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
+                >
+                  Delete
+                </Button>
+              </div>
             </div>
           ) : (
             <>
-              <button
+              <Button
                 id={props.id}
-                className={`inline-block text-lg px-2 py-4 rounded-xl leading-none border m-4 lg:mt-0 bg-red-600 text-white`}
+                variant="outlined"
+                color="error"
                 onClick={props.handleEjectRoom}
               >
                 batal join
-              </button>
+              </Button>
             </>
           )}
 

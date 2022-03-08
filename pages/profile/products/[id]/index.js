@@ -36,6 +36,7 @@ const MyProduct = ({ productsData, id, category }) => {
   const indexOfFirstRoom = indexOfLastRoom - myRoomPage;
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [productId, setProductId] = useState('');
   const [productById, setProductById] = useState({
     name: '',
@@ -48,6 +49,10 @@ const MyProduct = ({ productsData, id, category }) => {
   }
   function closeModalEdit() {
     setIsOpenEdit(false);
+  }
+
+  function closeModalAdd() {
+    setIsOpenAdd(false);
   }
 
   const handleChange = (e) => {
@@ -70,7 +75,6 @@ const MyProduct = ({ productsData, id, category }) => {
         setIsLoading(false);
       });
     }
-    setIsLoading(false);
   }, [productId]);
 
   useEffect(() => {
@@ -80,8 +84,6 @@ const MyProduct = ({ productsData, id, category }) => {
       setIsLoading(false);
     });
   }, [isRoomUpdate]);
-
-  console.log(user.token);
 
   const currentRoom = products.slice(indexOfFirstRoom, indexOfLastRoom);
 
@@ -119,7 +121,7 @@ const MyProduct = ({ productsData, id, category }) => {
     };
     postProductData(payload, user.token).then((res) => {
       console.log(res);
-      setIsOpenEdit(false);
+      setIsOpenAdd(false);
       setIsRoomUpdate(true);
     });
   };
@@ -128,7 +130,7 @@ const MyProduct = ({ productsData, id, category }) => {
     e.preventDefault();
     setProductById('');
     setIsRoomUpdate(true);
-    setIsOpenEdit(true);
+    setIsOpenAdd(true);
   };
 
   const handleModalEdit = (e) => {
@@ -232,7 +234,7 @@ const MyProduct = ({ productsData, id, category }) => {
         />
       )}
 
-      {isOpenEdit && (
+      {isOpenAdd && (
         <ModalAddProduct
           category={category}
           categoryState={categoryState}
@@ -244,8 +246,8 @@ const MyProduct = ({ productsData, id, category }) => {
           handleChange={handleChange}
           description={productById.description}
           name={productById.name}
-          handleClose={closeModalEdit}
-          open={isOpenEdit}
+          handleClose={closeModalAdd}
+          open={isOpenAdd}
         />
       )}
     </div>
