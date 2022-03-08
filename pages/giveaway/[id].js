@@ -2,6 +2,7 @@ import ProductDetail from '../../components/ProductDetail';
 import styles from '../../styles/Home.module.css';
 import Head from 'next/head';
 import ParticipantList from '../../components/ParticipantList';
+import ParticipantLists from '../../components/ParticipantLists';
 import RoomInfo from '../../components/RoomInfo';
 import axios from 'axios';
 import { useState } from 'react';
@@ -32,7 +33,8 @@ const Event = () => {
         <main className={styles.main + `top-0 p-6`}>
           <ProductDetail />
           <div className="flex flex-row w-full">
-            <ParticipantList />
+            {/* <ParticipantList /> */}
+            <ParticipantLists />
             <RoomInfo />
           </div>
         </main>
