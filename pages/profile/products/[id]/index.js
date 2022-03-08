@@ -51,6 +51,10 @@ const MyProduct = ({ productsData, id, category }) => {
     setIsOpenEdit(false);
   }
 
+  function closeModalAdd() {
+    setIsOpenAdd(false);
+  }
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -120,7 +124,7 @@ const MyProduct = ({ productsData, id, category }) => {
     };
     postProductData(payload, user.token).then((res) => {
       console.log(res);
-      setIsOpenEdit(false);
+      setIsOpenAdd(false);
       setIsRoomUpdate(true);
     });
   };
@@ -245,7 +249,7 @@ const MyProduct = ({ productsData, id, category }) => {
           handleChange={handleChange}
           description={productById.description}
           name={productById.name}
-          handleClose={closeModalEdit}
+          handleClose={closeModalAdd}
           open={isOpenAdd}
         />
       )}
