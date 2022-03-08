@@ -38,17 +38,9 @@ const StatusButton = ({ id, user, isOwner, data }) => {
           <button className="p-1">
             <Link href={`/profile/products/${id}`}>
               <a className="inline-block text-lg px-12 py-4 rounded-xl leading-none border bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0">
-                add product
+                add/edit product
               </a>
             </Link>
-          </button>
-          <button className="p-1">
-            <a
-              href="#"
-              className="inline-block text-lg px-12 py-4 rounded-xl leading-none border bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0"
-            >
-              Edit Product
-            </a>
           </button>
         </>
       ) : (
