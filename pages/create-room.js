@@ -15,9 +15,9 @@ const createRoom = () => {
 
   const onSubmit = async (data) => {
     try {
-      await postRoom(data, user.token);
       console.log(data);
-      router.replace(`/giveaway/${data.id}`);
+      await postRoom(data, user.token);
+      router.replace(`/profile/my-room`);
     } catch (e) {
       console.error(e);
     }
