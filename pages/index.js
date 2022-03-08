@@ -10,12 +10,7 @@ import ImageCarousel from '../components/ImageCarousel';
 import { getAllRooms, getAllProducts } from '../services/giveaway';
 
 export default function Home({ roomData, productData }) {
-  const imgArray = [
-    <ImageCarousel src="/images/image1.jpg" />,
-    <ImageCarousel src="/images/image2.jpg" />,
-    <ImageCarousel src="/images/image3.jpg" />,
-    <ImageCarousel src="/images/image4.jpg" />,
-  ];
+  const imgArray = [<ImageCarousel src="/images/banner.jpg" />];
 
   const [category, setCategory] = useState('');
 
