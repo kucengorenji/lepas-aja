@@ -10,7 +10,7 @@ const Event = ({ id, data, productsData }) => {
   const participants = data.data.participants;
 
   console.log(room);
-  
+
   return (
     <>
       <div className={styles.container + 'container'}>
