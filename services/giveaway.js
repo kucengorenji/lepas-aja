@@ -115,6 +115,7 @@ export const getCategory = async () => {
 
 // join giveaway
 export const joinGiveaway = async (id, user, token) => {
+  console.log(id, user, token);
   return axios.post(`${baseUrl}/rooms/${id}/join`, user, {
     headers: {
       method: 'POST',

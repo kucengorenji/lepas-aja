@@ -7,14 +7,18 @@ import { getRoomById, getProductsData } from '../../../services/giveaway';
 const Event = ({ id, data, productsData }) => {
   const room = data.data;
   const products = productsData.data;
+  const participants = data.data.participants;
+
+  console.log(room);
+
   return (
     <>
       <div className={styles.container + 'container'}>
         <main className={styles.main + `top-0 p-6`}>
           <ProductDetail id={id} data={room} products={products} />
           <div className="flex flex-row w-full">
-            <ParticipantList data={data} />
-            <RoomInfo data={data} />
+            <ParticipantList data={participants} />
+            <RoomInfo data={room} />
           </div>
         </main>
       </div>
