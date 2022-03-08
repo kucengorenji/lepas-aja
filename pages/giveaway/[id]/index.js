@@ -8,6 +8,8 @@ const Event = ({ id, data, productsData }) => {
   const room = data.data;
   const products = productsData.data;
   const participants = data.data.participants;
+
+  console.log(room);
   
   return (
     <>
@@ -16,7 +18,7 @@ const Event = ({ id, data, productsData }) => {
           <ProductDetail id={id} data={room} products={products} />
           <div className="flex flex-row w-full">
             <ParticipantList data={participants} />
-            <RoomInfo data={data} />
+            <RoomInfo data={room} />
           </div>
         </main>
       </div>

@@ -1,28 +1,21 @@
-export default function RoomInfo() {
+import CountDown from "./CountDown";
+
+export default function RoomInfo({data}) {
+
+  const finishAt = data.finishAt*1000;
+  const totalParticipants = data.participants.length;
+
+  
   return (
     <div className="p-5 bg-grey basis-1/4 text-center">
-      <div className="p-2 bg-slate-200 rounded-lg ">
-        <p>countdown</p>
-      </div>
-      <div className="flex justify-between">
-        <div className="p-2  px-6 bg-slate-200 m-2 rounded-lg">
-          <p className="font-bold text-xl">03</p> <p>day</p>
-        </div>
-        <div className="p-2  px-6 bg-slate-200 m-2 rounded-lg">
-          <p className="font-bold text-xl">03</p> <p>Hour</p>
-        </div>
-        <div className="p-2  px-6 bg-slate-200 m-2 rounded-lg">
-          <p className="font-bold text-xl">03</p> <p>Minute</p>
-        </div>
-        <div className="p-2  px-6 bg-slate-200 m-2 rounded-lg">
-          <p className="font-bold text-xl">03</p> <p>Second</p>
-        </div>
-      </div>
+      <CountDown
+        finishTime={finishAt}
+      />
       <div className="w-full bg-slate-200 rounded-lg p-3">
         <h3 className="text-left font-bold px-8 py-1 text-xl">
           Total Peserta:
         </h3>
-        <h2 className="text-left font-bold px-8 text-3xl">12 Peserta</h2>
+        <h2 className="text-left font-bold px-8 text-3xl"> {totalParticipants} Peserta</h2>
         <h3 className="text-left font-bold px-8 py-1 text-xl">
           Syarat & Ketentutan:
         </h3>

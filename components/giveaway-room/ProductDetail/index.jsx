@@ -5,8 +5,9 @@ import StatusButton from './StatusButton';
 
 const ProductDetail = ({ id, data, products }) => {
   const user = useUser();
-  console.log(id);
-  console.log(user);
+  // console.log(id);
+  // console.log(data);
+  // console.log(products);
   const isOwner = data.ownerId === user.uid;
 
   return (
