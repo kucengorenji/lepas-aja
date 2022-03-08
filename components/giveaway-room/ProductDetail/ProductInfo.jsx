@@ -45,7 +45,9 @@ export default function ProductInfo({ id, products }) {
           </Tab.Panels>
         </Tab.Group>
       ) : (
-        <div className="mx-auto">No product</div>
+        <div className="mx-auto my-11">
+          belum ada product yang ditambahkan di event ini
+        </div>
       )}
     </div>
   );
