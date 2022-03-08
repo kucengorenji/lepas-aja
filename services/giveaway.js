@@ -9,7 +9,6 @@ export const postRoom = async (payload, token) => {
     headers: {
       method: 'POST',
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
     },
   });
 };
