@@ -3,16 +3,8 @@ import { useState } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
 const PhotoShowcase = ({ products }) => {
-  // const defaultImage = products[0].photoUrl[0].url;
   const defaultImage = '/images/sepatu.jpg';
-  let photoUrl = [];
-  const [photoProduct, setPhotoProduct] = useState({});
-
-  products.map((product) => {
-    photoUrl = product.photoUrl;
-    // console.log(product.photoUrl);
-  });
-  console.log(photoUrl);
+  console.log(products);
 
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', minWidth: '400px' }}>
