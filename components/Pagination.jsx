@@ -32,7 +32,7 @@ const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
         <div></div>
         <div>
           <nav
-            className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
+            className="relative z-0 inline-flex space-x-2 rounded-md shadow-sm"
             aria-label="Pagination"
           >
             <button
@@ -56,9 +56,9 @@ const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
                 }}
                 key={number}
                 href="#"
-                className={`relative inline-flex items-center px-4 py-2 text-sm font-medium   border border-gray-300  ${
+                className={`relative inline-flex items-center px-4 py-2 text-sm font-medium border border-gray-300  ${
                   currentPage === number
-                    ? 'bg-ruddy-pink text-white'
+                    ? 'bg-red-600 text-white'
                     : 'bg-white text-gray-500'
                 }`}
               >
@@ -68,7 +68,7 @@ const Pagination = ({ historyPerPage, totalHistory, paginate }) => {
             <button
               disabled={currentPage === int}
               onClick={handleNext}
-              className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50"
+              className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50"
             >
               <ArrowRightIcon
                 className={`h-6 w-6 ${
