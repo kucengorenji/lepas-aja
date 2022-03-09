@@ -3,6 +3,9 @@ import ParticipantList from '../../../components/giveaway-room/ParticipantList';
 import ProductDetail from '../../../components/giveaway-room/ProductDetail';
 import RoomInfo from '../../../components/giveaway-room/RoomInfo';
 import { getRoomById, getProductsData } from '../../../services/giveaway';
+import ToastError from '../../../components/ToastError';
+import ToastSuccess from '../../../components/ToastSuccess';
+import { useState } from 'react';
 
 const Event = ({ id, data, productsData }) => {
   const room = data.data;
@@ -11,9 +14,28 @@ const Event = ({ id, data, productsData }) => {
 
   console.log(room);
 
+  const [isToast, setIsToast] = useState(true);
+
+  const onToastClearClick = () => {
+    console.log(isToast);
+    setIsToast(false);
+  }
+
   return (
     <>
       <div className={styles.container + 'container'}>
+        {/* <div className='relative'> */}
+          {/* {isToast && (<ToastSuccess
+            boldText={`Success!`}
+            text={`Anda telah join room`}
+            onToastClearClick={onToastClearClick}
+          />)} */}
+          {/* <ToastError
+            boldText={`Danger!`}
+            text={`Anda tidak bisa join room`}
+          /> */}
+          
+        {/* </div> */}
         <main className={styles.main + `top-0 p-6`}>
           <ProductDetail id={id} data={room} products={products} />
           <div className="flex flex-row w-full">

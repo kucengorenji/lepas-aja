@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm, Controller } from 'react-hook-form';
 import { postRoom } from '../services/giveaway';
@@ -7,21 +7,44 @@ import { useRouter } from 'next/dist/client/router';
 import DateAdapter from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from 'react-datepicker';
+import { Alert } from '@mui/material';
 
 const createRoom = () => {
   const { register, handleSubmit, control } = useForm();
   const user = useUser();
   const router = useRouter();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const onSubmit = async (data) => {
     try {
       console.log(data);
       await postRoom(data, user.token);
-      router.replace(`/profile/my-room`);
+      setIsSuccess(true);
+      setTimeout(() => {
+        router.replace(`/profile/my-room`);
+      }, 3500)
     } catch (e) {
       console.error(e);
+      setIsError(true);
     }
   };
+
+  useEffect(() => {
+    if(isSuccess){
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000)
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if(isError){
+      setTimeout(() => {
+        setIsError(false);
+      }, 5000)
+    }
+  }, [isError])
 
   return (
     <section className="flex flex-col px-8 py-12">
@@ -29,6 +52,20 @@ const createRoom = () => {
         Room
       </h4>
       <div className="flex flex-col items-center justify-center w-full">
+        {isSuccess && (
+          <div className='absolute top-32'>
+            <Alert variant='filled' severity='success'>
+              Anda telah berhasil membuat room!
+            </Alert>
+          </div>
+        )}
+        {isError && (
+          <div className='absolute top-32'>
+            <Alert variant='filled' severity='error'>
+              Anda tidak dapat membuat room! Silahkan lengkapi profil anda terlebih dahulu!
+            </Alert>
+          </div>
+        )}
         <h1 className="mb-8 text-4xl text-ruddy-pink">Buat Giveaway</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}

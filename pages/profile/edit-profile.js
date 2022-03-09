@@ -16,6 +16,7 @@ import DateAdapter from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import moment from 'moment';
+import { Alert } from '@mui/material';
 
 const EditProfile = () => {
   const router = useRouter();
@@ -38,6 +39,10 @@ const EditProfile = () => {
   });
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
+
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   useEffect(() => {
     if (idKota) {
       fetchKota(idKota).then((data) => {
@@ -109,20 +114,28 @@ const EditProfile = () => {
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
-        router.replace('/profile');
+        setIsSuccess(true);
+        setTimeout(() => {
+          router.replace('/profile');
+        }, 3500)
       })
       .catch((error) => {
         console.log(error.message);
+        setIsError(true);
       });
 
     editBio(user.uid, userData, user.token)
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
-        router.replace('/profile');
+        setIsSuccess(true);
+        setTimeout(() => {
+          router.replace('/profile');
+        }, 3500)
       })
       .catch((error) => {
         console.log(error.message);
+        setIsError(true);
       });
   };
 
@@ -152,6 +165,22 @@ const EditProfile = () => {
     }
   };
 
+  useEffect(() => {
+    if(isSuccess){
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000)
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if(isError){
+      setTimeout(() => {
+        setIsError(false);
+      }, 5000)
+    }
+  }, [isError])
+
   return (
     <section className="flex flex-col px-8 py-12">
       {loading ? (
@@ -165,7 +194,21 @@ const EditProfile = () => {
         </Box>
       ) : (
         <div className="flex flex-col items-center justify-center w-full">
-          <h1 className="mb-8 text-4xl text-left text-ruddy-pink">
+          {isSuccess && (
+            <div className='absolute top-32'>
+              <Alert variant='filled' severity='success'>
+                Anda telah berhasil mengedit profile!
+              </Alert>
+            </div>
+          )}
+          {isError && (
+            <div className='absolute top-32'>
+              <Alert variant='filled' severity='error'>
+                Anda tidak dapat mengedit profile!
+              </Alert>
+            </div>
+          )}
+          <h1 className="mt-4 mb-8 text-4xl text-left text-ruddy-pink">
             Edit Profile
           </h1>
           <form

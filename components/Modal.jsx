@@ -1,13 +1,4 @@
 import React, { useState } from 'react';
-// import { 
-//   getAuth,
-//   sendPasswordResetEmail
-// } 
-// from "firebase/auth";
-// import firebase from '../config/firebase.config.js';
-
-// const auth = getAuth(firebase);
-// console.log(auth);
 
 export default function Modal(props) {
   const [email, setEmail] = useState('');
