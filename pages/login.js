@@ -74,19 +74,6 @@ const login = () => {
       console.log('error');
       console.log(error);
     }
-
-    // sendPasswordResetEmail(Authentication, email)
-    //   .then(() => {
-    //     setModal(!modal);
-    //     setIsAlert(true);
-    //     // alert('Email has been send. Please check your email!');
-    //     console.log('Please check your email!');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     console.log(Authentication);
-    //     console.log('Error');
-    //   })
   };
 
   useEffect(() => {
@@ -135,29 +122,29 @@ const login = () => {
           </div>
         )}
 
-        <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
+        <div className="mb-4 shadow appearance-none border-red-600 border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
           <label
-            className="text-[#706C88] mb-1 border-b-[3px] border-[#DF8D9F] max-w-max"
+            className="text-[#706C88] mb-1 border-b-[3px] border-red-600 max-w-max"
             htmlFor="username-email"
           >
             Email
           </label>
           <input
             ref={emailRef}
-            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-[#DF8D9F] text-xl"
+            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-red-600 text-xl"
             placeholder="Enter your email/username here"
           />
         </div>
-        <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
+        <div className="mb-4 shadow appearance-none border-red-600 border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
           <label
-            className="text-[#706C88] mb-1 border-b-[3px] border-[#DF8D9F] max-w-max"
+            className="text-[#706C88] mb-1 border-b-[3px] border-red-600 max-w-max"
             htmlFor="password"
           >
             Password
           </label>
           <input
             ref={passwordRef}
-            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-[#DF8D9F] text-xl"
+            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-red-600 text-xl"
             id="password"
             type="password"
             placeholder="Enter your password here"
@@ -167,14 +154,14 @@ const login = () => {
           <label className="inline-flex items-center">
             <input
               type="checkbox"
-              className="w-4 h-4 text-[#DF8D9F] justify-center form-checkbox"
+              className="w-4 h-4 text-red-600 justify-center form-checkbox"
             />
             <span className="ml-2 text-lg text-gray-700">Remember Me</span>
           </label>
         </div>
         <div className="flex flex-col items-center gap-4">
           <button
-            className="rounded-[4px] bg-[#DF8D9F] mx-auto max-w-[196px] w-full py-4 mt-8 text-xl text-white font-medium"
+            className="rounded-[4px] bg-red-600 mx-auto max-w-[196px] w-full py-4 mt-8 text-xl text-white font-medium"
             type="submit"
           >
             Login
