@@ -10,7 +10,7 @@ const breakPoints = [
 export default function NewGiveaway({ data }) {
   return (
     <section className="mt-5 w-full max-w-[950px]">
-      <h1 className="font-bold mb-5 text-[#DF8D9F] text-center text-4xl">
+      <h1 className="font-bold mb-5 text-red-600 text-center text-4xl">
         NEW GIVEAWAY
       </h1>
       <Carousel breakPoints={breakPoints}>
