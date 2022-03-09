@@ -38,7 +38,7 @@ const ProductGiveaway = ({ categoryIdFilter, data }) => {
       </div>
       <button
         onClick={showMoreItem}
-        className="outline mx-auto outline-1 outline-[#DF8D9F] px-8 py-2 text-[#DF8D9F]"
+        className="outline mx-auto outline-1 outline-red-600 px-8 py-2 text-red-600"
       >
         SEE MORE
       </button>
