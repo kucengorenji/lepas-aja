@@ -74,9 +74,8 @@ export const getProduct = async (id) => {
 };
 
 export const postProductPhoto = async (id, payload, token) => {
-  return axios.post(`${baseUrl}/products/${id}/photos`, payload, {
+  return await axios.post(`${baseUrl}/products/${id}/photos`, payload, {
     headers: {
-      method: 'POST',
       Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     },

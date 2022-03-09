@@ -47,7 +47,7 @@ export const ModalDelete = (props) => {
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  Apakah anda yakin ingin menghapus room ini?
+                  Apakah anda yakin ingin menghapus ini?
                 </p>
               </div>
 
