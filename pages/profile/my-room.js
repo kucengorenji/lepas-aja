@@ -16,8 +16,13 @@ import { ModalDelete } from '../../components/ModalDelete';
 import { CardMyRoom } from '../../components/CardMyRoom';
 import { ModalEditRoom } from '../../components/ModalEditRoom';
 import { leaveGiveaway } from '../../services/giveaway';
+import { BiArrowBack } from 'react-icons/bi';
+import Button from '@mui/material/Button';
+import { useRouter } from 'next/router';
+import { ModalUnjoin } from '../../components/giveaway-room/ProductDetail/ModalUnjoin';
 
 const MyRoom = () => {
+  const router = useRouter();
   const user = useUser();
   const [currentPage, setCurrentPage] = useState(1);
   const [myRoomPage] = useState(5);
@@ -37,6 +42,7 @@ const MyRoom = () => {
     description: '',
     condition: '',
   });
+  const [isOpenUndi, setIsOpenUndi] = useState(false);
 
   function closeModalDelete() {
     setIsOpenDelete(false);
@@ -116,23 +122,46 @@ const MyRoom = () => {
 
   const handleDelete = () => {
     deleteRoom(token, roomId);
+    setIsRoomUpdate(true);
     setIsOpenDelete(false);
   };
 
+  const handleModalUndi = (e) => {
+    e.preventDefault();
+    const getRoomId = e.target.id;
+    setRoomId(getRoomId);
+    setIsRoomUpdate(true);
+    setIsOpenUndi(true);
+  };
+
   return (
-    <div className="min-h-[80vh] container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
-      <div className="flex justify-end gap-4">
-        <Link href="/profile">
-          <a>Biodata</a>
+    <div className="min-h-[80vh] container mx-auto text-lg text-red-600 max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
+      <div className="w-full flex justify-between">
+        <Link href="/">
+          <Button
+            className="justify-start left-0 text-red-600 gap-4"
+            variant="text"
+          >
+            <BiArrowBack /> Kembali ke beranda
+          </Button>
         </Link>
-        <Link href="/profile/my-room">
-          <a className="underline underline-offset-8">Room Saya</a>
-        </Link>
-        <Link href="/profile/giveaway-history">
-          <a>Riwayat</a>
-        </Link>
+        <div className="inline-flex justify-end gap-4">
+          <Link href="/profile">
+            <a className=" p-1">Biodata</a>
+          </Link>
+          <Link href="/profile/my-room">
+            <a className="underline underline-offset-8 p-1 hover:bg-slate-100 hover:rounded-lg duration-300">
+              Room Saya
+            </a>
+          </Link>
+          <Link href="/profile/giveaway-history">
+            <a className="p-1 hover:bg-slate-100 hover:rounded-lg duration-300">
+              Riwayat
+            </a>
+          </Link>
+        </div>
       </div>
-      <h1 className="text-3xl font-semibold">Room Saya</h1>
+      <h1 className="text-3xl text-center font-semibold">Room Saya</h1>
       {isLoading ? (
         <Box
           display="flex"
@@ -158,10 +187,7 @@ const MyRoom = () => {
           {currentRoom.map((item, index) => {
             return (
               <CardMyRoom
-                handleEjectRoom={async () => {
-                  await leaveGiveaway(item.id, user, user.token);
-                  setIsRoomUpdate(true);
-                }}
+                handleEjectRoom={handleModalUndi}
                 id={item.id}
                 handleModalEdit={handleModalEdit}
                 handleModalDelete={handleModalDelete}
@@ -209,6 +235,18 @@ const MyRoom = () => {
           deskripsi={roomById.description}
           handleClose={closeModalEdit}
           open={isOpenEdit}
+        />
+      )}
+
+      {isOpenUndi && (
+        <ModalUnjoin
+          closeModal={() => setIsOpenUndi(false)}
+          isOpen={isOpenUndi}
+          handleUndi={async () => {
+            await leaveGiveaway(roomId, user, user.token);
+            setIsRoomUpdate(true);
+            setIsOpenUndi(false);
+          }}
         />
       )}
     </div>

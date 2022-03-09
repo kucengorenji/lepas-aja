@@ -29,7 +29,7 @@ export const ModalPhotoProduct = (props) => {
               <input
                 name="title"
                 onChange={props.handleChange}
-                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                 maxLength="30"
                 value={props.title}
               />
@@ -42,7 +42,7 @@ export const ModalPhotoProduct = (props) => {
               <input
                 name="alt"
                 onChange={props.handleChange}
-                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                 maxLength="30"
                 value={props.alt}
               />
@@ -116,7 +116,7 @@ export const ModalPhotoProduct = (props) => {
             </div>
             <button
               onClick={props.handleUploadPhoto}
-              className="rounded-[4px] bg-[#DF8D9F] w-[300px] py-4 mt-8 text-xl text-white font-medium"
+              className="rounded-[4px] bg-red-600 w-[300px] py-4 mt-8 text-xl text-white font-medium"
             >
               Tambah Foto
             </button>

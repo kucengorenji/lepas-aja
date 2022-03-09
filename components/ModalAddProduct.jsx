@@ -37,7 +37,7 @@ export const ModalAddProduct = (props) => {
                 <input
                   name="name"
                   onChange={props.handleChange}
-                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                   maxLength="30"
                   value={props.name}
                 />
@@ -48,7 +48,7 @@ export const ModalAddProduct = (props) => {
                   Jenis Barang
                 </label>
                 <select
-                  className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border-red-600 border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
                   value={props.categoryState}
                   onChange={props.categoryOnChange}
                 >
@@ -70,7 +70,7 @@ export const ModalAddProduct = (props) => {
                   onChange={props.handleChange}
                   rows="6"
                   cols="33"
-                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                   maxLength="200"
                   value={props.description}
                 />
@@ -81,7 +81,7 @@ export const ModalAddProduct = (props) => {
           <div className="w-full text-center">
             <button
               onClick={props.handleSubmitNew}
-              className="rounded-[4px] bg-[#DF8D9F] w-[300px] py-4 mt-8 text-xl text-white font-medium"
+              className="rounded-[4px] bg-red-600 w-[300px] py-4 mt-8 text-xl text-white font-medium"
             >
               Tambahkan Perubahan
             </button>

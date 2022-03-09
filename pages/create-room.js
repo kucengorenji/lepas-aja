@@ -23,7 +23,7 @@ const createRoom = () => {
       setIsSuccess(true);
       setTimeout(() => {
         router.replace(`/profile/my-room`);
-      }, 3500)
+      }, 3500);
     } catch (e) {
       console.error(e);
       setIsError(true);
@@ -31,42 +31,43 @@ const createRoom = () => {
   };
 
   useEffect(() => {
-    if(isSuccess){
+    if (isSuccess) {
       setTimeout(() => {
         setIsSuccess(false);
-      }, 3000)
+      }, 3000);
     }
   }, [isSuccess]);
 
   useEffect(() => {
-    if(isError){
+    if (isError) {
       setTimeout(() => {
         setIsError(false);
-      }, 5000)
+      }, 5000);
     }
-  }, [isError])
+  }, [isError]);
 
   return (
     <section className="flex flex-col px-8 py-12">
-      <h4 className="mb-4 text-2xl font-medium text-right text-ruddy-pink">
+      <h4 className="mb-4 text-2xl font-medium text-right text-red-600">
         Room
       </h4>
       <div className="flex flex-col items-center justify-center w-full">
         {isSuccess && (
-          <div className='absolute top-32'>
-            <Alert variant='filled' severity='success'>
+          <div className="absolute top-32">
+            <Alert variant="filled" severity="success">
               Anda telah berhasil membuat room!
             </Alert>
           </div>
         )}
         {isError && (
-          <div className='absolute top-32'>
-            <Alert variant='filled' severity='error'>
-              Anda tidak dapat membuat room! Silahkan lengkapi profil anda terlebih dahulu!
+          <div className="absolute top-32">
+            <Alert variant="filled" severity="error">
+              Anda tidak dapat membuat room! Silahkan lengkapi profil anda
+              terlebih dahulu!
             </Alert>
           </div>
         )}
-        <h1 className="mb-8 text-4xl text-ruddy-pink">Buat Giveaway</h1>
+        <h1 className="mb-8 text-4xl text-red-600">Buat Giveaway</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-center w-full mt-6 md:flex-row gap-y-4 md:gap-x-32"
@@ -77,7 +78,7 @@ const createRoom = () => {
                 Nama Room
               </label>
               <input
-                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                 maxLength="30"
                 {...register('name', { required: true })}
               />
@@ -87,7 +88,7 @@ const createRoom = () => {
               <label className="text-2xl font-medium opacity-70">
                 Mulai Giveaway
               </label>
-              <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
+              <div className="mb-4 shadow appearance-none border-red-600 border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                 <Controller
                   control={control}
                   name="startAt"
@@ -108,7 +109,7 @@ const createRoom = () => {
               <label className="text-2xl font-medium opacity-70">
                 Akhir Giveaway
               </label>
-              <div className="mb-4 shadow border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
+              <div className="mb-4 shadow border-red-600 border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                 <Controller
                   control={control}
                   name="finishAt"
@@ -134,7 +135,7 @@ const createRoom = () => {
               <textarea
                 rows="6"
                 cols="33"
-                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                 maxLength="200"
                 {...register('description', { required: true })}
               />
@@ -148,14 +149,14 @@ const createRoom = () => {
             <textarea
               rows="6"
               cols="33"
-              className="flex flex-col px-4 py-3 my-2 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+              className="flex flex-col px-4 py-3 my-2 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
               maxLength="200"
               {...register('condition', { required: true })}
             />
             <p className="text-black opacity-30">Maksimal 200 Karakter</p>
             <button
               type="submit"
-              className="rounded-[4px] bg-[#DF8D9F] mx-auto w-full py-4 mt-8 text-xl text-white font-medium hover:animate-pulse"
+              className="rounded-[4px] bg-red-600 mx-auto w-full py-4 mt-8 text-xl text-white font-medium hover:animate-pulse"
             >
               Buat Room Giveaway
             </button>

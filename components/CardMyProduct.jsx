@@ -4,7 +4,7 @@ import { TrashIcon, PencilAltIcon } from '@heroicons/react/solid';
 
 export const CardMyProduct = (props) => {
   return (
-    <div className="mt-4 text-lg text-ruddy-pink p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
+    <div className="mt-4 text-lg text-red-600 p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
       <div className="text-black">
         <div className="flex items-center justify-between text-lg">
           <p className="font-semibold">
@@ -21,7 +21,7 @@ export const CardMyProduct = (props) => {
             <div>
               <div className="flex items-center">
                 <h5 className="text-xl font-semibold">{props.name}</h5>
-                <p className="px-2 ml-2 text-xs text-white opacity-100 bg-ruddy-pink">
+                <p className="px-2 ml-2 text-xs text-white opacity-100 bg-red-600">
                   {props.category}
                 </p>
               </div>
@@ -56,14 +56,14 @@ export const CardMyProduct = (props) => {
                 color="error"
                 size="medium"
                 variant="outlined"
-                startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
+                startIcon={<TrashIcon className="w-5 h-5 text-red-600" />}
               >
                 Delete
               </Button>
             </div>
           </div>
 
-          {/* <h5 className="px-6 py-2 text-white bg-ruddy-pink">Owner</h5> */}
+          {/* <h5 className="px-6 py-2 text-white bg-red-600">Owner</h5> */}
         </div>
       </div>
     </div>
