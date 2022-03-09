@@ -4,17 +4,39 @@
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
+
+/* hide disabled buttons */
+.rec.rec-arrow:disabled {
+	visibility: hidden;
+}
+
+.rec.rec-arrow:hover:enabled,
+.rec.rec-arrow:focus:enabled {
+	background-color: #dc2626;
+}
+
+/* .rec.rec-arrow {
+	background-color: rgb(220, 38, 38, 1), ;
+} */
+
+.rec.rec-dot.rec-dot_active {
+	background-color: #dc2626;
+	box-shadow: 0 0 1px 3px #dc2626;
+}
+
+/* disable default outline on focused items */
+/* add custom outline on focused items */
