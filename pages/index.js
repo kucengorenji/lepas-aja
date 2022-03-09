@@ -8,6 +8,8 @@ import ProductCategory from '../components/ProductCategory';
 import Carousel from '../components/Carousel/Carousel';
 import ImageCarousel from '../components/ImageCarousel';
 import { getAllRooms, getAllProducts } from '../services/giveaway';
+import { Testimonial } from '../components/Testimonial';
+import { Hero } from '../components/Hero';
 
 export default function Home({ roomData, productData }) {
   const imgArray = [<ImageCarousel src="/images/banner.jpg" />];
@@ -26,10 +28,11 @@ export default function Home({ roomData, productData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Carousel imgArray={imgArray} />
+        <Hero />
         <NewGiveaway data={roomData.data} />
         <ProductCategory categoryDataFunc={getCategoryData} />
         <ProductGiveaway categoryIdFilter={category} data={productData.data} />
+        <Testimonial />
       </main>
     </div>
   );

@@ -26,9 +26,10 @@ export default function ProductCategory({ categoryDataFunc }) {
   }, []);
 
   return (
-    <section className="flex flex-col mt-14 gap-y-12 max-w-[1200px]">
-      <h1 className="font-bold text-red-600 text-center text-4xl">
-        Product Giveaway
+    <section className="flex flex-col mt-36 gap-y-12 max-w-[1200px]">
+      <h1 className="mb-12 text-5xl font-black text-center text-gray-800 md:leading-9">
+        Pilih barang yang <br />
+        tersedia <span className="text-red-600 ">untukmu</span>
       </h1>
       <div className="flex flex-wrap gap-4 mx-auto mt-1">
         {console.log(dataCategories)}
