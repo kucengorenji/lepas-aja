@@ -222,7 +222,7 @@ const MyProduct = ({ productsData, id, category }) => {
           <a>Riwayat</a>
         </Link>
       </div>
-      <div className="flex justify-between items-center mt-8 px-12">
+      <div className="flex items-center justify-between px-12 mt-8">
         <h1 className="text-3xl font-semibold">Produk Saya</h1>
         <Button
           onClick={handleModalAdd}
@@ -242,35 +242,42 @@ const MyProduct = ({ productsData, id, category }) => {
         >
           <CircularProgress />
         </Box>
+      ) : products.length === 0 ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <h1 className="text-xl">Product anda masih kosong nih 😔</h1>
+        </Box>
       ) : (
-        products.length && (
-          <div className="max-w-[950px] mt-8 mx-auto">
-            {currentRoom.map((item, index) => {
-              return (
-                <CardMyProduct
-                  id={item.id}
-                  handleModalUpload={handleModalUpload}
-                  handleModalEdit={handleModalEdit}
-                  handleModalDelete={handleModalDelete}
-                  key={index}
-                  date={moment
-                    .unix(item.createdAt)
-                    .locale('id')
-                    .format('DD MMMM YYYY')}
-                  category={item.category}
-                  src={item.photoUrl[0].url}
-                  description={item.description}
-                  name={item.name}
-                />
-              );
-            })}
-            <Pagination
-              historyPerPage={myRoomPage}
-              totalHistory={products.length}
-              paginate={paginate}
-            />
-          </div>
-        )
+        <div className="max-w-[950px] mt-8 mx-auto">
+          {currentRoom.map((item, index) => {
+            return (
+              <CardMyProduct
+                id={item.id}
+                handleModalUpload={handleModalUpload}
+                handleModalEdit={handleModalEdit}
+                handleModalDelete={handleModalDelete}
+                key={index}
+                date={moment
+                  .unix(item.createdAt)
+                  .locale('id')
+                  .format('DD MMMM YYYY')}
+                category={item.category}
+                src={item.photoUrl[0].url}
+                description={item.description}
+                name={item.name}
+              />
+            );
+          })}
+          <Pagination
+            historyPerPage={myRoomPage}
+            totalHistory={products.length}
+            paginate={paginate}
+          />
+        </div>
       )}
       {isOpenDelete && (
         <ModalDelete
