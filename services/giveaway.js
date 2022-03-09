@@ -156,3 +156,12 @@ export const deleteProduct = async (token, id) => {
   const product = await response.data;
   return product.data;
 };
+
+export const findWinner = async (id, token) => {
+  const response = await axios.get(`${baseUrl}/rooms/${id}/find_winner`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};

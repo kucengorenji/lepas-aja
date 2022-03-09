@@ -43,36 +43,50 @@ const HistoryRoom = () => {
         <a className="underline underline-offset-8">Riwayat</a>
       </div>
       <h1 className="text-3xl font-semibold">Riwayat Join Room</h1>
-      <div className="max-w-[950px] mt-8">
-        {isLoading ? (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh"
-          >
-            <CircularProgress />
-          </Box>
-        ) : (
-          currentHistory.map((item, index) => {
+      {isLoading ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <CircularProgress />
+        </Box>
+      ) : history.length == 0 ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <h1 className="text-lg">
+            Belum ada undian yang selesai untuk saat ini...
+          </h1>
+        </Box>
+      ) : (
+        <div className="max-w-[950px] mt-8 mx-auto">
+          {currentHistory.map((item, index) => {
             return (
               <CardHistory
-                date={moment.unix(item.createdAt).format('YYYY-MM-DD')}
+                key={index}
+                date={moment
+                  .unix(item.createdAt)
+                  .locale('id')
+                  .format('DD MMMM YYYY')}
                 roomDesc={item.as}
                 src={item.photoUrl}
                 owner={item.owner}
                 title={item.name}
               />
             );
-          })
-        )}
-
-        <Pagination
-          historyPerPage={historyPage}
-          totalHistory={history.length}
-          paginate={paginate}
-        />
-      </div>
+          })}
+          <Pagination
+            historyPerPage={historyPage}
+            totalHistory={history.length}
+            paginate={paginate}
+          />
+        </div>
+      )}
     </div>
   );
 };

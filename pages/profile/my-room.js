@@ -142,38 +142,47 @@ const MyRoom = () => {
         >
           <CircularProgress />
         </Box>
+      ) : room.length == 0 ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <h1 className="text-lg">
+            Belum ada room yang anda buat atau ikuti untuk saat ini
+          </h1>
+        </Box>
       ) : (
-        room.length && (
-          <div className="max-w-[950px] mt-8 mx-auto">
-            {currentRoom.map((item, index) => {
-              return (
-                <CardMyRoom
-                  handleEjectRoom={async () => {
-                    await leaveGiveaway(item.id, user, user.token);
-                    setIsRoomUpdate(true);
-                  }}
-                  id={item.id}
-                  handleModalEdit={handleModalEdit}
-                  handleModalDelete={handleModalDelete}
-                  key={index}
-                  date={moment
-                    .unix(item.createdAt)
-                    .locale('id')
-                    .format('DD MMMM YYYY')}
-                  userStatus={item.as}
-                  src={item.photoUrl}
-                  owner={item.owner}
-                  title={item.name}
-                />
-              );
-            })}
-            <Pagination
-              historyPerPage={myRoomPage}
-              totalHistory={room.length}
-              paginate={paginate}
-            />
-          </div>
-        )
+        <div className="max-w-[950px] mt-8 mx-auto">
+          {currentRoom.map((item, index) => {
+            return (
+              <CardMyRoom
+                handleEjectRoom={async () => {
+                  await leaveGiveaway(item.id, user, user.token);
+                  setIsRoomUpdate(true);
+                }}
+                id={item.id}
+                handleModalEdit={handleModalEdit}
+                handleModalDelete={handleModalDelete}
+                key={index}
+                date={moment
+                  .unix(item.createdAt)
+                  .locale('id')
+                  .format('DD MMMM YYYY')}
+                userStatus={item.as}
+                src={item.photoUrl}
+                owner={item.owner}
+                title={item.name}
+              />
+            );
+          })}
+          <Pagination
+            historyPerPage={myRoomPage}
+            totalHistory={room.length}
+            paginate={paginate}
+          />
+        </div>
       )}
       {isOpenDelete && (
         <ModalDelete
@@ -206,4 +215,4 @@ const MyRoom = () => {
   );
 };
 
-export default withProtected(MyRoom);
+export default MyRoom;
