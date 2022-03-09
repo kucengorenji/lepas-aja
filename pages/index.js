@@ -12,7 +12,7 @@ import { getAllRooms, getAllProducts } from '../services/giveaway';
 export default function Home({ roomData, productData }) {
   const imgArray = [<ImageCarousel src="/images/banner.jpg" />];
 
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Pakaian');
 
   const getCategoryData = (childCategoryData) => {
     setCategory(childCategoryData);

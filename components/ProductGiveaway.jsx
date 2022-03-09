@@ -36,12 +36,14 @@ const ProductGiveaway = ({ categoryIdFilter, data }) => {
           );
         })}
       </div>
-      <button
-        onClick={showMoreItem}
-        className="outline mx-auto outline-1 outline-red-600 px-8 py-2 text-red-600"
-      >
-        SEE MORE
-      </button>
+      {filteredData.length > 8 && (
+        <button
+          onClick={showMoreItem}
+          className="px-8 py-2 mx-auto text-red-600 outline outline-1 outline-red-600"
+        >
+          SEE MORE
+        </button>
+      )}
     </section>
   );
 };
