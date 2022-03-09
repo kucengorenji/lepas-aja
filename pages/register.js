@@ -4,41 +4,75 @@ import { useRouter } from 'next/dist/client/router';
 import { SignUp, GoogleAuth, FacebookAuth } from '../services/Auth';
 import withUnProtected from '../hoc/withUnprotected';
 import { GetSignInErrorMessage } from '../services/Auth';
+import { Alert } from '@mui/material';
 
 const register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
       await SignUp(email, password);
+      setIsSuccess(true);
+      setTimeout(() => {
+        router.replace('/');
+      }, 3500);
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
+      setIsError(true);
     }
   };
 
   const handleGoogleAuth = async () => {
     try {
       await GoogleAuth();
+      setIsSuccess(true);
+      setTimeout(() => {
+        router.replace('/');
+      }, 3500);
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
+      setIsError(true);
     }
   };
 
   const handleFacebookAuth = async () => {
     try {
       await FacebookAuth();
+      setIsSuccess(true);
+      setTimeout(() => {
+        router.replace('/');
+      }, 3500);
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
+      setIsError(true);
     }
   };
+
+  useEffect(() => {
+    if(isSuccess){
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000)
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if(isError){
+      setTimeout(() => {
+        setIsError(false);
+      }, 5000)
+    }
+  }, [isError])
 
   return (
     <section className="w-full min-h-[80vh] flex flex-col justify-center items-center py-8">
@@ -47,7 +81,23 @@ const register = () => {
         className="mb-4 flex flex-col max-w-[450px] w-full"
         onSubmit={handleRegister}
       >
-        {error && (
+        <div className='relative mt-4'>
+          {isSuccess && (
+            <div className='-top-14 absolute ml-0 mr-0 left-0 right-0'>
+              <Alert variant='filled' severity='success'>
+                Anda telah berhasil register!
+              </Alert>
+            </div>
+          )}
+          {isError && (
+            <div className='-top-14 absolute ml-0 mr-0 left-0 right-0'>
+              <Alert variant='filled' severity='error'>
+                {error}
+              </Alert>
+            </div>
+          )}
+        </div>
+        {/* {error && (
           <div
             className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
             role="alert"
@@ -66,7 +116,7 @@ const register = () => {
               </svg>
             </span>
           </div>
-        )}
+        )} */}
         <div className="mb-4 shadow appearance-none border-red-600 border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
           <label
             className="text-[#706C88] mb-1 border-b-[3px] border-red-600 max-w-max"
