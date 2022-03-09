@@ -1,9 +1,12 @@
 import { 
     sendResetPassword,
+    changePassword
 } 
 from '../services/Auth';
 import { useEffect, useState } from "react";
-import app from '../config/firebase.config.js';
+import { Alert } from '@mui/material';
+import { useRouter } from 'next/dist/client/router';
+
 
 
 const ResetPassword = () => {
@@ -16,35 +19,30 @@ const ResetPassword = () => {
     const [oobCode, setOobCode] = useState('');
     const [isMatch, setIsMatch] = useState(true);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const router = useRouter();
 
-
-    useEffect(() => {
-        const host = window.location.host;
-        console.log(host);
-        const queryParams = new URLSearchParams(window.location.search);
-        setOobCode(queryParams.get('oobCode'));
-        console.log(oobCode);
-    })
     
 
     const newPasswordSubmitted = async(e) =>{
         e.preventDefault();
-        console.log(oobCode);
 
         if(newPassword !== confirmNewPassword){
             console.log("Password is not match");
-            setIsMatch(false);
+            setIsError(true);
             return;
         }
 
-        setIsMatch(true);
+        // setIsMatch(true);
         try {
-            await sendResetPassword(oobCode, newPassword);
+            await changePassword(newPassword);
             setIsSuccess(true);
-            console.log("Password has been changed!");
+            setTimeout(() => {
+                router.replace('/profile');
+            }, 3500);
         } catch (error) {
             console.log(error);
-            
+            setIsError(true);
         }
     }
 
@@ -59,11 +57,43 @@ const ResetPassword = () => {
         setInputType('password');
     }, [isShowPassword]);
 
+    useEffect(() => {
+        if(isSuccess){
+          setTimeout(() => {
+            setIsSuccess(false);
+          }, 3000)
+        }
+      }, [isSuccess]);
+    
+    useEffect(() => {
+      if(isError){
+        setTimeout(() => {
+          setIsError(false);
+        }, 5000)
+      }
+    }, [isError])
+
 
     return (
     <div className="flex flex-col mx-96 px-32 my-14">
         <div className="flex justify-center mb-8">
             <h1 className={`rhythm text-5xl text-center`}>Change <br /> Password</h1>
+        </div>
+        <div className="relative mx-6 mt-5">
+            {(isSuccess) && 
+                <div className='-top-6 absolute ml-0 mr-0 left-0 right-0'>
+                    <Alert variant='filled' severity='success'>
+                        Password berhasil diganti!
+                    </Alert>
+                </div>
+            }
+            {(isError) && 
+                <div className='-top-6 absolute ml-0 mr-0 left-0 right-0'>
+                <Alert variant='filled' severity='error'>
+                    Password tidak sama!
+                </Alert>
+            </div>
+            }
         </div>
         <div className="flex flex-col justify-center items-center">
             <form action="/" method="POST" onSubmit={newPasswordSubmitted}>
@@ -119,14 +149,6 @@ const ResetPassword = () => {
                 />
             </div>
             </form>
-            <div className="relative">
-                {(isMatch && isSuccess) && 
-                    <h1 className="absolute -left-28 w-60 text-center bg-green-600 text-white py-2 px-4">Password has been changed!</h1>
-                }
-                {(!isMatch && !isSuccess) && 
-                    <h1 className="absolute -left-28 w-60 text-center bg-red-600 text-white py-2 px-4">Password is not match!</h1>
-                }
-            </div>
         </div>
     </div>
     );

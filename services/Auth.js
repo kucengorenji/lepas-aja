@@ -8,6 +8,7 @@ import {
   getAuth,
   sendPasswordResetEmail,
   confirmPasswordReset,
+  updatePassword
 } from 'firebase/auth';
 import { app } from '../config/firebase.config';
 import axios from 'axios';
@@ -90,3 +91,7 @@ export const sendEmailResetPassword = async (email) => {
 export const sendResetPassword = async (oobCode, newPassword) => {
   await confirmPasswordReset(FirebaseAuth, oobCode, newPassword);
 };
+
+export const changePassword = async (newPassword) => {
+  await updatePassword(FirebaseAuth.currentUser, newPassword);
+}

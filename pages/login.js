@@ -10,12 +10,7 @@ import {
 } from '../services/Auth';
 import { useRouter } from 'next/dist/client/router';
 import withUnProtected from '../hoc/withUnprotected';
-import app from '../config/firebase.config.js';
-
-// console.log(app);
-
-// const auth = Authentication;
-// console.log(auth);
+import { Alert } from '@mui/material';
 
 const login = () => {
   const [modal, setModal] = useState(false);
@@ -24,6 +19,8 @@ const login = () => {
   const passwordRef = useRef();
   const [error, setError] = useState('');
   const [isAlert, setIsAlert] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const toggleModal = (e) => {
     e.preventDefault();
@@ -36,35 +33,46 @@ const login = () => {
     try {
       setError('');
       await SignIn(emailRef.current.value, passwordRef.current.value);
-      router.replace('/');
+      setIsSuccess(true);
+      setTimeout(() => {
+        router.replace('/');
+      }, 3500)
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
+      setIsError(true);
     }
   };
 
   const handleGoogleAuth = async () => {
     try {
       await GoogleAuth();
-      router.replace('/');
+      setIsSuccess(true);
+      setTimeout(() => {
+        router.replace('/');
+      }, 3500)
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
+      setIsError(true);
     }
   };
 
   const handleFacebookAuth = async () => {
     try {
       await FacebookAuth();
-      router.replace('/');
+      setIsSuccess(true);
+      setTimeout(() => {
+        router.replace('/');
+      }, 3500)
     } catch (err) {
       const message = GetSignInErrorMessage(err.code);
       setError(message);
+      setIsError(true);
     }
   };
   const onSendEmail = async ({ email }) => {
-    // console.log(app);
-    // console.log(Authentication, email);
+    
     try {
       await sendEmailResetPassword(email);
       setModal(!modal);
@@ -75,18 +83,6 @@ const login = () => {
       console.log(error);
     }
 
-    // sendPasswordResetEmail(Authentication, email)
-    //   .then(() => {
-    //     setModal(!modal);
-    //     setIsAlert(true);
-    //     // alert('Email has been send. Please check your email!');
-    //     console.log('Please check your email!');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     console.log(Authentication);
-    //     console.log('Error');
-    //   })
   };
 
   useEffect(() => {
@@ -98,23 +94,54 @@ const login = () => {
     }
   }, [isAlert]);
 
+  useEffect(() => {
+    if(isSuccess){
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000)
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if(isError){
+      setTimeout(() => {
+        setIsError(false);
+      }, 5000)
+    }
+  }, [isError]);
+
   return (
     <section className="w-full min-h-[80vh] flex flex-col justify-center items-center py-8">
-      {isAlert && (
-        <div className="relative ">
-          <div className="absolute w-96 -top-36 -left-44 bg-gray-500 text-center px-4 py-10">
-            <h1 className="text-white">
-              Email has been send. Please check your email!
-            </h1>
-          </div>
-        </div>
-      )}
+      
       <h1 className="text-5xl mb-14">LOGIN</h1>
       <form
         className="mb-4 flex flex-col max-w-[450px] w-full"
         onSubmit={handleSubmit}
       >
-        {error && (
+        <div className='relative mt-4'>
+          {isAlert && (
+          <div className='-top-14 absolute ml-0 mr-0 left-0 right-0'>
+            <Alert variant='filled' severity='success'>
+              Email sudah terkirim. Silahkan cek email anda!
+            </Alert>
+          </div>
+          )}
+          {isSuccess && (
+            <div className='-top-14 absolute ml-0 mr-0 left-0 right-0'>
+              <Alert variant='filled' severity='success'>
+                Anda telah berhasil login!
+              </Alert>
+            </div>
+          )}
+          {isError && (
+            <div className='-top-14 absolute ml-0 mr-0 left-0 right-0'>
+              <Alert variant='filled' severity='error'>
+                {error}
+              </Alert>
+            </div>
+          )}
+        </div>
+        {/* {error && (
           <div
             className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
             role="alert"
@@ -133,7 +160,7 @@ const login = () => {
               </svg>
             </span>
           </div>
-        )}
+        )} */}
 
         <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
           <label

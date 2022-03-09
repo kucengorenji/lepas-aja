@@ -19,7 +19,7 @@ import {
   postProductData,
 } from '../../../../services/giveaway';
 import { useRouter } from 'next/router';
-import { Button } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import { ModalAddProduct } from '../../../../components/ModalAddProduct';
 
 const MyProduct = ({ productsData, id, category }) => {
@@ -43,6 +43,9 @@ const MyProduct = ({ productsData, id, category }) => {
     description: '',
     category: '',
   });
+
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   function closeModalDelete() {
     setIsOpenDelete(false);
@@ -123,6 +126,7 @@ const MyProduct = ({ productsData, id, category }) => {
       console.log(res);
       setIsOpenAdd(false);
       setIsRoomUpdate(true);
+      setIsSuccess(true);
     });
   };
 
@@ -147,8 +151,25 @@ const MyProduct = ({ productsData, id, category }) => {
     setIsRoomUpdate(true);
   };
 
+  useEffect(() => {
+    if(isSuccess){
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000)
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if(isError){
+      setTimeout(() => {
+        setIsError(false);
+      }, 5000)
+    }
+  }, [isError]);
+
   return (
     <div className="min-h-[80vh] container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
+      
       <div className="flex justify-end gap-4">
         <Link href="/profile">
           <a>Biodata</a>
@@ -160,8 +181,24 @@ const MyProduct = ({ productsData, id, category }) => {
           <a>Riwayat</a>
         </Link>
       </div>
-      <div className="flex justify-between items-center mt-8 px-12">
+      <div className="flex justify-between items-center mt-8 px-12 h-16">
         <h1 className="text-3xl font-semibold">Produk Saya</h1>
+        <div className=''>
+          {isSuccess && (
+          <div className=''>
+            <Alert variant='filled' severity='success'>
+              Anda telah berhasil menambahkan barang!
+            </Alert>
+          </div>
+          )}
+          {isError && (
+            <div className=''>
+              <Alert variant='filled' severity='error'>
+                Anda tidak dapat menambahkan barang!
+              </Alert>
+            </div>
+          )}
+        </div>
         <Button
           onClick={handleModalAdd}
           color="success"
