@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-export const ModalDelete = (props) => {
+export const ModalUndi = (props) => {
   return (
     <Transition appear show={props.isOpen} as={Fragment}>
       <Dialog
@@ -43,11 +43,12 @@ export const ModalDelete = (props) => {
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Delete room
+                Mulai undi?
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  Apakah anda yakin ingin menghapus ini?
+                  <strong>Countdown belum selesai!</strong> Apakah anda yakin
+                  ingin mengundi sekarang?
                 </p>
               </div>
 
@@ -62,9 +63,9 @@ export const ModalDelete = (props) => {
                 <button
                   type="button"
                   className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-                  onClick={props.handleDelete}
+                  onClick={props.handleUndi}
                 >
-                  Delete
+                  Undi
                 </button>
               </div>
             </div>

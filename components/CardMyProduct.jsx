@@ -28,27 +28,39 @@ export const CardMyProduct = (props) => {
               <p>{props.description}</p>
             </div>
           </div>
-          <div className="flex items-center gap-x-4">
+          <div className="flex flex-col gap-y-4">
             <Button
               id={props.id}
-              onClick={props.handleModalEdit}
-              color="success"
-              size="medium"
+              color="primary"
+              size="large"
               variant="outlined"
-              startIcon={<PencilAltIcon className="w-5 h-5" />}
+              onClick={props.handleModalUpload}
             >
-              Edit
+              Tambah Foto
             </Button>
-            <Button
-              id={props.id}
-              onClick={props.handleModalDelete}
-              color="error"
-              size="medium"
-              variant="outlined"
-              startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
-            >
-              Delete
-            </Button>
+
+            <div className="flex items-center gap-x-4">
+              <Button
+                id={props.id}
+                onClick={props.handleModalEdit}
+                color="success"
+                size="medium"
+                variant="outlined"
+                startIcon={<PencilAltIcon className="w-5 h-5" />}
+              >
+                Edit
+              </Button>
+              <Button
+                id={props.id}
+                onClick={props.handleModalDelete}
+                color="error"
+                size="medium"
+                variant="outlined"
+                startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
+              >
+                Delete
+              </Button>
+            </div>
           </div>
 
           {/* <h5 className="px-6 py-2 text-white bg-ruddy-pink">Owner</h5> */}

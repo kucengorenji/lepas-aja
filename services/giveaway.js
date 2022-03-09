@@ -74,9 +74,8 @@ export const getProduct = async (id) => {
 };
 
 export const postProductPhoto = async (id, payload, token) => {
-  return axios.post(`${baseUrl}/products/${id}/photos`, payload, {
+  return await axios.post(`${baseUrl}/products/${id}/photos`, payload, {
     headers: {
-      method: 'POST',
       Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     },
@@ -156,4 +155,13 @@ export const deleteProduct = async (token, id) => {
   });
   const product = await response.data;
   return product.data;
+};
+
+export const findWinner = async (id, token) => {
+  const response = await axios.get(`${baseUrl}/rooms/${id}/find_winner`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
 };

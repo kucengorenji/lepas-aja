@@ -17,10 +17,12 @@ import {
   getCategory,
   updateProductPhoto,
   postProductData,
+  postProductPhoto,
 } from '../../../../services/giveaway';
 import { useRouter } from 'next/router';
 import { Button, Alert } from '@mui/material';
 import { ModalAddProduct } from '../../../../components/ModalAddProduct';
+import { ModalPhotoProduct } from '../../../../components/ModalPhotoProduct';
 
 const MyProduct = ({ productsData, id, category }) => {
   const router = useRouter();
@@ -37,12 +39,19 @@ const MyProduct = ({ productsData, id, category }) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const [isOpenUpload, setIsOpenUpload] = useState(false);
   const [productId, setProductId] = useState('');
   const [productById, setProductById] = useState({
     name: '',
     description: '',
     category: '',
   });
+  const [photo, setPhoto] = useState({
+    title: '',
+    alt: '',
+  });
+  const [image, setImage] = useState();
+  const [preview, setPreview] = useState();
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -57,12 +66,24 @@ const MyProduct = ({ productsData, id, category }) => {
   function closeModalAdd() {
     setIsOpenAdd(false);
   }
+  function closeModalUpload() {
+    setIsOpenUpload(false);
+  }
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setProductById({
       ...productById,
+      [name]: value,
+    });
+  };
+
+  const handlePhotoChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setPhoto({
+      ...photo,
       [name]: value,
     });
   };
@@ -88,6 +109,18 @@ const MyProduct = ({ productsData, id, category }) => {
     });
   }, [isRoomUpdate]);
 
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setPreview(null);
+    }
+  }, [image]);
+
   const currentRoom = products.slice(indexOfFirstRoom, indexOfLastRoom);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -97,6 +130,14 @@ const MyProduct = ({ productsData, id, category }) => {
     const getProductId = e.target.id;
     setProductId(getProductId);
     setIsOpenDelete(true);
+  };
+
+  const handleModalUpload = (e) => {
+    setImage('');
+    e.preventDefault();
+    const getProductId = e.target.id;
+    setProductId(getProductId);
+    setIsOpenUpload(true);
   };
 
   const handleSubmit = (e) => {
@@ -113,6 +154,28 @@ const MyProduct = ({ productsData, id, category }) => {
     });
   };
 
+  const handleUploadPhoto = (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append('productPhoto', image);
+    form.append('title', photo.title);
+    form.append('alt', photo.alt);
+
+    postProductPhoto(productId, form, user.token).then(() => {
+      setIsOpenUpload(false);
+      setIsRoomUpdate(true);
+    });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.substring(0, 5) === 'image') {
+      setImage(file);
+    } else {
+      setImage(null);
+    }
+  };
+
   const handleSubmitNew = (e) => {
     e.preventDefault();
     const payload = {
@@ -123,7 +186,6 @@ const MyProduct = ({ productsData, id, category }) => {
       qty: 1,
     };
     postProductData(payload, user.token).then((res) => {
-      console.log(res);
       setIsOpenAdd(false);
       setIsRoomUpdate(true);
       setIsSuccess(true);
@@ -217,34 +279,42 @@ const MyProduct = ({ productsData, id, category }) => {
         >
           <CircularProgress />
         </Box>
+      ) : products.length === 0 ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <h1 className="text-xl">Product anda masih kosong nih 😔</h1>
+        </Box>
       ) : (
-        products.length && (
-          <div className="max-w-[950px] mt-8 mx-auto">
-            {currentRoom.map((item, index) => {
-              return (
-                <CardMyProduct
-                  id={item.id}
-                  handleModalEdit={handleModalEdit}
-                  handleModalDelete={handleModalDelete}
-                  key={index}
-                  date={moment
-                    .unix(item.createdAt)
-                    .locale('id')
-                    .format('DD MMMM YYYY')}
-                  category={item.category}
-                  src={item.src}
-                  description={item.description}
-                  name={item.name}
-                />
-              );
-            })}
-            <Pagination
-              historyPerPage={myRoomPage}
-              totalHistory={products.length}
-              paginate={paginate}
-            />
-          </div>
-        )
+        <div className="max-w-[950px] mt-8 mx-auto">
+          {currentRoom.map((item, index) => {
+            return (
+              <CardMyProduct
+                id={item.id}
+                handleModalUpload={handleModalUpload}
+                handleModalEdit={handleModalEdit}
+                handleModalDelete={handleModalDelete}
+                key={index}
+                date={moment
+                  .unix(item.createdAt)
+                  .locale('id')
+                  .format('DD MMMM YYYY')}
+                category={item.category}
+                src={item.photoUrl[0].url}
+                description={item.description}
+                name={item.name}
+              />
+            );
+          })}
+          <Pagination
+            historyPerPage={myRoomPage}
+            totalHistory={products.length}
+            paginate={paginate}
+          />
+        </div>
       )}
       {isOpenDelete && (
         <ModalDelete
@@ -285,6 +355,19 @@ const MyProduct = ({ productsData, id, category }) => {
           name={productById.name}
           handleClose={closeModalAdd}
           open={isOpenAdd}
+        />
+      )}
+
+      {isOpenUpload && (
+        <ModalPhotoProduct
+          handleClose={closeModalUpload}
+          open={isOpenUpload}
+          preview={preview}
+          title={photo.title}
+          alt={photo.alt}
+          handleChange={handlePhotoChange}
+          handleImageChange={handleImageChange}
+          handleUploadPhoto={handleUploadPhoto}
         />
       )}
     </div>
