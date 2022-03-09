@@ -28,7 +28,7 @@ const EditProfile = () => {
   const [dataBio, setDataBio] = useState({
     firstname: '',
     lastname: '',
-    gender: '',
+    gender: 'LAKI_LAKI',
     address: '',
     province: '',
     city: '',
@@ -117,7 +117,7 @@ const EditProfile = () => {
         setIsSuccess(true);
         setTimeout(() => {
           router.replace('/profile');
-        }, 3500)
+        }, 3500);
       })
       .catch((error) => {
         console.log(error.message);
@@ -131,7 +131,7 @@ const EditProfile = () => {
         setIsSuccess(true);
         setTimeout(() => {
           router.replace('/profile');
-        }, 3500)
+        }, 3500);
       })
       .catch((error) => {
         console.log(error.message);
@@ -166,20 +166,20 @@ const EditProfile = () => {
   };
 
   useEffect(() => {
-    if(isSuccess){
+    if (isSuccess) {
       setTimeout(() => {
         setIsSuccess(false);
-      }, 3000)
+      }, 3000);
     }
   }, [isSuccess]);
 
   useEffect(() => {
-    if(isError){
+    if (isError) {
       setTimeout(() => {
         setIsError(false);
-      }, 5000)
+      }, 5000);
     }
-  }, [isError])
+  }, [isError]);
 
   return (
     <section className="flex flex-col px-8 py-12">
@@ -195,15 +195,15 @@ const EditProfile = () => {
       ) : (
         <div className="flex flex-col items-center justify-center w-full">
           {isSuccess && (
-            <div className='absolute top-32'>
-              <Alert variant='filled' severity='success'>
+            <div className="absolute top-32">
+              <Alert variant="filled" severity="success">
                 Anda telah berhasil mengedit profile!
               </Alert>
             </div>
           )}
           {isError && (
-            <div className='absolute top-32'>
-              <Alert variant='filled' severity='error'>
+            <div className="absolute top-32">
+              <Alert variant="filled" severity="error">
                 Anda tidak dapat mengedit profile!
               </Alert>
             </div>

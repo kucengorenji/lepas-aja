@@ -61,7 +61,7 @@ const Profile = () => {
         </Box>
       ) : (
         <div className="flex flex-wrap items-start py-8 text-black gap-x-24">
-          <div className="max-w-[320px] shrink-0 rounded-[10px] border border-[#C4C4C4] flex flex-col items-center p-4">
+          <div className="max-w-[320px] shrink-0 rounded-[10px] border-dashed border-2 border-red-600 flex flex-col items-center p-4">
             <img
               className="w-full h-[300px] rounded-[15px] object-cover"
               src={biodata.photoUrl}
@@ -78,7 +78,12 @@ const Profile = () => {
                   .locale('id')
                   .format('DD MMMM YYYY')}
               />
-              <ListBio title="Jenis Kelamin" content={biodata.gender} />
+              <ListBio
+                title="Jenis Kelamin"
+                content={
+                  biodata.gender === 'LAKI_LAKI' ? 'Laki laki' : 'Perempuan'
+                }
+              />
             </div>
             <div className="flex flex-col mt-8 gap-y-4">
               <h4 className="text-2xl font-medium">Kontak</h4>
@@ -92,13 +97,13 @@ const Profile = () => {
               <div className="flex gap-x-4">
                 <button
                   onClick={() => router.replace('/reset-password')}
-                  className="rounded-[4px] text-[#DF8D9F] border border-[#DF8D9F] px-8 py-2 mt-8 text-lg font-medium"
+                  className="rounded-[4px] text-red-600 border border-red-600 px-8 py-2 mt-8 text-lg font-medium hover:bg-red-600 hover:text-white"
                 >
                   Ubah Password
                 </button>
                 <button
                   type="submit"
-                  className="rounded-[4px] bg-[#DF8D9F] px-8 py-2 mt-8 text-lg text-white font-medium"
+                  className="rounded-[4px] bg-red-600 px-8 py-2 mt-8 text-lg text-white font-medium border hover:border hover:border-red-600 hover:text-red-600 hover:bg-white duration-300"
                   onClick={() => router.replace('/profile/edit-profile')}
                 >
                   Edit Profil
