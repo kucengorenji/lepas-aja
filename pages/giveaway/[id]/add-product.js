@@ -21,7 +21,7 @@ const addProduct = ({ id, category }) => {
 
   return (
     <section className="flex flex-col items-center py-12">
-      <h1 className="text-4xl text-ruddy-pink">Buat Giveaway</h1>
+      <h1 className="text-4xl text-red-600">Buat Giveaway</h1>
       <div className="flex flex-col mt-6 gap-y-4 w-full mx-auto items-center">
         <form
           onClick={handleSubmit(onSubmit)}
@@ -32,7 +32,7 @@ const addProduct = ({ id, category }) => {
               Nama Barang
             </label>
             <input
-              className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border-red-600 border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
               maxLength="30"
               {...register('name', { required: true })}
             />
@@ -43,7 +43,7 @@ const addProduct = ({ id, category }) => {
               Jenis Barang
             </label>
             <select
-              className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border-red-600 border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
               value={categoryState}
               onChange={(e) => {
                 const selectedCategory = e.target.value;
@@ -62,7 +62,7 @@ const addProduct = ({ id, category }) => {
           <div className="flex flex-col gap-y-2">
             <label className="text-2xl font-medium opacity-70">Kuantitas</label>
             <input
-              className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border-red-600 border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
               type="number"
               {...register('qty', { required: true })}
             />
@@ -72,7 +72,7 @@ const addProduct = ({ id, category }) => {
             <textarea
               rows="6"
               cols="33"
-              className="shadow appearance-none border-ruddy-pink border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border-red-600 border rounded py-3 px-4 leading-tight flex flex-col focus:outline-none focus:shadow-outline"
               maxLength="200"
               {...register('description', { required: true })}
             />

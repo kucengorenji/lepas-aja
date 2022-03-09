@@ -37,7 +37,7 @@ const StatusButton = ({ id, user, isOwner, data }) => {
         <>
           <button className="p-1">
             <Link href={`/profile/products/${id}`}>
-              <a className="inline-block text-lg px-12 py-4 rounded-xl leading-none border bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white mt-4 lg:mt-0">
+              <a className="inline-block text-lg px-12 py-4 rounded-xl leading-none border bg-red-600 text-white hover:border-red-600 hover:text-red-600 hover:bg-white mt-4 lg:mt-0 duration-300">
                 add/edit product
               </a>
             </Link>
@@ -48,7 +48,7 @@ const StatusButton = ({ id, user, isOwner, data }) => {
           <button
             className={`inline-block text-lg px-12 py-4 rounded-xl leading-none border mt-4 lg:mt-0 ${
               !isParticipant
-                ? 'bg-ruddy-pink text-white hover:border-ruddy-pink hover:text-ruddy-pink hover:bg-white'
+                ? 'bg-red-600 text-white hover:border-red-600 hover:text-red-600 hover:bg-white'
                 : 'bg-gray-400 text-white cursor-not-allowed'
             }`}
             onClick={handleJoinRoom}
