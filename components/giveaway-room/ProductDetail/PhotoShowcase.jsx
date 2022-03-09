@@ -33,7 +33,7 @@ const PhotoShowcase = ({ products }) => {
       ) : (
         <div>
           <img src={defaultImage} />
-          <p className="legend">
+          <p className="text-white legend">
             barang giveaway ini belum ada foto dari owner
           </p>
         </div>

@@ -18,8 +18,11 @@ import { ModalEditRoom } from '../../components/ModalEditRoom';
 import { leaveGiveaway } from '../../services/giveaway';
 import { BiArrowBack } from 'react-icons/bi';
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/router';
+import { ModalUnjoin } from '../../components/giveaway-room/ProductDetail/ModalUnjoin';
 
 const MyRoom = () => {
+  const router = useRouter();
   const user = useUser();
   const [currentPage, setCurrentPage] = useState(1);
   const [myRoomPage] = useState(5);
@@ -39,6 +42,7 @@ const MyRoom = () => {
     description: '',
     condition: '',
   });
+  const [isOpenUndi, setIsOpenUndi] = useState(false);
 
   function closeModalDelete() {
     setIsOpenDelete(false);
@@ -118,7 +122,16 @@ const MyRoom = () => {
 
   const handleDelete = () => {
     deleteRoom(token, roomId);
+    setIsRoomUpdate(true);
     setIsOpenDelete(false);
+  };
+
+  const handleModalUndi = (e) => {
+    e.preventDefault();
+    const getRoomId = e.target.id;
+    setRoomId(getRoomId);
+    setIsRoomUpdate(true);
+    setIsOpenUndi(true);
   };
 
   return (
@@ -174,10 +187,7 @@ const MyRoom = () => {
           {currentRoom.map((item, index) => {
             return (
               <CardMyRoom
-                handleEjectRoom={async () => {
-                  await leaveGiveaway(item.id, user, user.token);
-                  setIsRoomUpdate(true);
-                }}
+                handleEjectRoom={handleModalUndi}
                 id={item.id}
                 handleModalEdit={handleModalEdit}
                 handleModalDelete={handleModalDelete}
@@ -225,6 +235,18 @@ const MyRoom = () => {
           deskripsi={roomById.description}
           handleClose={closeModalEdit}
           open={isOpenEdit}
+        />
+      )}
+
+      {isOpenUndi && (
+        <ModalUnjoin
+          closeModal={() => setIsOpenUndi(false)}
+          isOpen={isOpenUndi}
+          handleUndi={async () => {
+            await leaveGiveaway(roomId, user, user.token);
+            setIsRoomUpdate(true);
+            setIsOpenUndi(false);
+          }}
         />
       )}
     </div>

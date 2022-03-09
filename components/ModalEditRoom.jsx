@@ -37,7 +37,7 @@ export const ModalEditRoom = (props) => {
                 <input
                   name="name"
                   onChange={props.handleChange}
-                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                   maxLength="30"
                   value={props.nama}
                 />
@@ -47,7 +47,7 @@ export const ModalEditRoom = (props) => {
                 <label className="text-2xl font-medium opacity-70">
                   Mulai Giveaway
                 </label>
-                <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
+                <div className="mb-4 shadow appearance-none border-red-600 border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                   <LocalizationProvider dateAdapter={DateAdapter}>
                     <DatePicker
                       value={props.startGiveaway}
@@ -61,7 +61,7 @@ export const ModalEditRoom = (props) => {
                 <label className="text-2xl font-medium opacity-70">
                   Akhir Giveaway
                 </label>
-                <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
+                <div className="mb-4 shadow appearance-none border-red-600 border rounded py-3 px-4 text-gray-700 leading-tight flex flex-col ">
                   <LocalizationProvider dateAdapter={DateAdapter}>
                     <DatePicker
                       value={props.endGiveaway}
@@ -82,7 +82,7 @@ export const ModalEditRoom = (props) => {
                   onChange={props.handleChange}
                   rows="6"
                   cols="33"
-                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                   maxLength="200"
                   value={props.condition}
                 />
@@ -97,7 +97,7 @@ export const ModalEditRoom = (props) => {
                   onChange={props.handleChange}
                   rows="6"
                   cols="33"
-                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-ruddy-pink focus:outline-none focus:shadow-outline"
+                  className="flex flex-col px-4 py-3 leading-tight border rounded shadow appearance-none border-red-600 focus:outline-none focus:shadow-outline"
                   maxLength="200"
                   value={props.deskripsi}
                 />
@@ -108,7 +108,7 @@ export const ModalEditRoom = (props) => {
           <div className="w-full text-center">
             <button
               onClick={props.handleSubmit}
-              className="rounded-[4px] bg-[#DF8D9F] w-[300px] py-4 mt-8 text-xl text-white font-medium"
+              className="rounded-[4px] bg-red-600 w-[300px] py-4 mt-8 text-xl text-white font-medium"
             >
               Simpan Perubahan
             </button>

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-export const ModalDelete = (props) => {
+export const ModalUnjoin = (props) => {
   return (
     <Transition appear show={props.isOpen} as={Fragment}>
       <Dialog
@@ -43,28 +43,29 @@ export const ModalDelete = (props) => {
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Delete room
+                Batal mengikuti event ini?
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  Apakah anda yakin ingin menghapus ini?
+                  <strong>Countdown belum selesai!</strong> Apakah anda yakin
+                  ingin membatalkan diri sebagai participant
                 </p>
               </div>
 
               <div className="flex justify-end mt-4 gap-x-4">
                 <button
                   type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium bg-white border border-transparent rounded-md text-red-600 hover:bg-red-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-200"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium bg-white border border-transparent rounded-md text-ruddy-pink hover:bg-ruddy-pink hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-200"
                   onClick={props.closeModal}
                 >
-                  Batal
+                  terus ikuti
                 </button>
                 <button
                   type="button"
                   className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-                  onClick={props.handleDelete}
+                  onClick={props.handleUndi}
                 >
-                  Delete
+                  batalkan sekarang
                 </button>
               </div>
             </div>

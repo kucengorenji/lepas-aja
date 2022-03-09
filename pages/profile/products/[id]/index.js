@@ -277,7 +277,8 @@ const MyProduct = ({ productsData, id, category }) => {
         </div>
         <Button
           onClick={handleModalAdd}
-          color="success"
+          className="text-red-600 border-2 border-red-600 hover:bg-red-600 hover:text-white"
+          color="error"
           size="medium"
           variant="outlined"
         >
