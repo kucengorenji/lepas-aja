@@ -67,29 +67,29 @@ const register = () => {
             </span>
           </div>
         )}
-        <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
+        <div className="mb-4 shadow appearance-none border-red-600 border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
           <label
-            className="text-[#706C88] mb-1 border-b-[3px] border-[#DF8D9F] max-w-max"
+            className="text-[#706C88] mb-1 border-b-[3px] border-red-600 max-w-max"
             htmlFor="username-email"
           >
             Email
           </label>
           <input
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-[#DF8D9F] text-xl"
+            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-red-600 text-xl"
             placeholder="Enter your email/username here"
           />
         </div>
-        <div className="mb-4 shadow appearance-none border-[#DF8D9F] border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
+        <div className="mb-4 shadow appearance-none border-red-600 border rounded py-2 px-4 text-gray-700 leading-tight flex flex-col bg-[#E4E4E4]">
           <label
-            className="text-[#706C88] mb-1 border-b-[3px] border-[#DF8D9F] max-w-max"
+            className="text-[#706C88] mb-1 border-b-[3px] border-red-600 max-w-max"
             htmlFor="password"
           >
             Password
           </label>
           <input
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-[#DF8D9F] text-xl"
+            className="bg-[#E4E4E4] focus:outline-none focus:shadow-outline text-red-600 text-xl"
             id="password"
             type="password"
             placeholder="Enter your password here"
@@ -97,7 +97,7 @@ const register = () => {
         </div>
         <div className="flex flex-col items-center gap-4">
           <button
-            className="rounded-[4px] bg-[#DF8D9F] mx-auto max-w-[196px] w-full py-4 mt-8 text-xl text-white font-medium"
+            className="rounded-[4px] bg-red-600 mx-auto max-w-[196px] w-full py-4 mt-8 text-xl text-white font-medium"
             type="submit"
           >
             Create Account

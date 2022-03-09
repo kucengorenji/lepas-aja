@@ -11,7 +11,7 @@ const PhotoShowcase = ({ products }) => {
   return (
     <div
       style={{ maxWidth: '500px', margin: '0 auto', minWidth: '400px' }}
-      className="bg-ruddy-pink rounded-lg"
+      className="bg-red-600 rounded-lg "
     >
       {isPhotoExist ? (
         <Carousel
@@ -23,8 +23,8 @@ const PhotoShowcase = ({ products }) => {
         >
           {photos.map((photo) => {
             return (
-              <div>
-                <img alt={photo[0].alt} src={photo[0].url} />
+              <div className="">
+                <img className="" alt={photo[0].alt} src={photo[0].url} />
                 <p className="legend">{photo[0].title}</p>
               </div>
             );
