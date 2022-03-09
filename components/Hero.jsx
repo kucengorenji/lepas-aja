@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export const Hero = () => {
   return (
@@ -16,10 +17,12 @@ export const Hero = () => {
       </div>
       <div className="flex items-center justify-center">
         <button className="px-4 py-2 text-sm text-white transition duration-150 ease-in-out bg-red-600 border border-red-600 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600 hover:bg-red-600 lg:text-xl lg:font-bold sm:px-10 sm:py-4">
-          Mulai Ikut
+          <a href="#product">Mulai Ikut</a>
         </button>
         <button className="px-4 py-2 ml-4 text-sm text-red-600 transition duration-150 ease-in-out bg-transparent border border-red-600 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600 hover:border-red-600 lg:text-xl lg:font-bold hover:text-red-600 sm:px-10 sm:py-4">
-          Bagi barang
+          <Link href="/create-room">
+            <a>Bagi barang</a>
+          </Link>
         </button>
       </div>
     </div>
