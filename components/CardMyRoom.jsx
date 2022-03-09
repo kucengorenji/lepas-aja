@@ -41,7 +41,8 @@ export const CardMyRoom = (props) => {
               <Link href={`/profile/products/${props.id}`}>
                 <Button
                   id={props.id}
-                  color="primary"
+                  className="bg-white text-red-600 hover:bg-red-600 hover:text-white"
+                  color="error"
                   size="large"
                   variant="outlined"
                 >
