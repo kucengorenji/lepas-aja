@@ -36,13 +36,17 @@ const Profile = () => {
         </Link>
         <div className="inline-flex justify-end gap-4">
           <Link href="/profile">
-            <a className="underline underline-offset-8">Biodata</a>
+            <a className="underline underline-offset-8 p-1">Biodata</a>
           </Link>
           <Link href="/profile/my-room">
-            <a>Room Saya</a>
+            <a className="p-1 hover:bg-slate-100 hover:rounded-lg duration-300">
+              Room Saya
+            </a>
           </Link>
           <Link href="/profile/giveaway-history">
-            <a>Riwayat</a>
+            <a className="p-1 hover:bg-slate-100 hover:rounded-lg duration-300">
+              Riwayat
+            </a>
           </Link>
         </div>
       </div>
