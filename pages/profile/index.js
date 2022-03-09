@@ -8,6 +8,8 @@ import moment from 'moment';
 import 'moment/locale/id';
 import { CircularProgress, Box } from '@mui/material';
 import Link from 'next/link';
+import { BiArrowBack } from 'react-icons/bi';
+import Button from '@mui/material/Button';
 
 const Profile = () => {
   const router = useRouter();
@@ -22,17 +24,27 @@ const Profile = () => {
   }, [biodata.photoUrl]);
 
   return (
-    <div className="container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
-      <div className="flex justify-end gap-4">
-        <Link href="/profile">
-          <a className="underline underline-offset-8">Biodata</a>
+    <div className="container mx-auto text-lg text-red-600 max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
+      <div className="w-full flex justify-between">
+        <Link href="/">
+          <Button
+            className="justify-start left-0 text-red-600 gap-4"
+            variant="text"
+          >
+            <BiArrowBack /> Kembali ke beranda
+          </Button>
         </Link>
-        <Link href="/profile/my-room">
-          <a>Room Saya</a>
-        </Link>
-        <Link href="/profile/giveaway-history">
-          <a>Riwayat</a>
-        </Link>
+        <div className="inline-flex justify-end gap-4">
+          <Link href="/profile">
+            <a className="underline underline-offset-8">Biodata</a>
+          </Link>
+          <Link href="/profile/my-room">
+            <a>Room Saya</a>
+          </Link>
+          <Link href="/profile/giveaway-history">
+            <a>Riwayat</a>
+          </Link>
+        </div>
       </div>
       {loading ? (
         <Box
