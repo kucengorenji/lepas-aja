@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const CardMyRoom = (props) => {
   return (
-    <div className="mt-4 text-lg text-ruddy-pink p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
+    <div className="mt-4 text-lg text-red-600 p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
       <div className="text-black">
         <div className="flex items-center justify-between text-lg">
           <p className="font-semibold">
@@ -22,7 +22,7 @@ export const CardMyRoom = (props) => {
             <div className="flex flex-col">
               <div className="flex items-center">
                 <h5 className="text-sm font-bold">{props.owner}</h5>
-                <p className="px-2 ml-2 text-xs text-white opacity-100 bg-ruddy-pink">
+                <p className="px-2 ml-2 text-xs text-white opacity-100 bg-yellow-500">
                   {props.userStatus}
                 </p>
               </div>
@@ -30,7 +30,7 @@ export const CardMyRoom = (props) => {
                 {props.title}
               </p>
               <Link href={`/giveaway/${props.id}`}>
-                <a className="mr-4 underline hover:no-underline md:mr-6 text-ruddy-pink text-sm">
+                <a className="mr-4 underline hover:no-underline md:mr-6 text-red-600 text-sm">
                   Menuju room giveaway
                 </a>
               </Link>
@@ -66,7 +66,7 @@ export const CardMyRoom = (props) => {
                   color="error"
                   size="medium"
                   variant="outlined"
-                  startIcon={<TrashIcon className="w-5 h-5 text-ruddy-pink" />}
+                  startIcon={<TrashIcon className="w-5 h-5 text-red-600" />}
                 >
                   Delete
                 </Button>
@@ -85,7 +85,7 @@ export const CardMyRoom = (props) => {
             </>
           )}
 
-          {/* <h5 className="px-6 py-2 text-white bg-ruddy-pink">Owner</h5> */}
+          {/* <h5 className="px-6 py-2 text-white bg-red-600">Owner</h5> */}
         </div>
       </div>
     </div>

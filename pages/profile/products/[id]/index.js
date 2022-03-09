@@ -23,6 +23,7 @@ import { useRouter } from 'next/router';
 import { Button, Alert } from '@mui/material';
 import { ModalAddProduct } from '../../../../components/ModalAddProduct';
 import { ModalPhotoProduct } from '../../../../components/ModalPhotoProduct';
+import { BiArrowBack } from 'react-icons/bi';
 
 const MyProduct = ({ productsData, id, category }) => {
   const router = useRouter();
@@ -214,48 +215,61 @@ const MyProduct = ({ productsData, id, category }) => {
   };
 
   useEffect(() => {
-    if(isSuccess){
+    if (isSuccess) {
       setTimeout(() => {
         setIsSuccess(false);
-      }, 3000)
+      }, 3000);
     }
   }, [isSuccess]);
 
   useEffect(() => {
-    if(isError){
+    if (isError) {
       setTimeout(() => {
         setIsError(false);
-      }, 5000)
+      }, 5000);
     }
   }, [isError]);
 
   return (
-    <div className="min-h-[80vh] container mx-auto text-lg text-ruddy-pink max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
-      
-      <div className="flex justify-end gap-4">
-        <Link href="/profile">
-          <a>Biodata</a>
-        </Link>
+    <div className="min-h-[80vh] container mx-auto text-lg text-red-600 max-w-[1050px] rounded-[10px] border border-[#C4C4C4] my-4 p-4">
+      <div className="w-full flex justify-between">
         <Link href="/profile/my-room">
-          <a className="underline underline-offset-8">Room Saya</a>
+          <Button
+            className="justify-start left-0 text-red-600 gap-4"
+            variant="text"
+          >
+            <BiArrowBack /> Kembali ke Room Saya
+          </Button>
         </Link>
-        <Link href="/profile/giveaway-history">
-          <a>Riwayat</a>
-        </Link>
+        <div className="inline-flex justify-end gap-4">
+          <Link href="/profile">
+            <a className=" p-1">Biodata</a>
+          </Link>
+          <Link href="/profile/my-room">
+            <a className="underline underline-offset-8 p-1 hover:bg-slate-100 hover:rounded-lg duration-300">
+              Produk Saya
+            </a>
+          </Link>
+          <Link href="/profile/giveaway-history">
+            <a className="p-1 hover:bg-slate-100 hover:rounded-lg duration-300">
+              Riwayat
+            </a>
+          </Link>
+        </div>
       </div>
       <div className="flex justify-between items-center mt-8 px-12 h-16">
         <h1 className="text-3xl font-semibold">Produk Saya</h1>
-        <div className=''>
+        <div className="">
           {isSuccess && (
-          <div className=''>
-            <Alert variant='filled' severity='success'>
-              Anda telah berhasil menambahkan barang!
-            </Alert>
-          </div>
+            <div className="">
+              <Alert variant="filled" severity="success">
+                Anda telah berhasil menambahkan barang!
+              </Alert>
+            </div>
           )}
           {isError && (
-            <div className=''>
-              <Alert variant='filled' severity='error'>
+            <div className="">
+              <Alert variant="filled" severity="error">
                 Anda tidak dapat menambahkan barang!
               </Alert>
             </div>

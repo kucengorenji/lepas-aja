@@ -2,14 +2,14 @@ import React from 'react';
 
 export const CardHistory = (props) => {
   return (
-    <div className="mt-4 text-lg text-ruddy-pink p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
+    <div className="mt-4 text-lg text-red-600 p-4  rounded-[10px] border border-[#C4C4C4] mx-auto">
       <div className="text-black">
         <div className="flex items-center justify-between text-lg">
           <p className="font-semibold">
             Giveaway |
             <span className="ml-3 text-sm opacity-70">{props.date}</span>
           </p>
-          <p className="w-[90px] text-center py-1 mr-3 text-xs font-semibold text-white opacity-100 bg-ruddy-pink">
+          <p className="w-[90px] text-center py-1 mr-3 text-xs font-semibold text-white opacity-100 bg-red-600">
             {props.roomDesc}
           </p>
         </div>
@@ -42,13 +42,13 @@ export const CardHistory = (props) => {
                     </div>
                   ))}
 
-                {/* <p className="px-2 ml-2 text-xs text-white opacity-100 bg-ruddy-pink">
+                {/* <p className="px-2 ml-2 text-xs text-white opacity-100 bg-red-600">
                   {props.status}
                 </p> */}
               </div>
             </div>
           </div>
-          {/* <h5 className="px-6 py-2 text-white bg-ruddy-pink">Owner</h5> */}
+          {/* <h5 className="px-6 py-2 text-white bg-red-600">Owner</h5> */}
         </div>
       </div>
     </div>
