@@ -9,7 +9,7 @@ export const CardHistory = (props) => {
             Giveaway |
             <span className="ml-3 text-sm opacity-70">{props.date}</span>
           </p>
-          <p className="px-4 py-1 mr-3 text-sm text-white opacity-100 bg-ruddy-pink">
+          <p className="w-[90px] text-center py-1 mr-3 text-xs font-semibold text-white opacity-100 bg-ruddy-pink">
             {props.roomDesc}
           </p>
         </div>
