@@ -20,11 +20,11 @@ export default function ProductInfo({ id, products }) {
                   key={idx}
                   className={({ selected }) =>
                     classNames(
-                      'w-full py-2.5 text-sm leading-5 font-medium text-ruddy-pink rounded-lg my-2 border border-white',
+                      'w-full py-2.5 text-sm leading-5 font-medium text-white rounded-lg my-2 border border-white hover:scale-125 hover:ease-in-out duration-300',
                       'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-white ring-white ring-opacity-60',
                       selected
-                        ? 'bg-ruddy-pink text-white'
-                        : 'text-ruddy-pink  hover:border-ruddy-pink'
+                        ? 'bg-red-600 text-white p-1'
+                        : 'text-red-600  hover:border-red-600'
                     )
                   }
                 >
@@ -33,11 +33,13 @@ export default function ProductInfo({ id, products }) {
               );
             })}
           </Tab.List>
-          <Tab.Panels className="w-full m-2 border border-ruddy-pink rounded-lg">
+          <Tab.Panels className="w-full m-2 border border-red-600 rounded-lg">
             {Object.values(products).map((product, idx) => (
               <Tab.Panel
                 key={idx}
-                className={classNames('bg-white rounded-xl p-3 ')}
+                className={classNames(
+                  'bg-white p-3 m-1 rounded hover:bg-red-200 duration-300'
+                )}
               >
                 <p>{product.description}</p>
               </Tab.Panel>
