@@ -68,6 +68,7 @@ const HistoryRoom = () => {
           {currentHistory.map((item, index) => {
             return (
               <CardHistory
+                isWinner={item.isWinner}
                 key={index}
                 date={moment
                   .unix(item.createdAt)
